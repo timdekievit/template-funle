@@ -1,0 +1,39 @@
+@import '~@angular/material/theming';
+@import 'src/libs/ui/scss/themes/material';
+@import 'src/libs/ui/scss/constants/colors';
+
+.footer-toolbar {
+  position: static;
+  bottom: 0;
+  z-index: 900;
+
+  &--spacer {
+    flex: 1 1 auto;
+  }
+
+  &--links {
+    color: #fff;
+    display: flex;
+
+    a {
+      color: inherit;
+    }
+  }
+
+  small {
+    font-size: 12px;
+  }
+
+  &--link {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  &--social {
+    font-size: $font-size-header-5;
+  }
+
+  &--contact {
+    font-size: $font-size-header-5;
+  }
+}

@@ -1,0 +1,17 @@
+@import 'src/libs/ui/scss/constants/colors';
+@import 'src/libs/ui/scss/themes/material';
+@import '~@angular/material/toolbar/toolbar-variables';
+
+.dashboard-banner {
+  position: absolute;
+  height: 300px;
+  width: 100%;
+  background-color: $color-secondary;
+}
+
+.dashboard-high-banner {
+  height: 330px;
+  @media ($mat-xsmall) {
+    height: 400px;
+  }
+}

@@ -1,0 +1,29 @@
+<mat-toolbar class="header-toolbar" color="primary">
+  <a class="header-toolbar--home header-toolbar--link" routerLink="/">
+    <button mat-icon-button aria-label="Funle icon">
+      <mat-icon svgIcon="funle-logo-background"></mat-icon>
+    </button>
+    <span class="header-toolbar--title">Funle</span>
+  </a>
+  <ng-container *ngIf="loggedIn">
+    <div class="header-toolbar--menu">
+      <div class="header-toolbar--menu-item">
+        <a routerLink="/actions">Acties</a>
+      </div>
+      <div class="header-toolbar--menu-item">
+        <a routerLink="/proposals">Matches</a>
+      </div>
+      <div class="header-toolbar--menu-item">
+        <a routerLink="/matching">Matching</a>
+      </div>
+      <div class="header-toolbar--menu-item">
+        <a routerLink="/candidates">Kandidaten</a>
+      </div>
+      <div class="header-toolbar--menu-item">
+        <a routerLink="/assignments">Opdrachten</a>
+      </div>
+    </div>
+  </ng-container>
+  <!-- <span class="header-toolbar--spacer"></span> -->
+  <ng-content></ng-content>
+</mat-toolbar>

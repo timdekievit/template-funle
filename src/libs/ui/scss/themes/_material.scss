@@ -1,0 +1,77 @@
+@import '~@angular/material/theming';
+@import 'src/libs/ui/scss/constants/colors';
+
+$font-size: 16px;
+$font-weight: 400;
+$line-height: 1.5;
+
+$font-weight-strong: 500;
+$font-weight-header: 700;
+$font-weight-banner: 900;
+
+$font-size-header-1: calc(#{$font-size} * 4);
+$font-size-header-2: calc(#{$font-size} * 3);
+$font-size-header-3: calc(#{$font-size} * 2.25);
+$font-size-header-4: calc(#{$font-size} * 1.5);
+$font-size-header-5: calc(#{$font-size} * 1.25);
+$font-size-header-6: calc(#{$font-size} * 1);
+
+$display-4: $font-size-header-1;
+$display-3: $font-size-header-2;
+$display-2: $font-size-header-3;
+$display-1: $font-size-header-4;
+$headline: $font-size-header-1;
+$title: $font-size-header-2;
+$subheading-2: $font-size-header-3;
+$subheading-1: $font-size-header-4;
+$body-2: $font-size-header-5;
+$body-1: $font-size;
+$caption: calc(#{$font-size} * 0.75);
+
+$custom-typography: mat-typography-config(
+  $font-family: 'Roboto, "Helvetica Neue", sans-serif',
+  $display-4: mat-typography-level($display-4, $line-height, $font-weight-banner),
+  $display-3: mat-typography-level($display-3, $line-height, $font-weight-header),
+  $display-2: mat-typography-level($display-2, $line-height, $font-weight-header),
+  $display-1: mat-typography-level($display-1, $line-height, $font-weight-strong),
+  $headline: mat-typography-level($headline, $line-height, $font-weight-banner),
+  $title: mat-typography-level($title, $line-height, $font-weight-header),
+  $subheading-2: mat-typography-level($subheading-2, $line-height, $font-weight-header),
+  $subheading-1: mat-typography-level($subheading-1, $line-height, $font-weight-strong),
+  $body-2: mat-typography-level($body-2, $line-height, $font-weight-strong),
+  $body-1: mat-typography-level($body-1, $line-height, $font-weight),
+  $caption: mat-typography-level($caption, $line-height, $font-weight),
+  $button: mat-typography-level($font-size, $line-height, $font-weight),
+  // Line-height must be unit-less fraction of the font-size.
+  $input: mat-typography-level(inherit, $line-height, $font-weight),
+);
+
+@include mat-core($custom-typography);
+
+$primary-colors: (
+  50: $color-primary-50,
+  100: $color-primary,
+  200: $color-primary,
+  contrast: (
+    50: black,
+    100: black,
+    200: black,
+  ),
+);
+
+$primary-palette: mat-palette($primary-colors, 100, 50, 200);
+$secondary-colors: (
+  50: $color-secondary,
+  100: $color-secondary,
+  200: $color-secondary,
+  contrast: (
+    50: white,
+    100: white,
+    200: white,
+  ),
+);
+
+$secondary-palette: mat-palette($secondary-colors, 100, 50, 200);
+$funle-theme: mat-light-theme($primary-palette, $secondary-palette);
+
+@include angular-material-theme($funle-theme);

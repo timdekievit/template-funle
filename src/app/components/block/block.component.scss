@@ -1,0 +1,40 @@
+@import 'src/libs/ui/scss/constants/colors';
+@import 'src/libs/ui/scss/themes/material';
+
+.block {  
+  background-color: #fff;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  &-primary {
+    background-color: $color-primary;
+  }
+
+  &-secondary {
+    background-color: $color-secondary;
+    color: #fff;
+  }
+
+  &-height-full {
+    height: 100%;
+  }
+  
+  &-height-auto {
+    height: auto;
+  }
+
+  h3 {
+    font-size: 20px;
+
+    mat-icon {
+      vertical-align: text-bottom;
+    }
+  }
+
+  &-footer {
+    display: flex;
+    justify-content: end;
+  }
+}

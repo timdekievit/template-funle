@@ -1,0 +1,40 @@
+@import '~@angular/material/core/style/variables';
+@import '~@angular/material/toolbar/toolbar-variables';
+
+@mixin full-height-minus-toolbar-height() {
+  min-height: calc(100% - #{$mat-toolbar-height-desktop});
+  padding-top: $mat-toolbar-height-desktop;
+
+  @media ($mat-xsmall) {
+    min-height: calc(100% - #{$mat-toolbar-height-mobile});
+    padding-top: $mat-toolbar-height-mobile;
+  }
+}
+
+@mixin property-toolbar-height($property, $offset: 0px, $operator: '+') {
+  #{$property}: calc(#{$mat-toolbar-height-desktop} #{$operator} #{$offset}) !important;
+
+  @media ($mat-xsmall) {
+    #{$property}: calc(#{$mat-toolbar-height-mobile} #{$operator} #{$offset}) !important;
+  }
+}
+
+@mixin full-height-minus-toolbar-height-fixed($offset: 0px, $operator: '+') {
+  height: calc(100% - #{$mat-toolbar-height-desktop} #{$operator} #{$offset});
+  padding-top: $mat-toolbar-height-desktop;
+
+  @media ($mat-xsmall) {
+    height: calc(100% - #{$mat-toolbar-height-mobile} #{$operator} #{$offset});
+    padding-top: $mat-toolbar-height-mobile;
+  }
+}
+
+@mixin full-height-minus-toolbar-height-extra($offset: 0px, $operator: '+') {
+  height: calc(100% - #{$mat-toolbar-height-desktop} + #{$mat-toolbar-height-desktop} #{$operator} #{$offset});
+  padding-top: $mat-toolbar-height-desktop;
+
+  @media ($mat-xsmall) {
+    height: calc(100% - #{$mat-toolbar-height-mobile} + #{$mat-toolbar-height-desktop} #{$operator} #{$offset});
+    padding-top: $mat-toolbar-height-mobile;
+  }
+}

@@ -1,0 +1,85 @@
+<ng-container *ngIf="isMobile$ | async;else desktopFooter">
+  <mat-toolbar class="footer-toolbar" color="accent">
+    <ng-container *ngIf="!showSocials">
+      <small>Copyright © {{ year }} funle</small>
+      <span class="footer-toolbar--spacer"></span>
+    </ng-container>
+
+    <ng-container *ngIf="showSocials">
+      <a
+        *ngFor="let social of socials"
+        [href]="social.url"
+        target="_blank"
+        class="footer-toolbar--social footer-toolbar--link"
+      >
+        <button mat-icon-button [attr.aria-label]="social.text">
+          <i [class]="social.icon"></i>
+        </button>
+      </a>
+
+      <span class="footer-toolbar--spacer"></span>
+    </ng-container>
+
+
+    <a
+      *ngFor="let contact of contacts"
+      [href]="contact.url"
+      target="_blank"
+      class="footer-toolbar--contact footer-toolbar--link"
+    >
+      <button mat-icon-button [attr.aria-label]="contact.text">
+        <i [class]="contact.icon"></i>
+      </button>
+    </a>
+
+    <span class="footer-toolbar--spacer"></span>
+
+    <div class="footer-toolbar--links" *ngIf="showLegals">
+      <small *ngFor="let legal of legals">
+        <a [routerLink]="legal.url">{{ legal.text }}</a>
+      </small>
+    </div>
+  </mat-toolbar>
+</ng-container>
+
+<ng-template #desktopFooter>
+  <mat-toolbar class="footer-toolbar" color="accent">
+    <small>Copyright © {{ year }} Funle</small>
+
+    <span class="footer-toolbar--spacer"></span>
+
+    <ng-container *ngIf="showSocials">
+      <a
+        *ngFor="let social of socials"
+        [href]="social.url"
+        target="_blank"
+        class="footer-toolbar--social footer-toolbar--link"
+      >
+        <button mat-icon-button [attr.aria-label]="social.text">
+          <i [class]="social.icon"></i>
+        </button>
+      </a>
+    </ng-container>
+
+    <span class="footer-toolbar--spacer"></span>
+
+    <div
+      *ngFor="let contact of contacts"
+      target="_blank"
+      class="footer-toolbar--contact footer-toolbar--link"
+    >
+      <a mat-icon-button [href]="contact.url" [attr.aria-label]="contact.text">
+        <i [class]="contact.icon"></i>
+      </a>
+      <small>{{ contact.text }}</small>
+    </div>
+
+    <span class="footer-toolbar--spacer"></span>
+
+    <div class="footer-toolbar--links" *ngIf="showLegals">
+      <small *ngFor="let legal of legals">
+        <a [routerLink]="legal.url">{{ legal.text }}</a>
+      </small>
+    </div>
+  </mat-toolbar>
+</ng-template>
