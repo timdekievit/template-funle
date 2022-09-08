@@ -1,0 +1,13 @@
+@import 'src/libs/ui/scss/constants/colors';
+@import 'src/libs/ui/scss/themes/material';
+
+.disabled {
+    background-color: #fff;
+    padding: 8px;
+    color: #b5485bff;
+    border: 1px solid #b5485bff;
+
+    p {
+        margin-bottom: 0px;
+    }
+}

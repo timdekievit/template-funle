@@ -1,0 +1,8 @@
+<div class="disabled">
+  <ng-container [ngSwitch]="type">
+    <p *ngSwitchCase="'inactive'">Je profiel is nog niet actief. Vul je profiel aan zodat wij deze kunnen activeren.</p>
+    <p *ngSwitchCase="'notSearching'">Huh, waarom zit hier geen knop... Volgens ons ben jij niet op zoek. Als je dit wel bent horen wij dit graag! (Dit kun je doen via je profiel.)</p>
+    <p *ngSwitchCase="'inactiveProfile'">Sorry we zijn nog even bezig... Met de informatie die jij hebt aangeleverd zijn wij nu je profiel compleet aan het maken.</p>
+    <p *ngSwitchCase="'incompleteProfile'">We hebben nog niet alle informatie ontvangen die we nodig hebben om jouw profiel te kunnen activeren. Zorg dat je naam, telefoonnummer, kvk, beschikbaarheid en CV ingevuld/geupload zijn.</p>
+  </ng-container>
+</div>
