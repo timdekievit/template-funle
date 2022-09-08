@@ -1,0 +1,130 @@
+{
+  "components": {
+    "candidateForm": {
+      "email": {
+        "label": "E-mailadres *",
+        "placeholder": "foo@bar.com",
+        "errors": {
+          "required": "E-mailadres is verplicht",
+          "email": "E-mailadres is incorrect"
+        }
+      },
+      "firstname": {
+        "label": "Voornaam",
+        "placeholder": "Voornaam"
+      },
+      "prefix": {
+        "label": "Tussenvoegsel(s)",
+        "placeholder": "Tussenvoegsel(s)"
+      },
+      "name": {
+        "label": "Achternaam",
+        "placeholder": "Achternaam"
+      },
+      "kvknummer": {
+        "label": "KVK-nummer",
+        "placeholder": "KVK-nummer"
+      },
+      "searching": {
+        "label": "Zoek opdrachten voor mij"
+      },
+      "rate": {
+        "label": "Uurtarief*",
+        "placeholder": "€ per uur",
+        "errors": {
+          "required": "Tarief is verplicht",
+          "min": "Tarief mag niet minder dan 0",
+          "max": "Tarief mag niet meer dan 200"
+        }
+      },
+      "assignmentSearchRadius": {
+        "label": "Max. afstand (km)",
+        "placeholder": "Zoekafstand in kilometers",
+        "errors": {
+          "min": "Afstand moet positief zijn"
+        }
+      },
+      "hours": {
+        "label": "Uren per week*",
+        "placeholder": "per week",
+        "errors": {
+          "required": "Uren zijn verplicht",
+          "min": "Uren mag niet minder dan 1",
+          "max": "Uren mag niet meer dan 40"
+        }
+      },
+      "role": {
+        "label": "Functie",
+        "placeholder": "Omschrijving van functie",
+        "errors": {
+          "required": "Functie is verplicht"
+        }
+      },
+      "city": {
+        "label": "Woonplaats",
+        "placeholder": "Woonplaats"
+      },
+      "availability": {
+        "label": "Per wanneer ben je beschikbaar *",
+        "placeholder": "vanaf datum",
+        "errors": {
+          "required": "Beschikbaarheid is verplicht"
+        }
+      },
+      "cv": {
+        "label": "CV",
+        "placeholder": "selecteer bestand",
+        "errors": {
+          "required": "CV is verplicht",
+          "fileMaxSize": "Het bestand mag niet groter zijn dan 10 MB",
+          "fileExtension": "Het bestand moet van het formaat pdf zijn"
+        }
+      },
+      "contactInfoBlock": {
+        "title": "Even bellen?",
+        "text": "Het lijkt ons leuk om een keer kennis te maken en te kijken wat jij precies wilt en wat je eisen zijn. Daarom zouden we graag je telefoonnummer willen vragen en een dag/tijd dat het jou uitkomt. Het is niet verplicht maar maakt ons contact wel lekker makkelijk."
+      },
+      "phoneNumber": {
+        "label": "Telefoonnummer *",
+        "placeholder": "0612345678",
+        "errors": {
+          "invalid": "Ongeldig telefoonnummer",
+          "required": "Telefoonnummer is verplicht",
+          "minLength": "Telefoonnummer mag niet korter dan 10 cijfers zijn",
+          "phoneNumber": "Telefoonnummer moet tenminste 10 cijfers bevatten en geen andere tekens dan +, -, ( en )"
+        }
+      },
+      "contactDate": {
+        "label": "Welke dag zouden wij contact kunnen opnemen",
+        "placeholder": "Datum",
+        "errors": {
+          "invalid": "Ongeldige datum"
+        }
+      },
+      "contactTimeSlot": {
+        "label": "Welke tijd komt het uit"
+      },
+      "buttons": {
+        "submit": "Opslaan"
+      }
+    }
+  },
+  "pages": {
+    "account": {
+      "views": {
+        "login": {
+          "title": "Inloggen",
+          "paragraph": "Je kunt inloggen door één van de onderstaande accounts te gebruiken. Dit is ook het emailadres wat gekoppeld staat aan je Funle account.",
+          "failure": "Inloggen is fout gegaan",
+          "buttons": {
+            "google": "Inloggen met Google",
+            "microsoft": "Inloggen met Microsoft",
+            "linkedin": "Inloggen met LinkedIn",
+            "github": "Inloggen met Github",
+            "facebook": "Inloggen met Facebook"
+          }
+        }
+      }
+    }
+  }
+}

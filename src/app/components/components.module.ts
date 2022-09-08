@@ -19,8 +19,6 @@ import { LinkButtonComponent } from './link-button/link-button.component';
     CommonModule,
     FormsModule,
     RouterModule
-
-
   ],
   exports: [
     BlockComponent,

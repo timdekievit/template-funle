@@ -1,5 +1,3 @@
-<p>dashboard werkt!</p>
-
 <div class="dashboard-content">
   <div class="row">
     <div class="col-md-6">
@@ -10,7 +8,7 @@
         <funle-portal-disabled-message *ngIf="isNotSearching" [type]="'notSearching'"></funle-portal-disabled-message>
       </funle-portal-block>
     </div>
-    <!-- <div class="col-md-6">
+    <div class="col-md-6">
       <funle-portal-block [type]="'basic'" [icon]="'pending_actions'" [title]="'Biedingen'"
         [text]="'Hier kun je de status bijhouden van de opdrachten waarop jij bent aangeboden.'">
         <funle-portal-link-button *ngIf="isSearching || isNotSearching" [page]="'favorite'"></funle-portal-link-button>
@@ -18,7 +16,7 @@
       </funle-portal-block>
     </div>
   </div>
-  <div class="row">
+  <!-- <div class="row">
     <div class="col-md-4">
       <ng-container [ngSwitch]="dashboard.secondaryScenario">
         <funle-portal-block *ngSwitchCase="0" [type]="'primary'" [icon]="'chat'" [title]="'Contact'"
@@ -37,7 +35,7 @@
         <funle-portal-action-button (click)="toFunleVision()" [type]="'secondary'" [text]="'Naar FunleVision'"></funle-portal-action-button>
       </funle-portal-block>
     </div>
-  </div>
+  </div> -->
   <div class="row">
     <div class="col-md-6">
       <funle-portal-block [type]="'basic'" [icon]="'article'" [title]="'Opdrachten'"
@@ -50,7 +48,7 @@
       <funle-portal-block [type]="'basic'" [icon]="'manage_accounts'" [title]="'Profiel'"
         [text]="'Al jouw instellingen en informatie.'">
         <funle-portal-link-button [page]="'profile'"></funle-portal-link-button>
-      </funle-portal-block> -->
+      </funle-portal-block>
     </div>
   </div>
-<!-- </div> -->
+</div>
