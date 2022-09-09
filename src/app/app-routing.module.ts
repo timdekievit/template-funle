@@ -34,15 +34,15 @@ const routes: Routes = [
     // canActivate: [AuthGuard],
     loadChildren: () => import('./pages/attention/attention.module').then(m => m.AttentionModule),
   },
-  // {
-  //   path: 'favorite',
-  //   data: {
-  //     page: 'Biedingen',
-  //     showBack: true
-  //   },
-  //   // canActivate: [AuthGuard],
-  //   loadChildren: () => import('./pages/favorite/favorite.module').then(m => m.FavoriteModule),
-  // },
+  {
+    path: 'favorite',
+    data: {
+      page: 'Biedingen',
+      showBack: true
+    },
+    // canActivate: [AuthGuard],
+    loadChildren: () => import('./pages/favorite/favorite.module').then(m => m.FavoriteModule),
+  },
   // {
   //   path: 'saved',
   //   data: {
