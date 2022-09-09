@@ -1,1 +1,43 @@
 /* You can add global styles to this file, and also import other style files */
+@import '~bootstrap/scss/bootstrap-grid.scss';
+@import '~font-awesome/scss/font-awesome.scss';
+@import 'src/libs/ui/scss/constants/colors';
+@import 'src/libs/ui/scss/themes/material';
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100vh;
+  min-height: 100vh;
+}
+
+body {
+  margin: 0;
+}
+
+a {
+  color: $color-secondary;
+}
+
+.mat-snack-bar-container {
+  &.success {
+    background-color: $color-success;
+  }
+
+  &.failure {
+    background-color: $color-error;
+  }
+
+  &.info {
+    color: $color-text;
+    background-color: $color-background-secondary;
+  }
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+}
