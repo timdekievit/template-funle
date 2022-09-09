@@ -1,0 +1,42 @@
+@import 'src/libs/ui/scss/constants/colors';
+@import 'src/libs/ui/scss/themes/material';
+
+.assignment-detail {
+  &-container {
+    padding-top: 8px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+
+    .sticky {
+      position: sticky;
+      top: 16px;
+    }
+  }
+
+  &--block {
+    background-color: #fff;
+    padding: 16px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
+    h1 {
+      font-size: 40px;
+      margin-top: 0px;
+      margin-bottom: 0px;
+    }
+
+    &-secondary {
+      background-color: $color-secondary;
+      color: #fff;
+    }
+
+    &-warn {
+      background-color:#b5485bff;
+      color: #fff;
+    }
+  }
+}
+

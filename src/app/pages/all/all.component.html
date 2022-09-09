@@ -1,19 +1,33 @@
-<p>opdrachten pagina werkt!</p>
-<p>opdrachten pagina werkt!</p>
-<p>opdrachten pagina werkt!</p>
-<p>opdrachten pagina werkt!</p>
-<p>opdrachten pagina werkt!</p>
-<p>opdrachten pagina werkt!</p>
-<p>opdrachten pagina werkt!</p>
-<p>opdrachten pagina werkt!</p>
-<p>opdrachten pagina werkt!</p>
-<p>opdrachten pagina werkt!</p>
-<p>opdrachten pagina werkt!</p>
-<p>opdrachten pagina werkt!</p>
-<p>opdrachten pagina werkt!</p>
-<p>opdrachten pagina werkt!</p>
-<p>opdrachten pagina werkt!</p>
-<p>opdrachten pagina werkt!</p>
-<p>opdrachten pagina werkt!</p>
-<p>opdrachten pagina werkt!</p>
-<p>opdrachten pagina werkt!</p>
+<div class="all-container container">
+    <h1>Opdrachten</h1>
+    <div class="row">
+        <div class="col-md-12">
+            <funle-portal-assignments-table *ngIf="assignments?.length > 0; else noContent" [showFilter]="false"
+                [assignments]="assignments" (assignmentSelected)="onAssignmentSelected($event)">
+            </funle-portal-assignments-table>
+            <ng-template #noContent>
+                <funle-portal-message-container [title]="messageTitle">
+                    <funle-portal-message *ngIf="nothingFound" [message]="nothingFoundMessage"
+                        [secondMessage]="'Sommige opdrachtgevers hebben liever dat wij specifiek naar kandidaten zoeken. Hierdoor zijn deze opdrachten niet te zien in deze lijst. Geef in je profiel aan dat je op zoek bent en per wanneer zodat wij deze opdrachten aan je kunnen koppelen als we een match zien.'">
+                    </funle-portal-message>
+                    <funle-portal-message *ngIf="somethingWentWrong" [message]="somethingWentWrongMessage">
+                    </funle-portal-message>
+                </funle-portal-message-container>
+            </ng-template>
+        </div>
+    </div>
+    <div class="row">
+        <!-- <div class="col-md-6">
+        <funle-portal-block [type]="'primary'" [icon]="'tips_and_updates'" [title]="'FunleVision'" [text]="'Heb jij een vraag over freelancen of IT? Stel ze bij FunleVision en wij gaan voor jou op zoek naar het antwoord! Of bekijk de blogs, video\'s over eerder gestelde vragen.'">
+          <funle-portal-action-button (click)="toFunleVision()" [type]="'primary'" [text]="'Naar FunleVision'"></funle-portal-action-button>
+        </funle-portal-block>
+      </div> -->
+        <div class="col-md-6">
+            <funle-portal-block [type]="'basic'" [icon]="'dashboard'" [title]="'Dashboard'"
+                [text]="'Een overzichtelijk overzicht. Overzichtelijker kunnen we het niet maken.'">
+                <button (click)="toPage('dashboard')" mat-button>Naar dashboard <mat-icon>arrow_forward</mat-icon>
+                    </button>
+            </funle-portal-block>
+        </div>
+    </div>
+</div>

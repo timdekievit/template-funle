@@ -23,6 +23,11 @@ import { LinkButtonComponent } from './link-button/link-button.component';
 import { ActionButtonComponent } from './action-button/action-button.component';
 import { PortalHeaderComponent } from './header/header.component';
 import { BannerComponent } from './banner/banner.component';
+import { AssignmentsDetailComponent } from './assignment-detail/assignments-detail.component';
+import { AssignmentGeneralItemComponent } from './assignment-general-item/assignment-general-item.component';
+import { AssignmentsTableComponent } from './assignments-table/assignments-table.component';
+import { MessageComponent } from './message/message.component';
+import { MessageContainerComponent } from './message-container/message-container.component';
 
 
 @NgModule({
@@ -32,7 +37,12 @@ import { BannerComponent } from './banner/banner.component';
     LinkButtonComponent,
     ActionButtonComponent,
     PortalHeaderComponent,
-    BannerComponent
+    BannerComponent,
+    AssignmentsDetailComponent,
+    AssignmentGeneralItemComponent,
+    AssignmentsTableComponent,
+    MessageComponent,
+    MessageContainerComponent
     
   ],
   imports: [
@@ -61,7 +71,12 @@ import { BannerComponent } from './banner/banner.component';
     LinkButtonComponent,
     ActionButtonComponent,
     PortalHeaderComponent,
-    BannerComponent
+    BannerComponent,
+    AssignmentGeneralItemComponent,
+    AssignmentsDetailComponent,
+    AssignmentsTableComponent,
+    MessageComponent,
+    MessageContainerComponent
   ],
 })
 export class ComponentsModule {}

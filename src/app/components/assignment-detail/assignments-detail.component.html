@@ -1,0 +1,103 @@
+<div class="assignment-detail-container container">
+  <div class="row">
+    <div *ngIf="assignment?.proposalStatus === 'Interview'" class="col-md-12">
+      <div class="assignment-detail--block assignment-detail--block-secondary">
+        <div class="block-content">
+          <h3><mat-icon>emoji_emotions</mat-icon> Je mag op intake!</h3>
+          <p>De opdrachtgever heeft je uitgenodigd voor een intake gesprek. Hieronder zie je de details van de uitnodiging.</p>
+          <funle-portal-assignment-general-item *ngIf="!assignment?.digital" [label]="'Locatie'" [value]="assignment?.interviewLocation"></funle-portal-assignment-general-item>
+          <funle-portal-assignment-general-item *ngIf="assignment?.digital" [label]="'Link'" [value]="assignment?.interviewLink"></funle-portal-assignment-general-item>
+          <funle-portal-assignment-general-item [label]="'Datum'" [value]="assignment?.interviewDate"></funle-portal-assignment-general-item>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="assignment?.proposalStatus === 'Rejected'" class="col-md-12">
+      <div class="assignment-detail--block assignment-detail--block-warn">
+          <div class="block-content">
+            <h3><mat-icon>sentiment_dissatisfied</mat-icon> Ze weten niet wat ze mislopen.</h3>
+            <p>De opdrachtgever heeft helaas voor iemand anders gekozen. De reden die hiervoor gegeven is:</p>
+            <p>{{assignment?.rejectedReason}}</p>
+          </div>
+      </div>
+    </div>
+    <div *ngIf="assignment?.proposalStatus === 'Submitted'" class="col-md-12">
+      <div class="assignment-detail--block">
+          <div class="block-content">
+            <h3><mat-icon>send</mat-icon> De digitale jij is onderweg</h3>
+            <p>We hebben de digitale versie van jou naar de opdrachtgever gestuurd. Nu is het wachten tot ze de opdracht sluiten of dat de uiterlijke indien datum verstreken is. Daarna zal de opdrachtgever bepalen wie ze willen uitnodigen om op intake te komen. De kans is groot dat jij hierbij zit!</p>
+          </div>
+      </div>
+    </div>    
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="assignment-detail--block">      
+        <h1>{{ assignment?.title }}</h1>
+        <p>{{assignment?.customer}}</p>
+        <funle-portal-assignment-general-item [label]="'Reageren voor'" [value]="assignment?.submitDate"></funle-portal-assignment-general-item>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="assignment-detail--block">      
+        <funle-portal-assignment-general-item [label]="'Plaats'" [value]="assignment?.city"></funle-portal-assignment-general-item>
+        <funle-portal-assignment-general-item [label]="'Uur'" [value]="assignment?.hours"></funle-portal-assignment-general-item>
+        <funle-portal-assignment-general-item [label]="'Startdatum'" [value]="assignment?.startDate"></funle-portal-assignment-general-item>
+        <funle-portal-assignment-general-item [label]="'Einddatum'" [value]="assignment?.endDate"></funle-portal-assignment-general-item>
+        <funle-portal-assignment-general-item [label]="'Verlening'" [value]="assignment?.withProlongation ? 'Mogelijk' : 'Niet bekend'"></funle-portal-assignment-general-item>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <ng-container *ngIf="isCreated">
+      <div class="col-sm-6 d-md-none">
+        <div class="sticky">
+          <funle-portal-block *ngIf="!accepted" [type]="'primary'" [height]="'auto'" [icon]="'favorite'" [title]="'Iets voor jou?'"
+            [text]="'Als jij denkt dat jij gemaakt bent voor deze opdracht, laat dit weten zodat wij voor je aan de slag kunnen!'">
+            <funle-portal-action-button (click)="acceptProposal()" [type]="'primary'" [text]="'Bied mij aan'"></funle-portal-action-button>
+          </funle-portal-block>
+          <funle-portal-block *ngIf="accepted" [type]="'primary'" [height]="'auto'" [icon]="'favorite'" [title]="'Aanpassing nodig?'"
+            [text]="'Je motivatie nog een beetje mooier maken? Of heb je nog wat extra notities om je kwaliteiten nog meer te laten shinen?'">
+            <funle-portal-action-button (click)="acceptProposal()" [type]="'primary'" [text]="'Pas aan'"></funle-portal-action-button>
+          </funle-portal-block>
+        </div>
+      </div>
+      <div class="col-sm-6 d-md-none">
+        <div class="sticky">
+          <funle-portal-block *ngIf="!declined && !accepted" [type]="'secondary'" [height]="'auto'" [icon]="'highlight_off'" [title]="'Is dit hem niet?'"
+            [text]="'Laat ons weten waarom deze opdracht geen match is zodat wij kunnen verbeteren en jou beter kunnen helpen.'">
+            <funle-portal-action-button (click)="declineProposal()" [type]="'secondary'" [text]="'Meld een mismatch'"></funle-portal-action-button>
+          </funle-portal-block>
+          <funle-portal-block *ngIf="declined && !accepted" [type]="'secondary'" [height]="'auto'" [icon]="'highlight_off'" [title]="'Bedankt!'"
+            [text]="'Je hebt ons laten weten dat dit geen goede match is. We zullen hiermee aan de slag gaan en proberen betere matches te maken in de toekomst.'">
+          </funle-portal-block>
+        </div>
+      </div>
+    </ng-container>
+    <div class="col-md-8" [ngClass]="{'col-md-12': !isCreated }">
+      <div class="assignment-detail--block">
+        <div class="assignment-detail--info-description" [innerHTML]="assignment?.description"></div>
+      </div>
+    </div>
+    <ng-container *ngIf="isCreated">
+      <div class="col-md-4 d-none d-md-block">
+        <div class="sticky">
+          <funle-portal-block *ngIf="!accepted" [type]="'primary'" [height]="'auto'" [icon]="'favorite'" [title]="'Iets voor jou?'"
+            [text]="'Als jij denkt dat jij gemaakt bent voor deze opdracht, laat dit weten zodat wij voor je aan de slag kunnen!'">
+            <funle-portal-action-button (click)="acceptProposal()" [type]="'primary'" [text]="'Bied mij aan'"></funle-portal-action-button>
+          </funle-portal-block>
+          <funle-portal-block *ngIf="accepted" [type]="'primary'" [height]="'auto'" [icon]="'favorite'" [title]="'Aanpassing nodig?'"
+            [text]="'Je motivatie nog een beetje mooier maken? Of heb je nog wat extra notities om je kwaliteiten nog meer te laten shinen?'">
+            <funle-portal-action-button (click)="acceptProposal()" [type]="'primary'" [text]="'Pas aan'"></funle-portal-action-button>
+          </funle-portal-block>
+          <funle-portal-block *ngIf="!declined && !accepted" [type]="'secondary'" [height]="'auto'" [icon]="'highlight_off'" [title]="'Is dit hem niet?'"
+            [text]="'Laat ons weten waarom deze opdracht geen match is zodat wij kunnen verbeteren en jou beter kunnen helpen.'">
+            <funle-portal-action-button (click)="declineProposal()" [type]="'secondary'" [text]="'Meld een mismatch'"></funle-portal-action-button>
+          </funle-portal-block>
+          <funle-portal-block *ngIf="declined && !accepted" [type]="'secondary'" [height]="'auto'" [icon]="'highlight_off'" [title]="'Bedankt!'"
+            [text]="'Je hebt ons laten weten dat dit geen goede match is. We zullen hiermee aan de slag gaan en proberen betere matches te maken in de toekomst.'">
+          </funle-portal-block>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</div>
