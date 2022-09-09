@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { ComponentsModule } from './components/components.module';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { DashboardModule } from './pages/dashboard/dashboard.module';
+import { MatSidenavModule } from '@angular/material/sidenav';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { DashboardModule } from './pages/dashboard/dashboard.module';
     BrowserModule,
     AppRoutingModule,
     MatIconModule,
+    MatSidenavModule,
     ComponentsModule,
     AppRoutingModule,
     DashboardModule,
