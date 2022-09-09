@@ -52,14 +52,14 @@ const routes: Routes = [
   //   // canActivate: [AuthGuard],
   //   loadChildren: () => import('./pages/saved/saved.module').then(m => m.SavedModule),
   // },
-  // {
-  //   path: 'all',
-  //   data: {
-  //     page: 'Opdrachten',
-  //     showBack: true
-  //   },
-  //   loadChildren: () => import('./pages/all/all.module').then(m => m.AllModule),
-  // },
+  {
+    path: 'all',
+    data: {
+      page: 'Opdrachten',
+      showBack: true
+    },
+    loadChildren: () => import('./pages/all/all.module').then(m => m.AllModule),
+  },
   // {
   //   path: 'profile',
   //   data: {
