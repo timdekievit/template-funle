@@ -20,7 +20,7 @@
         <div class="col-md-6">
           <funle-portal-block [type]="'basic'" [icon]="'star'" [title]="'Uitgelicht'"
             [text]="'Opdrachten die wij gevonden hebben waarvan we denken dat ze bij jou passen.'">
-            <funle-portal-link-button *ngIf="isSearching" [page]="'attention'"></funle-portal-link-button>
+            <funle-portal-link-button [page]="'attention'"></funle-portal-link-button>
             <funle-portal-disabled-message *ngIf="isInactive" [type]="'inactive'"></funle-portal-disabled-message>
             <funle-portal-disabled-message *ngIf="isNotSearching" [type]="'notSearching'">
             </funle-portal-disabled-message>
@@ -29,7 +29,7 @@
         <div class="col-md-6">
           <funle-portal-block [type]="'basic'" [icon]="'pending_actions'" [title]="'Biedingen'"
             [text]="'Hier kun je de status bijhouden van de opdrachten waarop jij bent aangeboden.'">
-            <funle-portal-link-button *ngIf="isSearching || isNotSearching" [page]="'favorite'">
+            <funle-portal-link-button [page]="'favorite'">
             </funle-portal-link-button>
             <funle-portal-disabled-message *ngIf="isInactive" [type]="'inactive'"></funle-portal-disabled-message>
           </funle-portal-block>
@@ -61,7 +61,7 @@
         <div class="col-md-6">
           <funle-portal-block [type]="'basic'" [icon]="'article'" [title]="'Opdrachten'"
             [text]="'Alle opdrachten waarvan ons systeem denkt dat dit mogelijk aansluit op jouw profiel.'">
-            <funle-portal-link-button *ngIf="isSearching || isNotSearching" [page]="'all'"></funle-portal-link-button>
+            <funle-portal-link-button [page]="'all'"></funle-portal-link-button>
             <funle-portal-disabled-message *ngIf="isInactive" [type]="'inactive'"></funle-portal-disabled-message>
           </funle-portal-block>
         </div>
