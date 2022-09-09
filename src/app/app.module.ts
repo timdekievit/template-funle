@@ -12,10 +12,12 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { ProfileModule } from './pages/profile/profile.module';
 import { AllModule } from './pages/all/all.module';
+import { AttentionComponent } from './pages/attention/attention.component';
+import { AttentionDetailComponent } from './pages/attention/views/attention-detail/attention-detail.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,

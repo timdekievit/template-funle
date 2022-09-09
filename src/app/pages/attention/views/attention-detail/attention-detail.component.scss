@@ -1,0 +1,60 @@
+@import 'src/libs/ui/scss/constants/colors';
+@import 'src/libs/ui/scss/themes/material';
+
+.fab-buttons {
+  display: none;
+
+  @media ($mat-xsmall) {
+    display: block;
+  }
+}
+
+.attention-detail {
+  &-container {
+    padding: 0;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+    padding-bottom: 100px;
+
+    @media ($mat-xsmall) {
+      padding-bottom: 140px;
+    }   
+    
+  }
+
+  &--actions {
+    width: 100%;
+    position: fixed;
+    bottom: 0px;
+    background-color: #eee;
+    height: 100px;
+    padding: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    @media ($mat-xsmall) {
+      display: block;
+      height: 140px;
+    }
+
+    &-button {
+      width: 50%;
+      display: flex;
+      justify-content: center;
+
+      @media ($mat-xsmall) {
+        width: 100%;
+        display: block;
+        margin: 16px 0px;
+
+        button {
+          width: 100%;
+        }
+      }
+
+    }
+  }
+}

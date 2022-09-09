@@ -25,15 +25,15 @@ const routes: Routes = [
     // canActivate: [AuthGuard],
     loadChildren: () => import('./pages/dashboard/dashboard.module').then(m => m.DashboardModule),
   },
-  // {
-  //   path: 'attention',
-  //   data: {
-  //     page: 'Uitgelicht',
-  //     showBack: true
-  //   },
-  //   // canActivate: [AuthGuard],
-  //   loadChildren: () => import('./pages/attention/attention.module').then(m => m.AttentionModule),
-  // },
+  {
+    path: 'attention',
+    data: {
+      page: 'Uitgelicht',
+      showBack: true
+    },
+    // canActivate: [AuthGuard],
+    loadChildren: () => import('./pages/attention/attention.module').then(m => m.AttentionModule),
+  },
   // {
   //   path: 'favorite',
   //   data: {
