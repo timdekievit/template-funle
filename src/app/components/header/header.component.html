@@ -1,0 +1,40 @@
+<mat-toolbar class="header-toolbar" color="primary">
+  <div class="container">
+    <div class="header-container">
+      <div *ngIf="ios && showBack" class="header-toolbar--iosBack" (click)="onBack()">
+        <mat-icon>arrow_back_ios</mat-icon>
+      </div>
+      <div  class="header-icon"><mat-icon svgIcon="funle-logo-background"></mat-icon></div>
+      
+      <div class="desktop-menu">
+        <ng-container *ngIf="showMenu">
+          <div (click)="goTo('dashboard')" class="header-toolbar--title" [ngClass]="{'active': page === 'Dashboard'}">
+            <mat-icon>dashboard</mat-icon>
+            <p>Dashboard</p>
+          </div>
+          <div (click)="goTo('attention')" class="header-toolbar--title" [ngClass]="{'active': page === 'Uitgelicht'}">
+            <mat-icon>star</mat-icon>
+            <p>Uitgelicht</p>
+          </div>
+          <div (click)="goTo('favorite')" class="header-toolbar--title" [ngClass]="{'active': page === 'Biedingen'}">
+            <mat-icon>pending_actions</mat-icon>
+            <p>Biedingen</p>
+          </div>
+          <div (click)="goTo('all')" class="header-toolbar--title" [ngClass]="{'active': page === 'Opdrachten'}">
+            <mat-icon>article</mat-icon>
+            <p>Opdrachten</p>
+          </div>
+          <div (click)="goTo('profile')" class="header-toolbar--title" [ngClass]="{'active': page === 'Profiel'}">
+            <mat-icon>manage_accounts</mat-icon>
+            <p>Profiel</p>
+          </div>
+        </ng-container>
+      </div>
+      <div class="mobile-menu">
+        <ng-container *ngIf="showMenu">
+          <ng-content></ng-content>
+        </ng-container>
+      </div>
+    </div>
+  </div>      
+</mat-toolbar>

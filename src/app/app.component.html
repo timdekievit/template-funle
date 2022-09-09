@@ -1,6 +1,12 @@
-<mat-sidenav-container>
+<funle-portal-header [showMenu]="!isIntroPage && loggedIn" [page]="pageTitle$" [showBack]="showBack$ | async" (back)="onBack()">
+    <div class="profile" (click)="menuOpen(true)">
+      <mat-icon>menu</mat-icon>
+    </div>
+</funle-portal-header>
+
+<mat-sidenav-container class="sidenav">
     <mat-sidenav-content class="page-wrapper-full page-wrapper--app">
-        <funle-portal-dashboard></funle-portal-dashboard>
+        <router-outlet></router-outlet>
     </mat-sidenav-content>
 </mat-sidenav-container>
 

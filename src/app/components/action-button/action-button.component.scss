@@ -1,0 +1,17 @@
+@import 'src/libs/ui/scss/constants/colors';
+@import 'src/libs/ui/scss/themes/material';
+
+.action {
+
+    &-primary {
+        .button {
+            border-color: #000;
+        }
+    }
+
+    &-secondary {
+        .button {
+            border-color: #fff;
+        }
+    }
+}

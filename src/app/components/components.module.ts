@@ -20,13 +20,18 @@ import { RouterModule } from '@angular/router';
 import { BlockComponent } from './block/block.component';
 import { DisabledMessageComponent } from './disabled-message/disabled-message.component';
 import { LinkButtonComponent } from './link-button/link-button.component';
+import { ActionButtonComponent } from './action-button/action-button.component';
+import { PortalHeaderComponent } from './header/header.component';
 
 
 @NgModule({
   declarations: [
     BlockComponent,
     DisabledMessageComponent,
-    LinkButtonComponent
+    LinkButtonComponent,
+    ActionButtonComponent,
+    PortalHeaderComponent,
+    
   ],
   imports: [
     MatTabsModule,
@@ -51,7 +56,9 @@ import { LinkButtonComponent } from './link-button/link-button.component';
   exports: [
     BlockComponent,
     DisabledMessageComponent,
-    LinkButtonComponent
+    LinkButtonComponent,
+    ActionButtonComponent,
+    PortalHeaderComponent,
   ],
 })
 export class ComponentsModule {}
