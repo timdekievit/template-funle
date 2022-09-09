@@ -1,26 +1,41 @@
 <div class="dashboard-banner"
   [ngClass]="{'dashboard-high-banner': dashboard?.mainScenario === 4 || dashboard?.mainScenario === 0 }"></div>
 <div class="dashboard-container container">
-  <div class="dashboard-content">
-    <div class="row">
-      <div class="col-md-6">
-        <funle-portal-block [type]="'basic'" [icon]="'star'" [title]="'Uitgelicht'"
-          [text]="'Opdrachten die wij gevonden hebben waarvan we denken dat ze bij jou passen.'">
-          <funle-portal-link-button *ngIf="isSearching" [page]="'attention'"></funle-portal-link-button>
-          <funle-portal-disabled-message *ngIf="isInactive" [type]="'inactive'"></funle-portal-disabled-message>
-          <funle-portal-disabled-message *ngIf="isNotSearching" [type]="'notSearching'"></funle-portal-disabled-message>
-        </funle-portal-block>
-      </div>
-      <div class="col-md-6">
-        <funle-portal-block [type]="'basic'" [icon]="'pending_actions'" [title]="'Biedingen'"
-          [text]="'Hier kun je de status bijhouden van de opdrachten waarop jij bent aangeboden.'">
-          <funle-portal-link-button *ngIf="isSearching || isNotSearching" [page]="'favorite'">
-          </funle-portal-link-button>
-          <funle-portal-disabled-message *ngIf="isInactive" [type]="'inactive'"></funle-portal-disabled-message>
-        </funle-portal-block>
+  <div class="dashboard-header">
+    <div class="dashboard-header--title">
+      <div class="row">
+        <div class="col-md-8">
+            <!-- NotActive -->
+            <funle-portal-banner [title]="'Beschikbaar'" 
+              [firstParagraph]="'Ben jij binnenkort weer beschikbaar voor een andere opdracht? Geef het bij ons aan en wij zorgen er voor dat je geen zorgen hoeft te maken dat je zonder opdracht komt te zitten.'">
+              <funle-portal-action-button (click)="goTo('profile')" [type]="'secondary'" [text]="'Beschikbaarheid opgeven'"></funle-portal-action-button>
+            </funle-portal-banner>
+        </div>
+        <div class="col-md-4"></div>
       </div>
     </div>
-    <!-- <div class="row">
+  </div>
+    <div class="dashboard-content">
+      <div class="row">
+        <div class="col-md-6">
+          <funle-portal-block [type]="'basic'" [icon]="'star'" [title]="'Uitgelicht'"
+            [text]="'Opdrachten die wij gevonden hebben waarvan we denken dat ze bij jou passen.'">
+            <funle-portal-link-button *ngIf="isSearching" [page]="'attention'"></funle-portal-link-button>
+            <funle-portal-disabled-message *ngIf="isInactive" [type]="'inactive'"></funle-portal-disabled-message>
+            <funle-portal-disabled-message *ngIf="isNotSearching" [type]="'notSearching'">
+            </funle-portal-disabled-message>
+          </funle-portal-block>
+        </div>
+        <div class="col-md-6">
+          <funle-portal-block [type]="'basic'" [icon]="'pending_actions'" [title]="'Biedingen'"
+            [text]="'Hier kun je de status bijhouden van de opdrachten waarop jij bent aangeboden.'">
+            <funle-portal-link-button *ngIf="isSearching || isNotSearching" [page]="'favorite'">
+            </funle-portal-link-button>
+            <funle-portal-disabled-message *ngIf="isInactive" [type]="'inactive'"></funle-portal-disabled-message>
+          </funle-portal-block>
+        </div>
+      </div>
+      <!-- <div class="row">
       <div class="col-md-4">
         <ng-container [ngSwitch]="dashboard.secondaryScenario">
           <funle-portal-block *ngSwitchCase="0" [type]="'primary'" [icon]="'chat'" [title]="'Contact'"
@@ -42,20 +57,20 @@
         </funle-portal-block>
       </div>
     </div> -->
-    <div class="row">
-      <div class="col-md-6">
-        <funle-portal-block [type]="'basic'" [icon]="'article'" [title]="'Opdrachten'"
-          [text]="'Alle opdrachten waarvan ons systeem denkt dat dit mogelijk aansluit op jouw profiel.'">
-          <funle-portal-link-button *ngIf="isSearching || isNotSearching" [page]="'all'"></funle-portal-link-button>
-          <funle-portal-disabled-message *ngIf="isInactive" [type]="'inactive'"></funle-portal-disabled-message>
-        </funle-portal-block>
-      </div>
-      <div class="col-md-6">
-        <funle-portal-block [type]="'basic'" [icon]="'manage_accounts'" [title]="'Profiel'"
-          [text]="'Al jouw instellingen en informatie.'">
-          <funle-portal-link-button [page]="'profile'"></funle-portal-link-button>
-        </funle-portal-block>
+      <div class="row">
+        <div class="col-md-6">
+          <funle-portal-block [type]="'basic'" [icon]="'article'" [title]="'Opdrachten'"
+            [text]="'Alle opdrachten waarvan ons systeem denkt dat dit mogelijk aansluit op jouw profiel.'">
+            <funle-portal-link-button *ngIf="isSearching || isNotSearching" [page]="'all'"></funle-portal-link-button>
+            <funle-portal-disabled-message *ngIf="isInactive" [type]="'inactive'"></funle-portal-disabled-message>
+          </funle-portal-block>
+        </div>
+        <div class="col-md-6">
+          <funle-portal-block [type]="'basic'" [icon]="'manage_accounts'" [title]="'Profiel'"
+            [text]="'Al jouw instellingen en informatie.'">
+            <funle-portal-link-button [page]="'profile'"></funle-portal-link-button>
+          </funle-portal-block>
+        </div>
       </div>
     </div>
-  </div>
 </div>

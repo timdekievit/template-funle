@@ -22,6 +22,7 @@ import { DisabledMessageComponent } from './disabled-message/disabled-message.co
 import { LinkButtonComponent } from './link-button/link-button.component';
 import { ActionButtonComponent } from './action-button/action-button.component';
 import { PortalHeaderComponent } from './header/header.component';
+import { BannerComponent } from './banner/banner.component';
 
 
 @NgModule({
@@ -31,6 +32,7 @@ import { PortalHeaderComponent } from './header/header.component';
     LinkButtonComponent,
     ActionButtonComponent,
     PortalHeaderComponent,
+    BannerComponent
     
   ],
   imports: [
@@ -59,6 +61,7 @@ import { PortalHeaderComponent } from './header/header.component';
     LinkButtonComponent,
     ActionButtonComponent,
     PortalHeaderComponent,
+    BannerComponent
   ],
 })
 export class ComponentsModule {}

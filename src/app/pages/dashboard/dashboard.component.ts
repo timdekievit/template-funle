@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { IBaseDashboard } from '@funle/entities';
 
 @Component({
@@ -21,9 +22,13 @@ export class DashboardComponent implements OnInit {
 
   get isInactive(): boolean {
     return this.dashboard?.mainScenario === 0;
-  } 
+  }
+  
+  goTo(page: string) {
+    this.router.navigate([page]);
+  }
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
   }

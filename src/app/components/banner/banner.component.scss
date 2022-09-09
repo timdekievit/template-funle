@@ -1,0 +1,40 @@
+@import 'src/libs/ui/scss/constants/colors';
+@import 'src/libs/ui/scss/themes/material';
+
+.font-size-20 {
+  font-size: 20px;
+}
+
+.banner {
+  // background-color: $color-secondary;
+  color: #fff;
+  padding: 16px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  // &-accent {
+  //   background-color: $color-primary;
+  //   color: #000;
+  // }
+
+  &-content {
+    h2 {
+      font-size: 30px;
+    }
+  }
+
+  &-footer {
+    // button {
+    //   border: 2px solid #fff;
+    // }
+
+    // &-accent {
+    //   button {
+    //     border-color: #000;
+    //   }
+    // }
+  }
+  
+}

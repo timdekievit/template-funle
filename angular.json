@@ -29,6 +29,7 @@
                 "src/site.webmanifest"
               ],
               "styles": [
+                "node_modules/fullpage.js/dist/fullpage.min.css",
                 "src/styles.scss"
               ],
               "scripts": []

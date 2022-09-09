@@ -1,0 +1,150 @@
+@import 'src/libs/ui/scss/mixins/toolbar';
+@import 'src/libs/ui/scss/themes/material';
+@import 'src/libs/ui/scss/constants/colors';
+@import '~@angular/material/toolbar/toolbar-variables';
+
+funle-portal-root {
+  background-color: #eee;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  .page-wrapper {
+    @include property-toolbar-height(margin-top);
+    overflow: auto;
+    background-color: #eee;
+    margin-top: auto;
+    flex: 1 0 auto;
+  }
+
+  .page-wrapper-full {
+    @include property-toolbar-height(margin-top);
+    // overflow: auto;
+    background-color: #eee;
+    flex: 1 0 auto;
+    padding-bottom: 100px;
+  }
+
+  .logout {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+
+    mat-icon {
+      color: white;
+      transform: rotateY(180deg);
+    }
+  }
+
+  [class*='col-'] {
+    margin-top: 16px;
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+
+  .row {
+    padding: 0px 0px 0px 0px;
+  }
+}
+
+.profile {
+  cursor: pointer;
+  width: 32px;
+  mat-icon {
+    font-size: 32px;
+    width: 32px;
+    height: 32px;
+  }
+}
+
+
+.agreement-container {
+  padding:16px;
+
+  h3 {
+    font-size: 20px;
+  }
+
+  &--text {
+    max-height: 400px;
+    overflow: scroll;
+    background-color: #f1f1f1;
+    padding: 8px;
+    border: 1px solid #000;
+  }
+
+  &--agree {
+    line-height: 1.5;
+    margin-top: 16px;
+
+    .mat-checkbox-layout {
+      white-space: normal;
+    }
+  }
+
+  &--next {
+    line-height: 1.5;
+    margin-top: 32px;
+
+    @media (max-width: 900px) {
+      button {
+        width: 100%;
+      }
+    }
+  }
+}
+
+.incentive-banner {
+  background-color: $color-secondary;
+  color: $color-background-secondary;
+
+  display: flex;
+  flex-shrink: 0;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: baseline;
+  text-align: center;
+
+  margin-top: 10px;
+  padding: .5em;
+
+  .banner-text {
+    font-weight: 700;
+  }
+
+  button {
+    margin: .5em 1em;
+    border: 1px solid white;
+  }
+}
+
+.sidenav {
+  height: 100%;
+
+  &-menu {
+    padding: 64px 16px 0px 16px;
+    min-width: 200px;
+
+    &--item {
+      height: 50px;
+      display: flex;
+      align-items: center;
+
+      p {
+        display: flex;
+      }
+
+      mat-icon {
+        margin-right: 8px;
+      }
+    }
+  }
+
+  .active {
+    p {
+      span {
+        text-decoration: underline;
+      }
+    }
+  }
+}

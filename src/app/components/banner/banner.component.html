@@ -1,0 +1,14 @@
+<div class="banner">
+  <div class="banner-content">
+    <h2>{{title}}</h2>
+    <p>
+      {{firstParagraph}}
+    </p>
+    <p *ngIf="secondParagraph !== undefined">
+      {{secondParagraph}}
+    </p>
+  </div>
+  <div class="banner-footer">
+    <ng-content></ng-content>
+  </div>
+</div>
