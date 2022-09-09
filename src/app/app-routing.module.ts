@@ -60,15 +60,15 @@ const routes: Routes = [
     },
     loadChildren: () => import('./pages/all/all.module').then(m => m.AllModule),
   },
-  // {
-  //   path: 'profile',
-  //   data: {
-  //     page: 'Profiel',
-  //     showBack: true
-  //   },
-  //   // canActivate: [AuthGuard],
-  //   loadChildren: () => import('./pages/profile/profile.module').then(m => m.ProfileModule),
-  // },
+  {
+    path: 'profile',
+    data: {
+      page: 'Profiel',
+      showBack: true
+    },
+    // canActivate: [AuthGuard],
+    loadChildren: () => import('./pages/profile/profile.module').then(m => m.ProfileModule),
+  },
   // { 
   //   path: 'incentive', 
   //   data: {

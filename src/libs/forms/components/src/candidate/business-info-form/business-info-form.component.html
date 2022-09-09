@@ -1,0 +1,171 @@
+<ng-container *ngIf="!admin || edit; else readonly">
+  <form [formGroup]="form">
+    <span>
+      <h4 class="title">Werk informatie</h4>
+      <mat-icon *ngIf="admin" (click)="onEdit(false)" class="close">close</mat-icon>
+    </span>
+    <div class="row small-row-padding">
+      <div class="col-md-6">
+        <mat-checkbox [formControl]="form.controls.searching">{{
+          'components.candidateForm.searching.label' | translate
+          }}</mat-checkbox>
+      </div>
+    </div>
+    <div class="row small-row-padding">
+      <ng-container *ngIf="searching || admin">
+        <div class="col-md-6">
+          <mat-form-field appearance="outline" floatLabel="always" color="accent" (click)="picker1.open()">
+            <mat-label>{{ 'components.candidateForm.availability.label' | translate }}</mat-label>
+            <input matInput disabled [matDatepicker]="picker1" [formControl]="form.controls.availability"
+              [placeholder]="'components.candidateForm.availability.placeholder' | translate" />
+            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+            <mat-datepicker #picker1 disabled="false"></mat-datepicker>
+
+            <mat-error *ngIf="form.dirty && form.controls.availability.hasError('required')">
+              {{ 'components.candidateForm.availability.errors.required' | translate }}
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-md-3">
+          <mat-form-field appearance="outline" floatLabel="always" color="accent">
+            <mat-label>{{ 'components.candidateForm.assignmentSearchRadius.label' | translate }}</mat-label>
+  
+            <input matInput type="number" inputmode="numeric" autocomplete="off" [formControl]="form.controls.assignmentSearchRadius"
+              [placeholder]="'components.candidateForm.assignmentSearchRadius.placeholder' | translate" min="0" />
+  
+              <mat-error *ngIf="form.dirty && form.controls.hours.hasError('min')">
+                {{ 'components.candidateForm.assignmentSearchRadius.errors.min' | translate }}
+              </mat-error>
+          </mat-form-field>
+        </div>
+      </ng-container>
+    </div>
+    <div class="row small-row-padding">
+      <div class="col-md-6">
+        <mat-form-field appearance="outline" floatLabel="always" color="accent">
+          <mat-label>{{ 'components.candidateForm.role.label' | translate }}</mat-label>
+
+          <input matInput autocomplete="off" [formControl]="form.controls.role"
+            [placeholder]="'components.candidateForm.role.placeholder' | translate" />
+
+          <mat-error *ngIf="form.dirty && form.controls.role.hasError('required')">
+            {{ 'components.candidateForm.role.errors.required' | translate }}
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-md-3">
+        <mat-form-field appearance="outline" floatLabel="always" color="accent">
+          <mat-label>{{ 'components.candidateForm.hours.label' | translate }}</mat-label>
+
+          <input matInput type="number" inputmode="numeric" autocomplete="off" [formControl]="form.controls.hours"
+            [placeholder]="'components.candidateForm.hours.placeholder' | translate" min="1" max="40" />
+
+            <mat-error *ngIf="form.dirty && form.controls.hours.hasError('required')">
+              {{ 'components.candidateForm.hours.errors.required' | translate }}
+            </mat-error>
+            <mat-error *ngIf="form.dirty && form.controls.hours.hasError('min')">
+              {{ 'components.candidateForm.hours.errors.min' | translate }}
+            </mat-error>
+            <mat-error *ngIf="form.dirty && form.controls.hours.hasError('max')">
+              {{ 'components.candidateForm.hours.errors.max' | translate }}
+            </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-md-3">
+        <mat-form-field appearance="outline" floatLabel="always" color="accent">
+          <mat-label>{{ 'components.candidateForm.rate.label' | translate }}</mat-label>
+
+          <input matInput type="number" inputmode="numeric" autocomplete="off" [formControl]="form.controls.rate"
+            [placeholder]="'components.candidateForm.rate.placeholder' | translate" min="40" max="200" />
+
+          <mat-error *ngIf="form.dirty && form.controls.rate.hasError('required')">
+            {{ 'components.candidateForm.rate.errors.required' | translate }}
+          </mat-error>
+          <mat-error *ngIf="form.dirty && form.controls.rate.hasError('min')">
+            {{ 'components.candidateForm.rate.errors.min' | translate }}
+          </mat-error>
+          <mat-error *ngIf="form.dirty && form.controls.rate.hasError('max')">
+            {{ 'components.candidateForm.rate.errors.max' | translate }}
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row small-row-padding">
+      <div class="col-md-12">
+        <mat-form-field appearance="outline" floatLabel="always" (click)="fileUpload.click()" color="accent">
+          <mat-label>{{ 'components.candidateForm.cv.label' | translate }}</mat-label>
+
+          <input readonly matInput autocomplete="off" [formControl]="form.controls.cv" [value]="value.fileName"
+            [placeholder]="'components.candidateForm.cv.placeholder' | translate" />
+
+          <mat-icon matSuffix>attach_file</mat-icon>
+
+          <mat-error *ngIf="form.dirty && form.controls.cv.hasError('required')">
+            {{ 'components.candidateForm.cv.errors.required' | translate }}
+          </mat-error>
+
+          <mat-error *ngIf="form.controls.cv.hasError('fileMaxSize')">
+            {{ 'components.candidateForm.cv.errors.fileMaxSize' | translate }}
+          </mat-error>
+
+          <mat-error *ngIf="form.controls.cv.hasError('fileExtension')">
+            {{ 'components.candidateForm.cv.errors.fileExtension' | translate }}
+          </mat-error>
+
+          <input type="file" accept=".pdf" name="fileUpload" id="fileUpload" (change)="onFileUpload($event.target.files)"
+            (click)="$event.stopPropagation()" #fileUpload />
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row small-row-padding">
+      <div class="col-md-12">
+        <mat-form-field appearance="outline" floatLabel="always" color="accent">
+          <mat-label>{{ 'components.candidateForm.motivation.label' | translate }}</mat-label>
+  
+          <textarea matInput rows="6" autocomplete="off" [formControl]="form.controls.defaultMotivation"
+            [placeholder]="'components.candidateForm.motivation.placeholder' | translate"></textarea>
+        </mat-form-field>
+      </div>    
+    </div>
+  </form>
+
+  <!-- <button mat-flat-button color="accent" (click)="onSubmit()" [disabled]="disabled">
+    {{ 'components.candidateForm.buttons.submit' | translate }}
+  </button> -->
+</ng-container>
+<ng-template #readonly>
+  <h4 class="title">Werk informatie</h4>
+  <mat-icon (click)="onEdit(true)" class="edit">edit</mat-icon>
+  <div class="row small-row-padding">
+    <div class="col-md-4">
+      <span class="bold">Op zoek: </span> {{ candidate?.searching ? 'Ja' : 'Nee' }}
+    </div>
+    <div class="col-md-4">
+      <span class="bold">Beschikbaar vanaf: </span> {{ candidate?.availability }}
+    </div>
+    <div class="col-md-4">
+      <span class="bold">Max. afstand: </span> {{ candidate?.assignmentSearchRadius ? candidate?.assignmentSearchRadius + ' km' : ''  }}
+    </div>
+  </div>
+  <div class="row small-row-padding">
+    <div class="col-md-4">
+      <span class="bold">Functie: </span> {{ candidate?.role }}
+    </div>
+    <div class="col-md-2">
+      <span class="bold">Uren p/w:</span> {{ candidate?.hours }}
+    </div>
+    <div class="col-md-2">
+      <span class="bold">Uurtarief:</span> {{ candidate?.rate }}
+    </div>
+  </div>
+  <div class="row small-row-padding">
+    <div class="col-md-6">
+      <span class="bold">CV: </span> {{ candidate?.fileName }}
+    </div>
+  </div>
+  <div class="row small-row-padding">
+    <div class="col-md-6">
+      <span class="bold">Standaard Motivatie: </span> {{ candidate?.defaultMotivation }}
+    </div>
+  </div>
+</ng-template>

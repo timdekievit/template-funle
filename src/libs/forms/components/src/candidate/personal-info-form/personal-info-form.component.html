@@ -1,0 +1,123 @@
+<ng-container *ngIf="!admin || edit || new; else readonly">
+  <form [formGroup]="form">
+    <span>
+      <h4 class="title">Persoonlijke informatie</h4>
+      <mat-icon *ngIf="admin && !new" (click)="onEdit(false)" class="close">close</mat-icon>
+    </span>
+    <div class="row small-row-padding">
+      <div class="col-md-6">
+        <mat-form-field appearance="outline" floatLabel="always" color="accent">
+          <mat-label>{{ 'components.candidateForm.email.label' | translate }}</mat-label>
+
+          <input matInput type="email" inputmode="email" autocomplete="off" [readonly]="!admin"
+                 [formControl]="form.controls.email"
+                 [placeholder]="'components.candidateForm.email.placeholder' | translate" />
+
+          <mat-error *ngIf="form.dirty && form.controls.email.hasError('required')">
+            {{ 'components.candidateForm.email.errors.required' | translate }}
+          </mat-error>
+
+          <mat-error *ngIf="form.dirty && form.controls.email.hasError('email')">
+            {{ 'components.candidateForm.email.errors.email' | translate }}
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-md-6" *ngIf="!new">
+        <mat-form-field appearance="outline" floatLabel="always" color="accent">
+          <mat-label>{{ 'components.candidateForm.phoneNumber.label' | translate }}</mat-label>
+
+          <input matInput type="text" inputmode="numeric" autocomplete="off" [formControl]="form.controls.phoneNumber"
+                 [placeholder]="'components.candidateForm.phoneNumber.placeholder' | translate" />
+
+          <mat-error *ngIf="!admin && form.dirty && form.controls.phoneNumber.hasError('required')">
+            {{ 'components.candidateForm.phoneNumber.errors.required' | translate }}
+          </mat-error>
+
+          <mat-error *ngIf="!admin && form.dirty && form.controls.phoneNumber.hasError('minlength')">
+            {{ 'components.candidateForm.phoneNumber.errors.minLength' | translate }}
+          </mat-error>
+
+          <mat-error *ngIf="!admin && form.dirty && form.controls.phoneNumber.hasError('phoneNumber')">
+            {{ 'components.candidateForm.phoneNumber.errors.phoneNumber' | translate }}
+          </mat-error>
+
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row small-row-padding" *ngIf="!new">
+      <div class="col-md-4">
+        <mat-form-field appearance="outline" floatLabel="always" color="accent">
+          <mat-label>{{ 'components.candidateForm.firstname.label' | translate }}</mat-label>
+
+          <input matInput autocomplete="off" [formControl]="form.controls.firstName"
+                 [placeholder]="'components.candidateForm.firstname.placeholder' | translate" />
+        </mat-form-field>
+      </div>
+      <div class="col-md-4">
+        <mat-form-field appearance="outline" floatLabel="always" color="accent">
+          <mat-label>{{ 'components.candidateForm.prefix.label' | translate }}</mat-label>
+
+          <input matInput autocomplete="off" [formControl]="form.controls.prefix"
+                 [placeholder]="'components.candidateForm.prefix.placeholder' | translate" />
+        </mat-form-field>
+      </div>
+      <div class="col-md-4">
+        <mat-form-field appearance="outline" floatLabel="always" color="accent">
+          <mat-label>{{ 'components.candidateForm.name.label' | translate }}</mat-label>
+
+          <input matInput autocomplete="off" [formControl]="form.controls.name"
+                 [placeholder]="'components.candidateForm.name.placeholder' | translate" />
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row small-row-padding" *ngIf="!new">
+      <div class="col-md-4">
+        <mat-form-field appearance="outline" floatLabel="always" color="accent">
+          <mat-label>{{ 'components.candidateForm.city.label' | translate }}</mat-label>
+
+          <input matInput autocomplete="off" [formControl]="form.controls.city"
+                 [placeholder]="'components.candidateForm.city.placeholder' | translate" />
+        </mat-form-field>
+      </div>
+      <div class="col-md-4">
+        <mat-form-field appearance="outline" floatLabel="always" color="accent">
+          <mat-label>{{ 'components.candidateForm.kvknummer.label' | translate }}</mat-label>
+
+          <input matInput autocomplete="off" inputmode="numeric" [formControl]="form.controls.kvkNummer"
+            [placeholder]="'components.candidateForm.kvknummer.placeholder' | translate" />
+        </mat-form-field>
+      </div>
+    </div>
+  </form>
+
+  <button *ngIf="new" mat-flat-button color="accent" (click)="onSubmit()" [disabled]="disabled">
+    {{ 'components.candidateForm.buttons.submit' | translate }}
+  </button>
+</ng-container>
+<ng-template #readonly>
+  <h4 class="title">Persoonlijke informatie</h4>
+  <mat-icon (click)="onEdit(true)" class="edit">edit</mat-icon>
+  <div class="row small-row-padding">
+    <div class="col-md-4">
+      <span class="bold">E-mail:</span> {{ candidate?.email }}
+    </div>
+    <div class="col-md-4">
+      <span class="bold">Telefoonnummer:</span> {{ candidate?.phoneNumber }}
+    </div>
+  </div>
+  <div class="row small-row-padding">
+    <div class="col-md-12">
+      <span class="bold">Naam:</span> {{ candidate?.fullName }}
+    </div>
+  </div>
+  <div class="row small-row-padding">
+    <div class="col-md-12">
+      <span class="bold">Plaats:</span> {{ candidate?.city }}
+    </div>
+  </div>
+  <div class="row small-row-padding">
+    <div class="col-md-12">
+      <span class="bold">KVK-nummer:</span> {{ candidate?.kvkNummer }}
+    </div>
+  </div>
+</ng-template>

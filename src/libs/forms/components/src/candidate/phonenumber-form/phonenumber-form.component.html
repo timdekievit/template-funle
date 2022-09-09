@@ -1,0 +1,30 @@
+<form [formGroup]="form">
+  <div class="row small-row-padding">
+    <div class="col-md-6">
+      <mat-form-field appearance="outline" floatLabel="always" color="accent">
+        <mat-label>{{ 'components.candidateForm.phoneNumber.label' | translate }}</mat-label>
+
+        <input
+          matInput
+          type="text"
+          inputmode="numeric"
+          autocomplete="off"
+          [formControl]="form.controls.phoneNumber"
+          [placeholder]="'components.candidateForm.phoneNumber.placeholder' | translate"
+        />
+
+        <mat-error *ngIf="form.dirty && form.controls.phoneNumber.hasError('minlength')">
+          {{ 'components.candidateForm.phoneNumber.errors.minLength' | translate }}
+        </mat-error>
+
+        <mat-error *ngIf="form.dirty && form.controls.phoneNumber.hasError('phoneNumber')">
+          {{ 'components.candidateForm.phoneNumber.errors.phoneNumber' | translate }}
+        </mat-error>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <button mat-flat-button color="accent" (click)="onSubmit()">
+    {{ 'components.candidateForm.buttons.submit' | translate }}
+  </button>
+</form>
