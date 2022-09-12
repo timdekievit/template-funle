@@ -1,12 +1,39 @@
-<p>favorite works!</p>
-<p>favorite works!</p>
-<p>favorite works!</p>
-<p>favorite works!</p>
-<p>favorite works!</p>
-<p>favorite works!</p>
-<p>favorite works!</p>
-<p>favorite works!</p>
-<p>favorite works!</p>
-<p>favorite works!</p>
-<p>favorite works!</p>
-<p>favorite works!</p>
+<!-- <ng-container *ngIf="loading; else content">
+    <funle-portal-loader></funle-portal-loader>
+  </ng-container> -->
+
+<div class="favorite-container container">
+    <h1>Biedingen</h1>
+    <div class="row">
+        <div class="col-md-12">
+            <funle-portal-assignments-favorite-table *ngIf="assignments?.length > 0; else noContent"
+                [showFilter]="false" [assignments]="assignments" (assignmentSelected)="onAssignmentSelected($event)">
+            </funle-portal-assignments-favorite-table>
+            <ng-template #noContent>
+                <funle-portal-message-container [title]="messageTitle">
+                    <funle-portal-message *ngIf="nothingFound" [message]="message"
+                        [secondMessage]="'Ondertussen kun je op FunleVision allerlei interessante dingen vinden.'">
+                    </funle-portal-message>
+                    <funle-portal-message *ngIf="somethingWentWrong" [message]="somethingWentWrongMessage">
+                    </funle-portal-message>
+                </funle-portal-message-container>
+            </ng-template>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <!-- <funle-portal-block [type]="'primary'" [icon]="'tips_and_updates'" [title]="'FunleVision'"
+                [text]="'Heb jij een vraag over freelancen of IT? Stel ze bij FunleVision en wij gaan voor jou op zoek naar het antwoord! Of bekijk de blogs, video\'s over eerder gestelde vragen.'">
+                <funle-portal-action-button (click)="toFunleVision()" [type]="'primary'" [text]="'Naar FunleVision'">
+                </funle-portal-action-button>
+            </funle-portal-block> -->
+        </div>
+        <div class="col-md-6">
+            <funle-portal-block [type]="'basic'" [icon]="'dashboard'" [title]="'Dashboard'"
+                [text]="'Een overzichtelijk overzicht. Overzichtelijker kunnen we het niet maken.'">
+                <button (click)="toPage('dashboard')" mat-button>Naar dashboard <mat-icon>arrow_forward</mat-icon>
+                    </button>
+            </funle-portal-block>
+        </div>
+    </div>
+</div>

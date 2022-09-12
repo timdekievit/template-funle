@@ -4,6 +4,7 @@
 @import '~@angular/material/toolbar/toolbar-variables';
 
 funle-portal-root {
+  // margin-top: 64px;
   background-color: #eee;
   height: 100%;
   display: flex;
@@ -13,12 +14,13 @@ funle-portal-root {
     @include property-toolbar-height(margin-top);
     overflow: auto;
     background-color: #eee;
-    margin-top: auto;
+    margin-top: 200px;
     flex: 1 0 auto;
   }
 
   .page-wrapper-full {
     @include property-toolbar-height(margin-top);
+
     // overflow: auto;
     background-color: #eee;
     flex: 1 0 auto;
