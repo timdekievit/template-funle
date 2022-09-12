@@ -1,14 +1,57 @@
-<p>profile works!</p>
-<p>profile works!</p>
-<p>profile works!</p>
-<p>profile works!</p>
-<p>profile works!</p>
-<p>profile works!</p>
-<p>profile works!</p>
-<p>profile works!</p>
-<p>profile works!</p>
-<p>profile works!</p>
-<p>profile works!</p>
-<p>profile works!</p>
-<p>profile works!</p>
-<p>profile works!</p>
+<!-- <ng-container *ngIf="loading; else content">
+    <funle-portal-loader></funle-portal-loader>
+  </ng-container> -->
+
+<div class="profile-container container">
+    <h1>Profiel</h1>
+    <ng-container *ngIf="showInactiveMessage">
+        <funle-portal-disabled-message [type]="'inactiveProfile'"></funle-portal-disabled-message>
+    </ng-container>
+    <ng-container *ngIf="showIncompleteMessage">
+        <funle-portal-disabled-message [type]="'incompleteProfile'"></funle-portal-disabled-message>
+    </ng-container>
+    <ng-container *ngIf="!somethingWentWrong; else noContent">
+        <div class="row">
+            <div class="col-md-6">
+                <funle-portal-block [type]="'basic'" [icon]="'person'" [title]="'Persoonsgegevens'"
+                    [text]="'Gegevens zoals je naam, telefoonnummer etc..'">
+                    <funle-portal-link-button [text]="'Wijzig'" [page]="'profile/person'"></funle-portal-link-button>
+                </funle-portal-block>
+            </div>
+            <div class="col-md-6">
+                <funle-portal-block [type]="'basic'" [icon]="'business'" [title]="'Zakelijke gegevens'"
+                    [text]="'Gegevens zoals je KvK, CV etc..'">
+                    <funle-portal-link-button [text]="'Wijzig'" [page]="'profile/business'"></funle-portal-link-button>
+                </funle-portal-block>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <funle-portal-block [type]="'secondary'" [icon]="'redeem'" [title]="'Korting'"
+                    [text]="'Deel de link en met mensen uit je netwerk. Per aanmelding via de link krijg jij korting.'">
+                    <funle-portal-action-button (click)="goTo('profile/incentive')" [type]="'secondary'">
+                    </funle-portal-action-button>
+                </funle-portal-block>
+            </div>
+            <div class="col-md-6">
+                <funle-portal-block [type]="'basic'" [icon]="'handshake'" [title]="'Algemene voorwaarden'"
+                    [text]="'Nooit gelezen waarschijnlijk maar als je even niks te doen hebt altijd leuk.'">
+                    <funle-portal-action-button (click)="openTermsAndCondiditions()"></funle-portal-action-button>
+                </funle-portal-block>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <button class="logout-button" mat-flat-button color="warn" (click)="logout()">Uitloggen</button>
+            </div>
+        </div>
+    </ng-container>
+    <ng-template #noContent>
+        <funle-portal-message-container [title]="messageTitle">
+            <funle-portal-message *ngIf="somethingWentWrong" [message]="somethingWentWrongMessage">
+            </funle-portal-message>
+        </funle-portal-message-container>
+    </ng-template>
+</div>
+<!-- <div *ngIf="errorInUpdate" class="profile-error">Oeps, er is iets fout gegaan bij het opslaan. Geef ons even en probeer
+    het later nog eens.</div> -->

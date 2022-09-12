@@ -7,9 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfileComponent implements OnInit {
 
+  somethingWentWrong: boolean;
+  showIncompleteMessage: boolean;
+  showInactiveMessage: boolean;
+
   constructor() { }
 
   ngOnInit(): void {
+
   }
 
 }

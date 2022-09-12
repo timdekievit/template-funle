@@ -1,1 +1,133 @@
-<p>person works!</p>
+<!-- <ng-container *ngIf="loading; else content">
+    <funle-portal-loader></funle-portal-loader>
+</ng-container> -->
+
+<div class="notification" [ngClass]="{'notification-show': show}">
+    <div class="notification-content">
+        Gegevens zijn opgeslagen
+    </div>
+</div>
+<form [formGroup]="form">
+    <div class="person-container container">
+        <h1>Persoonsgegevens</h1>
+        <div class="person-container--block">
+            <div class="row">
+                <div class="col-md-12">
+                    <h4>Contactgegevens</h4>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <mat-form-field appearance="outline" color="accent">
+                        <mat-label>Email</mat-label>
+
+                        <input matInput type="email" inputmode="email" autocomplete="off" [readonly]="true"
+                            [formControl]="form.controls.email" [placeholder]="'Email'" />
+                    </mat-form-field>
+                </div>
+                <div class="col-md-6">
+                    <mat-form-field floatLabel="always" appearance="outline" color="accent">
+                        <mat-label>Telefoonnummer (mobiel)*</mat-label>
+
+                        <input matInput type="text" inputmode="numeric" autocomplete="off"
+                            [formControl]="form.controls.phoneNumber" [placeholder]="" />
+
+                        <mat-error *ngIf="form.controls.phoneNumber.hasError('required')">
+                            Telefoonnummer is verplicht
+                        </mat-error>
+                        <mat-error *ngIf="form.controls.phoneNumber.hasError('pattern')">
+                            Telefoonnummer moet 10 cijfers lang zijn en met 06 beginnen
+                        </mat-error>
+                        <mat-error *ngIf="form.controls.phoneNumber.hasError('serverError')">
+                            Telefoonnummer voldoet niet aan de eisen
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <mat-checkbox [formControl]="form.controls.whatsapp">Contact via whatsapp</mat-checkbox>
+                </div>
+            </div>
+        </div>
+        <div class="person-container--block">
+            <div class="row">
+                <div class="col-md-12">
+                    <h4>Naam & woonplaats</h4>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <mat-form-field floatLabel="always" appearance="outline" color="accent">
+                        <mat-label>Voornaam*</mat-label>
+
+                        <input matInput autocomplete="off" [formControl]="form.controls.firstName" [placeholder]="" />
+
+                        <mat-error
+                            *ngIf="form.controls.firstName.hasError('required') || form.controls.firstName.hasError('notempty')">
+                            Voornaam is verplicht
+                        </mat-error>
+                        <mat-error *ngIf="form.controls.firstName.hasError('pattern')">
+                            Voornaam mag alleen letters bevatten
+                        </mat-error>
+                        <mat-error *ngIf="form.controls.firstName.hasError('serverError')">
+                            Voornaam voldoet niet aan de eisen
+                        </mat-error>
+
+                    </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                    <mat-form-field floatLabel="always" appearance="outline" color="accent">
+                        <mat-label>Tussenvoegsel(s)</mat-label>
+
+                        <input matInput autocomplete="off" [formControl]="form.controls.prefix" [placeholder]="" />
+                    </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                    <mat-form-field floatLabel="always" appearance="outline" color="accent">
+                        <mat-label>Achternaam*</mat-label>
+
+                        <input matInput autocomplete="off" [formControl]="form.controls.lastname" [placeholder]="" />
+
+                        <mat-error
+                            *ngIf="form.controls.lastname.hasError('required') || form.controls.lastname.hasError('notempty')">
+                            Achternaam is verplicht
+                        </mat-error>
+                        <mat-error *ngIf="form.controls.lastname.hasError('pattern')">
+                            Achternaam mag alleen letters bevatten
+                        </mat-error>
+                        <mat-error *ngIf="form.controls.lastname.hasError('serverError')">
+                            Achternaam voldoet niet aan de eisen
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <mat-form-field floatLabel="always" appearance="outline" color="accent">
+                        <mat-label>Woonplaats</mat-label>
+
+                        <input matInput autocomplete="off" [formControl]="form.controls.city"
+                            [placeholder]="'Woonplaats'" />
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <funle-portal-block [type]="'primary'" [icon]="'dashboard'" [title]="'Dashboard'"
+                    [text]="'Een overzichtelijk overzicht. Overzichtelijker kunnen we het niet maken.'">
+                    <button type="button" (click)="toPage('dashboard')" mat-button>Naar dashboard <mat-icon>
+                            arrow_forward</mat-icon></button>
+                </funle-portal-block>
+            </div>
+            <div class="col-md-6">
+                <funle-portal-block [type]="'basic'" [icon]="'business'" [title]="'Zakelijke gegevens'"
+                    [text]="'Gegevens zoals je KvK, CV etc..'">
+                    <button type="button" (click)="toPage('profile/business')" mat-button>Wijzig <mat-icon>arrow_forward
+                        </mat-icon></button>
+                </funle-portal-block>
+            </div>
+        </div>
+    </div>
+</form>
