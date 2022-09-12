@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
@@ -28,6 +28,7 @@ import { AssignmentGeneralItemComponent } from './assignment-general-item/assign
 import { AssignmentsTableComponent } from './assignments-table/assignments-table.component';
 import { MessageComponent } from './message/message.component';
 import { MessageContainerComponent } from './message-container/message-container.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @NgModule({
@@ -63,7 +64,9 @@ import { MessageContainerComponent } from './message-container/message-container
     MatTooltipModule,
     CommonModule,
     FormsModule,
-    RouterModule
+    RouterModule,
+    ReactiveFormsModule,
+    TranslateModule.forChild({ extend: true })
   ],
   exports: [
     BlockComponent,

@@ -1,0 +1,84 @@
+@import 'src/libs/ui/scss/constants/colors';
+@import 'src/libs/ui/scss/themes/material';
+
+.person-container {
+    padding-top: 8px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+  
+    h1 {
+      font-size: 40px;
+      margin-top: 16px;
+    }
+
+    &--block {
+        background-color: #fff;
+        margin-left: -7px;
+        margin-right: -7px;
+        padding: 8px 31px 20px 31px;
+    
+        h4 {
+          font-size: 20px;
+          margin-top: 0px;
+          margin-bottom: 0px;
+        }
+
+
+        mat-form-field {
+          width: 100%;
+        }
+
+        mat-chip {
+          font-size: 14px;
+        }
+    }
+
+    #fileUpload {
+      display: none;
+    }
+}
+
+.notification {
+  position: fixed;
+  top: 0px;
+  right: 25px;
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+  z-index: 999;
+
+  &-show {
+    top: 70px;
+    animation-name: notification-animation;
+    animation-duration: 0.5s;
+    animation-timing-function: ease-out;
+    
+  }
+
+  &-content {
+    background-color: $color-secondary;
+    padding: 8px 16px;
+    color:#fff;
+  }
+}
+
+.download-button {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  justify-content: center;
+  // align-items: center;
+}
+
+@keyframes notification-animation {
+  from {top :0px}
+  to {top: 70px;}
+}
+
+.black {
+  input {
+    color: #000;
+  }
+}
