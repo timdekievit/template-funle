@@ -1,6 +1,8 @@
-import { Component, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, OnDestroy, ViewChild, ViewEncapsulation } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
-import { Router } from '@angular/router';
+import { ActivationEnd, NavigationEnd, Router } from '@angular/router';
+import { Subject } from 'rxjs';
+import { filter, map, takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'funle-portal-root',
@@ -8,14 +10,38 @@ import { Router } from '@angular/router';
   styleUrls: ['./app.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class AppComponent {
-  title = 'ngrx-funle-test';
+export class AppComponent implements OnDestroy {
+  title = 'template-funle';
   isIntroPage = false;
   loggedIn = true;
-  pageTitle$ = 'Dashboard';
+  
+  pageTitle$ = '';
   showBack$ = false;
 
+  private backSegments: string[] = [];
   @ViewChild('sidenav') public sidenav: MatSidenav;
+
+  constructor(private route: Router) {
+    this.route.events.pipe(
+      takeUntil(this.destroy$),
+      filter(event => event instanceof NavigationEnd),
+      map((event: NavigationEnd) => {
+        const url = event.urlAfterRedirects?.substring(1);
+        const segments = url?.split('/');
+        segments.pop();
+        return segments;
+      }),      
+    ).subscribe(segments => {
+      this.backSegments = segments;
+    });
+  }
+
+  private destroy$ = new Subject<boolean>();
+  ngOnDestroy(): void {
+    this.destroy$.next(true);
+    this.destroy$.complete();
+  }
+  
 
   // constructor(private route: Router) {
   //   this.route.events.subscribe(event => {
