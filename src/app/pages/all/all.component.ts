@@ -13,6 +13,8 @@ import { Router } from "@angular/router";
     assignments = []
 
     nothingFound = true;
+    nothingFoundMessage =
+    'Hmm vreemd we hebben op dit moment geen opdrachten die passen bij jou profiel... We doen ons best om zo veel mogelijk opdrachtgevers aan te sluiten op Funle zodat we voor iedereen mooie opdrachten hebben.';
     // somethingWentWrong = true;
 
     toPage(page: string) {
