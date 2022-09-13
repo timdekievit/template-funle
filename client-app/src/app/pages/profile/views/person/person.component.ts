@@ -34,7 +34,7 @@ export class ProfilePersonComponent implements OnInit {
     // this.res = this.candidateService.get();
     // console.log(this.res);
 
-    this.res = this.http.get('localhost:3000/candidates/1').subscribe();
+    this.res = this.http.get('http://localhost:5000/api/candidates/a43d667e-bb17-4870-83ce-0fe1e9a9dc7f').subscribe();
     console.log(this.res);
   }
 
