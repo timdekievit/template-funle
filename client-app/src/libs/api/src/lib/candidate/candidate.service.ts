@@ -23,7 +23,7 @@ export class PortalCandidateService {
   // getProfileStatus = () => this.api.get('profile');
 
   // put = (candidate: BaseCandidate) => this.api.put(null, candidate);
-  // patch = (candidate: BaseCandidate) => this.api.patch(null, candidate);
+  patch = (candidate: BaseCandidate) => this.api.patch(null, candidate);
   // postCv = (cv: File) => this.api.post('cv', this.createFormData(cv));
 
   // downloadCv = () => this.api.get<Blob>('cv', { responseType: 'blob' });

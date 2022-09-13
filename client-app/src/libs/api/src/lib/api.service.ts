@@ -140,13 +140,13 @@ export class ApiService<Type = any, Response = any> {
 
   createUri(endpoint: string | number) {
     if (!endpoint) {
-      return 'http://localhost:3000';
+      return 'http://localhost:5000/api';
     }
 
     const uri = endpoint.toString();
 
     // return uri.includes('http') || uri.includes('api/funle') ? uri : this.config.uri.concat('/', uri);
-    return 'http://localhost:3000'.concat('/', uri);
+    return 'http://localhost:5000/api'.concat('/', uri);
   }
 
   createOptions(options: ApiOptions): ApiOptions & { responseType: 'json' } {
