@@ -3,7 +3,7 @@ export * from './lib/api.service';
 
 // export * from './lib/auth/auth.service';
 export * from './lib/candidate/candidate.service';
-// export * from './lib/assignment/assignment.service';
+export * from './lib/assignment/assignment.service';
 // export * from './lib/proposal/proposal.service';
 // export * from './lib/specialty/specialty.service';
 // export * from './lib/tag/tag.service';

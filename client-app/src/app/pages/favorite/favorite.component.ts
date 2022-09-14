@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { PortalAssignmentService } from '@funle/api';
 
 @Component({
   selector: 'funle-portal-favorite',
@@ -16,10 +17,10 @@ export class FavoriteComponent implements OnInit {
   nothingFound = true;
   somethingWentWrong = false;
 
-  constructor(private router: Router, private http: HttpClient) { }
+  constructor(private router: Router, private assignmentService: PortalAssignmentService) { }
 
   ngOnInit(): void {
-    this.http.get('http://localhost:5000/api/assignments').subscribe(res => {
+    this.assignmentService.getAll().subscribe(res => {
       console.log(res);
       this.assignments = res;
     });

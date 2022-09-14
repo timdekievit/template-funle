@@ -8,12 +8,12 @@ import { ApiService } from '../api.service';
 @Injectable({
   providedIn: 'root',
 })
-export class PortalCandidateService {
-  // api = this.apiService.for<BaseCandidate, IBaseCandidate>('candidates');
+export class PortalAssignmentService {
+//   api = this.apiService.for<BaseCandidate, IBaseCandidate>('candidates');
 
   constructor(private apiService: ApiService, private http: HttpClient) {}
 
-  get = () => this.http.get('http://localhost:5000/api/candidates/2E386ECA-F7C7-4ED6-8E4C-DF8520881133');
+  getAll = () => this.http.get('http://localhost:5000/api/assignments/');
 
   // get = () => this.api.get();
   // getSkills = () => this.api.get('skills');

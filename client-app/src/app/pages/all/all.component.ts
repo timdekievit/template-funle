@@ -1,6 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Component } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
+import { PortalAssignmentService } from "@funle/api";
 
 @Component({
     selector: 'funle-portal-dashboard',
@@ -14,10 +15,10 @@ import { ActivatedRoute, Router } from "@angular/router";
     'Hmm vreemd we hebben op dit moment geen opdrachten die passen bij jou profiel... We doen ons best om zo veel mogelijk opdrachtgevers aan te sluiten op Funle zodat we voor iedereen mooie opdrachten hebben.';
     // somethingWentWrong = true;
 
-    constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient) {}
+    constructor(private router: Router, private route: ActivatedRoute, private assignmentService: PortalAssignmentService) {}
 
     ngOnInit(): void {
-      this.http.get('http://localhost:5000/api/assignments').subscribe(res => {
+      this.assignmentService.getAll().subscribe(res => {
         console.log(res);
         this.assignments = res;
       });
