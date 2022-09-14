@@ -23,6 +23,7 @@ export class FavoriteComponent implements OnInit {
     this.assignmentService.getAll().subscribe(res => {
       console.log(res);
       this.assignments = res;
+      console.log(this.assignments.length)
     });
   }
 

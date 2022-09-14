@@ -20,7 +20,7 @@
           </div>
           <div class="assignments-table--cell-info">
             <div>
-              Reageren voor: {{ assignment.submitDate }}
+              Reageren voor: {{ assignment.submitDate | date:'shortDate' }}
             </div>
           </div>
         </div>
@@ -41,7 +41,7 @@
       <td mat-footer-cell *matFooterCellDef></td>
     </ng-container>
 
-    <tr class="assignments-table--row" mat-row *matRowDef="let row; columns: columns" (click)="onClick(row.publicId)"></tr>
+    <tr class="assignments-table--row" mat-row *matRowDef="let row; columns: columns" (click)="onClick(row.id)"></tr>
     <ng-container *ngIf="showMoreRow">
       <tr mat-footer-row *matFooterRowDef="columns" (click)="onShowMore()"></tr>
     </ng-container>

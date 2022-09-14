@@ -34,15 +34,15 @@
       <div class="assignment-detail--block">      
         <h1>{{ assignment?.title }}</h1>
         <p>{{assignment?.customer}}</p>
-        <funle-portal-assignment-general-item [label]="'Reageren voor'" [value]="assignment?.submitDate"></funle-portal-assignment-general-item>
+        <funle-portal-assignment-general-item [label]="'Reageren voor'" [value]="assignment?.submitDate | date:'shortDate'"></funle-portal-assignment-general-item>
       </div>
     </div>
     <div class="col-md-6">
       <div class="assignment-detail--block">      
         <funle-portal-assignment-general-item [label]="'Plaats'" [value]="assignment?.city"></funle-portal-assignment-general-item>
         <funle-portal-assignment-general-item [label]="'Uur'" [value]="assignment?.hours"></funle-portal-assignment-general-item>
-        <funle-portal-assignment-general-item [label]="'Startdatum'" [value]="assignment?.startDate"></funle-portal-assignment-general-item>
-        <funle-portal-assignment-general-item [label]="'Einddatum'" [value]="assignment?.endDate"></funle-portal-assignment-general-item>
+        <funle-portal-assignment-general-item [label]="'Startdatum'" [value]="assignment?.startDate | date:'shortDate'"></funle-portal-assignment-general-item>
+        <funle-portal-assignment-general-item [label]="'Einddatum'" [value]="assignment?.endDate | date:'shortDate'"></funle-portal-assignment-general-item>
         <funle-portal-assignment-general-item [label]="'Verlening'" [value]="assignment?.withProlongation ? 'Mogelijk' : 'Niet bekend'"></funle-portal-assignment-general-item>
       </div>
     </div>

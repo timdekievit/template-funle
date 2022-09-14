@@ -42,6 +42,7 @@ export class AssignmentsTableComponent implements OnInit, OnChanges {
   }
 
   onClick(id: string) {
+    console.log(id);
     this.assignmentSelected.emit(id);
   }
 

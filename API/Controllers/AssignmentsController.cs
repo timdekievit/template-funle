@@ -15,5 +15,11 @@ namespace API.Controllers
         {
             return await Mediator.Send(new List.Query());
         }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Assignment>> getCandidate(Guid id) 
+        {
+            return await Mediator.Send(new Details.Query{Id = id});
+        }
     }
 }
