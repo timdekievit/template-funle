@@ -8,7 +8,7 @@ import { ActivatedRoute, Router } from "@angular/router";
     styleUrls: ['./all.component.scss'],
   })
   export class AllComponent {
-    assignments;
+    assignments: any;
     nothingFound = true;
     nothingFoundMessage =
     'Hmm vreemd we hebben op dit moment geen opdrachten die passen bij jou profiel... We doen ons best om zo veel mogelijk opdrachtgevers aan te sluiten op Funle zodat we voor iedereen mooie opdrachten hebben.';
