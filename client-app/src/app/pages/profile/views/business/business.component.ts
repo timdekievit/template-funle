@@ -1,4 +1,5 @@
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -33,9 +34,29 @@ export class ProfileBusinessComponent implements OnInit {
 
   readonly separatorKeysCodes = [ENTER, COMMA] as const;
 
-  constructor(private router: Router) { }
+  res: any;
+
+  constructor(private router: Router, private http: HttpClient) { }
 
   ngOnInit(): void {
+
+    this.http.get('http://localhost:5000/api/candidates/a43d667e-bb17-4870-83ce-0fe1e9a9dc7f').subscribe(res => {
+      console.log(res);
+      this.res = res;
+
+      this.form.value.kvkNummer = this.res.kvkNummer;
+      this.form.value.rate = this.res.rate;
+      this.form.value.assignmentSearchRadius = this.res.assignmentSearchRadius;
+      this.form.value.hours = this.res.hours;
+      this.form.value.role = this.res.role;
+      this.form.value.availability = this.res.availability;
+      this.form.value.searching = this.res.searching;
+      this.form.value.fileName = this.res.fileName;
+      this.form.value.specialty = this.res.specialty;
+      this.form.value.defaultMotivation = this.res.defaultMotivation;
+
+      console.log(this.form);
+    });
   }
 
   toPage(page: string): void {
