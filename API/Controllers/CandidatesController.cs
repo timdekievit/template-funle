@@ -12,12 +12,6 @@ namespace API.Controllers
 {
     public class CandidatesController : BaseApiController
     {
-        private readonly DataContext _context;
-        public CandidatesController(DataContext context)
-        {
-            _context = context;
-        }
-
         [HttpGet]
         public async Task<ActionResult<List<Candidate>>> getCandidates() 
         {

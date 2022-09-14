@@ -14,5 +14,6 @@ namespace Persistence
         }
 
         public DbSet<Candidate> Candidates { get; set; }
+        public DbSet<Assignment> Assignments { get; set; }
     }
 }

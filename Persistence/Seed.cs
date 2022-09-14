@@ -33,7 +33,40 @@ namespace Persistence
                 },
             };
 
+            var assignments = new List<Assignment>
+            {
+                new Assignment
+                {
+                    Source = "Abn Amro",
+                    SourceId = "Abn",
+                    Customer = "Abn Amro",
+                    Role = "Scrum Master",
+                    Description = "We zoeken iemand met 50 jaar ervaring als Scrum Master",
+                    StartDate = DateTime.Now.AddMonths(2),
+                    EndDate = DateTime.Now.AddMonths(6),
+                    SubmitDate = DateTime.Now,
+                    City = "Den Haag",
+                    Notes = "geen",
+                    Title = "Scrum Master voor Abn Amro"
+                },
+                new Assignment
+                {
+                    Source = "Ing",
+                    SourceId = "ING",
+                    Customer = "Ing",
+                    Role = "Scrum Master",
+                    Description = "We zoeken iemand met 50 jaar ervaring als Scrum Master",
+                    StartDate = DateTime.Now.AddMonths(2),
+                    EndDate = DateTime.Now.AddMonths(6),
+                    SubmitDate = DateTime.Now,
+                    City = "Den Haag",
+                    Notes = "geen",
+                    Title = "Scrum Master voor ING"
+                },
+            };
+
             await context.Candidates.AddRangeAsync(candidates);
+            await context.Assignments.AddRangeAsync(assignments);
             await context.SaveChangesAsync();
         }
     }
