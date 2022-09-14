@@ -43,7 +43,7 @@ export class ProfilePersonComponent implements OnInit {
     // this.res = this.candidateService.get();
     // console.log(this.res);
 
-    this.http.get('http://localhost:5000/api/candidates/a43d667e-bb17-4870-83ce-0fe1e9a9dc7f').subscribe(res => {
+    this.candidateService.get().subscribe(res => {
       console.log(res);
       this.res = res;
 
@@ -68,30 +68,30 @@ export class ProfilePersonComponent implements OnInit {
   
   }
 
-  onPropChange(property: string): void {
-    if (this.form.controls[property].valid) {
-      this.propChange({ prop: property, candidate: this.form.value });
-    }
-  }
+  // onPropChange(property: string): void {
+  //   if (this.form.controls[property].valid) {
+  //     this.propChange({ prop: property, candidate: this.form.value });
+  //   }
+  // }
 
-  propChange(change: { prop: string; candidate: BaseCandidate }) {
-    let request = {};
-    request[change.prop] = change.candidate[change.prop];
-    this.candidateService
-      .patch(request as BaseCandidate)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe(
-        () => {
-          this.show = true;
-          setTimeout(() => this.show = false, 3000);
-        },
-        error => {
-          if (error.status == 401) {
-            this.router.navigate(['account']);
-          }
-        }
-      );
-  }
+  // propChange(change: { prop: string; candidate: BaseCandidate }) {
+  //   let request = {};
+  //   request[change.prop] = change.candidate[change.prop];
+  //   this.candidateService
+  //     .patch(request as BaseCandidate)
+  //     .pipe(takeUntil(this.destroy$))
+  //     .subscribe(
+  //       () => {
+  //         this.show = true;
+  //         setTimeout(() => this.show = false, 3000);
+  //       },
+  //       error => {
+  //         if (error.status == 401) {
+  //           this.router.navigate(['account']);
+  //         }
+  //       }
+  //     );
+  // }
 
   toPage(page: string): void {
     this.router.navigate([page]);

@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BaseSpecialty } from '@funle/entities';
+import { PortalCandidateService } from '@funle/api';
 import { KvKValidator } from 'src/app/validators/kvk.validator';
 import { FileValidator } from 'src/libs/forms/components/src/validators/file-validator';
 
@@ -36,11 +37,11 @@ export class ProfileBusinessComponent implements OnInit {
 
   res: any;
 
-  constructor(private router: Router, private http: HttpClient) { }
+  constructor(private router: Router, private candidateService: PortalCandidateService) { }
 
   ngOnInit(): void {
 
-    this.http.get('http://localhost:5000/api/candidates/a43d667e-bb17-4870-83ce-0fe1e9a9dc7f').subscribe(res => {
+    this.candidateService.get().subscribe(res => {
       console.log(res);
       this.res = res;
 

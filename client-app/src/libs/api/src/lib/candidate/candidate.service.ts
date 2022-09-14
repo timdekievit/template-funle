@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { combineLatest } from 'rxjs';
 import { take, map, mergeMap } from 'rxjs/operators';
 import { IBaseCandidate, BaseCandidate, IBaseIncentiveLink, ILinkedCandidates } from '@funle/entities';
@@ -11,9 +11,11 @@ import { ApiService } from '../api.service';
 export class PortalCandidateService {
   api = this.apiService.for<BaseCandidate, IBaseCandidate>('candidates');
 
-  constructor(private apiService: ApiService) {}
+  constructor(private apiService: ApiService, private http: HttpClient) {}
 
-  get = () => this.api.get();
+  get = () => this.http.get('http://localhost:5000/api/candidates/2E386ECA-F7C7-4ED6-8E4C-DF8520881133');
+
+  // get = () => this.api.get();
   // getSkills = () => this.api.get('skills');
   // getAgreement = () => this.api.get('termsandconditions');
   // getIncentiveLink = () => this.api.get<IBaseIncentiveLink>('incentivelink');
@@ -23,7 +25,7 @@ export class PortalCandidateService {
   // getProfileStatus = () => this.api.get('profile');
 
   // put = (candidate: BaseCandidate) => this.api.put(null, candidate);
-  patch = (candidate: BaseCandidate) => this.api.patch(null, candidate);
+  // patch = (candidate: BaseCandidate) => this.api.patch(null, candidate);
   // postCv = (cv: File) => this.api.post('cv', this.createFormData(cv));
 
   // downloadCv = () => this.api.get<Blob>('cv', { responseType: 'blob' });

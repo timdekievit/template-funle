@@ -29,7 +29,7 @@ namespace API.Extensions
             {
                 opt.AddPolicy("CorsPolicy", policy =>
                 {
-                    policy.AllowAnyMethod().AllowAnyHeader().WithOrigins("http://localhost:4200");
+                    policy.AllowAnyMethod().AllowAnyHeader().AllowAnyOrigin();
                 });
             });
             services.AddMediatR(typeof(List.Handler).Assembly);
