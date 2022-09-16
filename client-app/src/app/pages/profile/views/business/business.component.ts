@@ -17,6 +17,7 @@ export class ProfileBusinessComponent implements OnInit {
 
   show: boolean = false;
   skills: BaseSpecialty[] = [];
+  candidate: any;
 
 
   form = new FormGroup({
@@ -35,32 +36,51 @@ export class ProfileBusinessComponent implements OnInit {
 
   readonly separatorKeysCodes = [ENTER, COMMA] as const;
 
-  res: any;
-
   constructor(private router: Router, private candidateService: PortalCandidateService) { }
 
   ngOnInit(): void {
 
     this.candidateService.get().subscribe(res => {
       console.log(res);
-      this.res = res;
+      this.candidate = res;
 
-      this.form.controls.kvkNummer.setValue(this.res.kvkNummer);
-      this.form.controls.rate.setValue(this.res.rate);
-      this.form.controls.assignmentSearchRadius.setValue(this.res.assignmentSearchRadius);
-      this.form.controls.hours.setValue(this.res.hours);
-      this.form.controls.role.setValue(this.res.role);
-      this.form.controls.availability.setValue(this.res.availability);
-      this.form.controls.searching.setValue(this.res.searching);
-      this.form.controls.fileName.setValue(this.res.fileName);
-      this.form.controls.specialty.setValue(this.res.specialty);
-      this.form.controls.defaultMotivation.setValue(this.res.defaultMotivation);
+      this.form.controls.kvkNummer.setValue(this.candidate.kvkNummer);
+      this.form.controls.rate.setValue(this.candidate.rate);
+      this.form.controls.assignmentSearchRadius.setValue(this.candidate.assignmentSearchRadius);
+      this.form.controls.hours.setValue(this.candidate.hours);
+      this.form.controls.role.setValue(this.candidate.role);
+      this.form.controls.availability.setValue(this.candidate.availability);
+      this.form.controls.searching.setValue(this.candidate.searching);
+      this.form.controls.fileName.setValue(this.candidate.fileName);
+      this.form.controls.specialty.setValue(this.candidate.specialty);
+      this.form.controls.defaultMotivation.setValue(this.candidate.defaultMotivation);
       console.log(this.form);
     });
   }
 
   toPage(page: string): void {
     this.router.navigate([page]);
+  }
+
+  onSubmit(): void {
+    this.candidate = {
+      ...this.candidate,
+      kvkNummer: this.form.value.kvkNummer,
+      rate: this.form.value.rate,
+      assignmentSearchRadius: this.form.value.assignmentSearchRadius,
+      hours: this.form.value.hours,
+      role: this.form.value.role,
+      availability: this.form.value.availability,
+      searching: this.form.value.searching,
+      fileName: this.form.value.fileName,
+      specialty: this.form.value.specialty,
+      defaultMotivation: this.form.value.defaultMotivation
+    }
+
+    console.log(this.candidate);
+
+    this.candidateService.put(this.candidate);
+    
   }
 
   addSpecialty(skill: BaseSpecialty) {
