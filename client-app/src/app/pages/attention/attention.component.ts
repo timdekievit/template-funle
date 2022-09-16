@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { PortalAssignmentService } from '@funle/api';
 
 @Component({
@@ -17,7 +17,7 @@ export class AttentionComponent implements OnInit {
   nothingFound = true;
   somethingWentWrong = false;
 
-  constructor(private router: Router, private assignmentService: PortalAssignmentService) { }
+  constructor(private router: Router, private route: ActivatedRoute, private assignmentService: PortalAssignmentService) { }
 
   ngOnInit(): void {
 
@@ -25,6 +25,10 @@ export class AttentionComponent implements OnInit {
       console.log(res);
       this.assignments = res;
     });
+  }
+
+  onAssignmentSelected(id: string) {
+    this.router.navigate([id], { relativeTo: this.route });
   }
 
   toPage(page: string) {

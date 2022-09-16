@@ -12,4 +12,46 @@ export class AttentionDetailComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  declineProposal(): void {
+    // this.assignmentService.decline(this.assignment.id).subscribe(res => {
+    //   this.openDeclinedDialog();
+    // });
+  }
+
+  openAcceptedDialog(): void {
+    // const dialogRef = this.dialog.open(ProposalAcceptedDialogComponent, {
+    //   width: '100%',
+    //   data: this.assignment,
+    // });
+
+    // dialogRef.afterClosed().subscribe(result => {
+    //   if (result !== undefined && result.motivation !== '') {
+    //     const model = {
+    //       id: this.assignment.id,
+    //       motivation: result.motivation,
+    //       makeMotivationDefault: result.defaultMotivation,
+    //       notes: result.notes
+    //     };
+    //     this.assignment = { ...this.assignment, ...model };
+    //     this.assignmentService.accept(model).subscribe(res => {
+    //       this.accepted = true;
+    //     });
+    //   }
+    // });
+  }
+
+  openDeclinedDialog(): void {
+    // const dialogRef = this.dialog.open(ProposalDeclinedDialogComponent, {
+    //   width: '100%',
+    //   data: null,
+    // });
+
+    // dialogRef.afterClosed().subscribe(result => {
+    //   if (result !== undefined && result.declinedReason !== '') {
+    //     this.assignmentService.declinedReason({ id: this.assignment.id, declinedReason: result.declinedReason }).subscribe(res => {
+    //     });
+    //   }
+    // });
+  }
+
 }
