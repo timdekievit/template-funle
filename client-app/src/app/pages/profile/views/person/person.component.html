@@ -21,7 +21,7 @@
                     <mat-form-field appearance="outline" color="accent">
                         <mat-label>Email</mat-label>
 
-                        <input matInput type="email" inputmode="email" autocomplete="off" [readonly]="true" [value]="form.value.email"
+                        <input matInput type="email" inputmode="email" autocomplete="off" [readonly]="true" 
                             [formControl]="form.controls.email" [placeholder]="'Email'" />
                     </mat-form-field>
                 </div>
@@ -30,7 +30,7 @@
                         <mat-label>Telefoonnummer (mobiel)*</mat-label>
 
                         <input matInput type="text" inputmode="numeric" autocomplete="off"
-                            [formControl]="form.controls.phoneNumber" [placeholder]="" [value]="form.value.phoneNumber" />
+                            [formControl]="form.controls.phoneNumber" [placeholder]="" />
 
                         <mat-error *ngIf="form.controls.phoneNumber.hasError('required')">
                             Telefoonnummer is verplicht
@@ -46,7 +46,7 @@
             </div>
             <div class="row">
                 <div class="col-md-6">
-                    <mat-checkbox [formControl]="form.controls.whatsapp" [value]="form.value.whatsapp">Contact via whatsapp</mat-checkbox>
+                    <mat-checkbox [formControl]="form.controls.whatsapp">Contact via whatsapp</mat-checkbox>
                 </div>
             </div>
         </div>
@@ -61,7 +61,7 @@
                     <mat-form-field floatLabel="always" appearance="outline" color="accent">
                         <mat-label>Voornaam*</mat-label>
 
-                        <input matInput autocomplete="off" [formControl]="form.controls.firstName" [value]="form.value.firstName" [placeholder]="" />
+                        <input matInput autocomplete="off" [formControl]="form.controls.firstName" [placeholder]="" />
 
                         <mat-error
                             *ngIf="form.controls.firstName.hasError('required') || form.controls.firstName.hasError('notempty')">
@@ -80,14 +80,14 @@
                     <mat-form-field floatLabel="always" appearance="outline" color="accent">
                         <mat-label>Tussenvoegsel(s)</mat-label>
 
-                        <input matInput autocomplete="off" [formControl]="form.controls.prefix" [value]="form.value.prefix" [placeholder]="" />
+                        <input matInput autocomplete="off" [formControl]="form.controls.prefix" [placeholder]="" />
                     </mat-form-field>
                 </div>
                 <div class="col-md-4">
                     <mat-form-field floatLabel="always" appearance="outline" color="accent">
                         <mat-label>Achternaam*</mat-label>
 
-                        <input matInput autocomplete="off" [formControl]="form.controls.lastname" [value]="form.value.lastname" [placeholder]="" />
+                        <input matInput autocomplete="off" [formControl]="form.controls.lastname" [placeholder]="" />
 
                         <mat-error
                             *ngIf="form.controls.lastname.hasError('required') || form.controls.lastname.hasError('notempty')">
@@ -107,7 +107,7 @@
                     <mat-form-field floatLabel="always" appearance="outline" color="accent">
                         <mat-label>Woonplaats</mat-label>
 
-                        <input matInput autocomplete="off" [formControl]="form.controls.city" [value]="form.value.city"
+                        <input matInput autocomplete="off" [formControl]="form.controls.city"
                             [placeholder]="'Woonplaats'" />
                     </mat-form-field>
                 </div>

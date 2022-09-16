@@ -16,7 +16,7 @@
         <div class="col-md-6 black">
           <mat-form-field appearance="outline" floatLabel="always" color="accent" (click)="picker1.open()">
             <mat-label>{{ 'components.candidateForm.availability.label' | translate }}</mat-label>
-            <input matInput disabled [matDatepicker]="picker1" [formControl]="form.controls.availability" [value]="form.value.availability"
+            <input matInput disabled [matDatepicker]="picker1" [formControl]="form.controls.availability"
               [placeholder]="'components.candidateForm.availability.placeholder' | translate" />
             <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
             <mat-datepicker #picker1 disabled="false"></mat-datepicker>
@@ -38,7 +38,7 @@
             <mat-label>KvK-nummer</mat-label>
 
             <input matInput type="text" inputmode="numeric" autocomplete="off" [formControl]="form.controls.kvkNummer"
-              [value]="form.value.kvkNummer" [placeholder]="" />
+              [placeholder]="" />
 
             <mat-error *ngIf="form.dirty && form.controls.kvkNummer.hasError('required')">
               KvK-nummer is verplicht
@@ -60,8 +60,7 @@
           <mat-form-field floatLabel="always" appearance="outline" color="accent">
             <mat-label>Functie</mat-label>
 
-            <input matInput autocomplete="off" [formControl]="form.controls.role" [value]="form.value.role"
-              [placeholder]="'Functie'" />
+            <input matInput autocomplete="off" [formControl]="form.controls.role" [placeholder]="'Functie'" />
 
             <mat-error *ngIf="form.dirty && form.controls.role.hasError('required')">
               {{ 'components.candidateForm.role.errors.required' | translate }}
@@ -75,8 +74,7 @@
             <mat-label>Max. afstand klant (km)</mat-label>
 
             <input matInput type="number" inputmode="numeric" autocomplete="off"
-              [formControl]="form.controls.assignmentSearchRadius" [value]="form.value.assignmentSearchRadius"
-              [placeholder]="'Max afstand'" min="0" />
+              [formControl]="form.controls.assignmentSearchRadius" [placeholder]="'Max afstand'" min="0" />
 
             <mat-error *ngIf="form.controls.hours.hasError('min')">
               {{ 'components.candidateForm.assignmentSearchRadius.errors.min' | translate }}
@@ -88,7 +86,7 @@
             <mat-label>Uur per week</mat-label>
 
             <input matInput type="number" inputmode="numeric" autocomplete="off" [formControl]="form.controls.hours"
-              [value]="form.value.hours" [placeholder]="'Uur per week'" min="1" max="40" />
+              [placeholder]="'Uur per week'" min="1" max="40" />
 
             <mat-error *ngIf="form.controls.hours.hasError('required')">
               {{ 'components.candidateForm.hours.errors.required' | translate }}
@@ -105,7 +103,7 @@
           <mat-form-field floatLabel="always" appearance="outline" color="accent">
             <mat-label>Uurtarief</mat-label>
 
-            <input matInput type="number" inputmode="numeric" autocomplete="off" [formControl]="form.controls.rate" [value]="form.value.rate"
+            <input matInput type="number" inputmode="numeric" autocomplete="off" [formControl]="form.controls.rate"
               [placeholder]="'Uurtarief'" min="40" max="200" />
 
             <mat-error *ngIf="form.controls.rate.hasError('required')">
@@ -130,7 +128,7 @@
           <mat-form-field floatLabel="always" appearance="outline" (click)="fileUpload.click()" color="accent">
             <mat-label>{{ 'components.candidateForm.cv.label' | translate }}</mat-label>
 
-            <input readonly matInput autocomplete="off" [formControl]="form.controls.fileName" [value]="form.value.fileName"
+            <input readonly matInput autocomplete="off" [formControl]="form.controls.fileName"
               [placeholder]="'components.candidateForm.cv.placeholder' | translate" />
 
             <mat-icon matSuffix>attach_file</mat-icon>
@@ -168,7 +166,7 @@
                 <mat-icon matChipRemove>cancel</mat-icon>
               </mat-chip>
               <input placeholder="Voeg skill toe" [formControl]="form.controls.specialty" [matChipInputFor]="chipList"
-                [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="true" [value]="form.value.specialty"
+                [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="true"
                 (matChipInputTokenEnd)="addSpecialty($event)">
             </mat-chip-list>
           </mat-form-field>
@@ -179,7 +177,7 @@
           <mat-form-field floatLabel="always" appearance="outline" color="accent">
             <mat-label>Standaard Motivatie</mat-label>
 
-            <textarea matInput rows="6" autocomplete="off" [formControl]="form.controls.defaultMotivation" [value]="form.value.defaultMotivation"
+            <textarea matInput rows="6" autocomplete="off" [formControl]="form.controls.defaultMotivation"
               [placeholder]="'Zet hier je standaard motivatie. Deze wordt dan alvast ingevuld als je een opdracht interessant vindt. Scheelt weer werk.'"></textarea>
           </mat-form-field>
         </div>

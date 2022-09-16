@@ -45,17 +45,16 @@ export class ProfileBusinessComponent implements OnInit {
       console.log(res);
       this.res = res;
 
-      this.form.value.kvkNummer = this.res.kvkNummer;
-      this.form.value.rate = this.res.rate;
-      this.form.value.assignmentSearchRadius = this.res.assignmentSearchRadius;
-      this.form.value.hours = this.res.hours;
-      this.form.value.role = this.res.role;
-      this.form.value.availability = this.res.availability;
-      this.form.value.searching = this.res.searching;
-      this.form.value.fileName = this.res.fileName;
-      this.form.value.specialty = this.res.specialty;
-      this.form.value.defaultMotivation = this.res.defaultMotivation;
-
+      this.form.controls.kvkNummer.setValue(this.res.kvkNummer);
+      this.form.controls.rate.setValue(this.res.rate);
+      this.form.controls.assignmentSearchRadius.setValue(this.res.assignmentSearchRadius);
+      this.form.controls.hours.setValue(this.res.hours);
+      this.form.controls.role.setValue(this.res.role);
+      this.form.controls.availability.setValue(this.res.availability);
+      this.form.controls.searching.setValue(this.res.searching);
+      this.form.controls.fileName.setValue(this.res.fileName);
+      this.form.controls.specialty.setValue(this.res.specialty);
+      this.form.controls.defaultMotivation.setValue(this.res.defaultMotivation);
       console.log(this.form);
     });
   }

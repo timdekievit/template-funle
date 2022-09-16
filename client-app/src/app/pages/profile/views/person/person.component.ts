@@ -47,13 +47,19 @@ export class ProfilePersonComponent implements OnInit {
       console.log(res);
       this.res = res;
 
-      this.form.value.firstName = this.res.firstName;
-      this.form.value.prefix = this.res.prefix;
-      this.form.value.lastname = this.res.lastname;
-      this.form.value.email = this.res.email;
-      this.form.value.phoneNumber = this.res.phoneNumber;
-      this.form.value.city = this.res.city;
-      this.form.value.whatsapp = this.res.whatsapp;
+      this.form.controls.firstName.setValue(this.res.firstName)
+      this.form.controls.prefix.setValue(this.res.prefix)
+      this.form.controls.lastname.setValue(this.res.lastname)
+      this.form.controls.email.setValue(this.res.email)
+      this.form.controls.phoneNumber.setValue(this.res.phoneNumber)
+      this.form.controls.city.setValue(this.res.city)
+      this.form.controls.whatsapp.setValue(this.res.whatsapp)
+      // this.form.value.prefix = this.res.prefix;
+      // this.form.value.lastname = this.res.lastname;
+      // this.form.value.email = this.res.email;
+      // this.form.value.phoneNumber = this.res.phoneNumber;
+      // this.form.value.city = this.res.city;
+      // this.form.value.whatsapp = this.res.whatsapp;
 
       console.log(this.form);
     });

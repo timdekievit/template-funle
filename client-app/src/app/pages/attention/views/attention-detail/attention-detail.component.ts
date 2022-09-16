@@ -7,6 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AttentionDetailComponent implements OnInit {
 
+  messageTitle = 'Deze opdracht is helaas niet meer beschikbaar';
+  nothingFoundMessage = 'Maak je profiel volledig zodat wij voor jou op zoek kunnen of kijk in het overzicht of er nog een andere interessante opdracht tussen staat.';
+  nothingFoundButtonText = 'Terug naar overzicht';
+
+  assignment: any;
+  accepted: boolean;
+
+  nothingFound = false;
+
   constructor() { }
 
   ngOnInit(): void {
@@ -16,6 +25,10 @@ export class AttentionDetailComponent implements OnInit {
     // this.assignmentService.decline(this.assignment.id).subscribe(res => {
     //   this.openDeclinedDialog();
     // });
+  }
+
+  acceptProposal(): void {
+    
   }
 
   openAcceptedDialog(): void {
