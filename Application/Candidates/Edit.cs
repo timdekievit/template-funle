@@ -32,6 +32,8 @@ namespace Application.Candidates
 
                 _mapper.Map(request.Candidate, candidate);
 
+                Console.Write(candidate);
+
                 await _context.SaveChangesAsync();
 
                 return Unit.Value;

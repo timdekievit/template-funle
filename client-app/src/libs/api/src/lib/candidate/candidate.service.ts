@@ -13,7 +13,7 @@ export class PortalCandidateService {
 
   constructor(private apiService: ApiService, private http: HttpClient) {}
 
-  get = () => this.http.get('http://localhost:5000/api/candidates/2E386ECA-F7C7-4ED6-8E4C-DF8520881133');
+  get = () => this.http.get('http://localhost:5000/api/candidates/2e386eca-f7c7-4ed6-8e4c-df8520881133');
 
   // get = () => this.api.get();
   // getSkills = () => this.api.get('skills');
@@ -24,7 +24,12 @@ export class PortalCandidateService {
 
   // getProfileStatus = () => this.api.get('profile');
 
-  // put = (candidate: BaseCandidate) => this.api.put(null, candidate);
+  put = (candidate: any) => {
+    console.log(candidate);
+    this.http.put('http://localhost:5000/api/candidates/' + candidate.id, candidate).subscribe();
+  }
+
+
   // patch = (candidate: BaseCandidate) => this.api.patch(null, candidate);
   // postCv = (cv: File) => this.api.post('cv', this.createFormData(cv));
 

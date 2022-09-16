@@ -17,6 +17,8 @@ export class ProfilePersonComponent implements OnInit {
   
   show: boolean = false;
 
+  candidate: any;
+
   form = new FormGroup({
     id: new FormControl(''),
     email: new FormControl(''),
@@ -27,9 +29,6 @@ export class ProfilePersonComponent implements OnInit {
     phoneNumber: new FormControl('', [Validators.required, Validators.pattern('^06[0-9]{8}$')]),
     whatsapp: new FormControl(''),
   });
-
-  res: any;
-
 
   constructor(private router: Router, private candidateService: PortalCandidateService, private http: HttpClient) { }
 
@@ -45,24 +44,20 @@ export class ProfilePersonComponent implements OnInit {
 
     this.candidateService.get().subscribe(res => {
       console.log(res);
-      this.res = res;
+      this.candidate = res;
 
-      this.form.controls.firstName.setValue(this.res.firstName)
-      this.form.controls.prefix.setValue(this.res.prefix)
-      this.form.controls.lastname.setValue(this.res.lastname)
-      this.form.controls.email.setValue(this.res.email)
-      this.form.controls.phoneNumber.setValue(this.res.phoneNumber)
-      this.form.controls.city.setValue(this.res.city)
-      this.form.controls.whatsapp.setValue(this.res.whatsapp)
-      // this.form.value.prefix = this.res.prefix;
-      // this.form.value.lastname = this.res.lastname;
-      // this.form.value.email = this.res.email;
-      // this.form.value.phoneNumber = this.res.phoneNumber;
-      // this.form.value.city = this.res.city;
-      // this.form.value.whatsapp = this.res.whatsapp;
+      this.form.controls.firstName.setValue(this.candidate.firstName)
+      this.form.controls.prefix.setValue(this.candidate.prefix)
+      this.form.controls.lastname.setValue(this.candidate.lastname)
+      this.form.controls.email.setValue(this.candidate.email)
+      this.form.controls.phoneNumber.setValue(this.candidate.phoneNumber)
+      this.form.controls.city.setValue(this.candidate.city)
+      this.form.controls.whatsapp.setValue(this.candidate.whatsapp)
 
       console.log(this.form);
     });
+
+    
     // console.log(this.res);
 
     // this.form.controls.firstName.valueChanges.pipe(takeUntil(this.destroy$), debounceTime(1000)).subscribe(() => this.onPropChange('firstName'));
@@ -72,6 +67,24 @@ export class ProfilePersonComponent implements OnInit {
     // this.form.controls.city.valueChanges.pipe(takeUntil(this.destroy$), debounceTime(1000)).subscribe(() => this.onPropChange('city'));
     // this.form.controls.whatsapp.valueChanges.pipe(takeUntil(this.destroy$), debounceTime(1000)).subscribe(() => this.onPropChange('whatsapp'));
   
+  }
+
+  onSubmit(): void {
+    this.candidate = {
+      ...this.candidate,
+      firstName: this.form.value.firstName,
+      prefix: this.form.value.prefix,
+      lastname: this.form.value.lastname,
+      email: this.form.value.email,
+      phoneNumber: this.form.value.phoneNumber,
+      city: this.form.value.city,
+      whatsapp: this.form.value.whatsapp
+    }
+
+    console.log(this.candidate);
+
+    this.candidateService.put(this.candidate);
+    
   }
 
   // onPropChange(property: string): void {
