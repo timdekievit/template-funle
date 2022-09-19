@@ -80,7 +80,13 @@ export class ProfileBusinessComponent implements OnInit {
     console.log(this.candidate);
 
     this.candidateService.put(this.candidate);
+    this.showNotification();
     
+  }
+
+  showNotification(): void {  
+    this.show = true;
+    setTimeout(() => this.show = false, 3000);
   }
 
   addSpecialty(skill: BaseSpecialty) {

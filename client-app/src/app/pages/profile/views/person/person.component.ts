@@ -39,9 +39,6 @@ export class ProfilePersonComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.res = this.candidateService.get();
-    // console.log(this.res);
-
     this.candidateService.get().subscribe(res => {
       console.log(res);
       this.candidate = res;
@@ -84,7 +81,12 @@ export class ProfilePersonComponent implements OnInit {
     console.log(this.candidate);
 
     this.candidateService.put(this.candidate);
-    
+    this.showNotification()
+  }
+
+  showNotification(): void {  
+    this.show = true;
+    setTimeout(() => this.show = false, 3000);
   }
 
   // onPropChange(property: string): void {
