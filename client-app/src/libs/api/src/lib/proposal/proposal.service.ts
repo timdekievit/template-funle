@@ -8,14 +8,14 @@ import { ApiService } from '../api.service';
 @Injectable({
   providedIn: 'root',
 })
-export class PortalCandidateService {
-  // api = this.apiService.for<BaseCandidate, IBaseCandidate>('candidates');
+export class PortalAssignmentService {
+//   api = this.apiService.for<BaseCandidate, IBaseCandidate>('candidates');
 
   constructor(private apiService: ApiService, private http: HttpClient) {}
 
-  get = () => this.http.get('http://localhost:5000/api/candidates/EE38480A-6DB4-41EE-B197-D33CC1CC02C9');
+  getAll = () => this.http.get('http://localhost:5000/api/proposals/');
 
-  // get = () => this.api.get();
+  get = (id: string) => this.http.get('http://localhost:5000/api/proposals/' + id);
   // getSkills = () => this.api.get('skills');
   // getAgreement = () => this.api.get('termsandconditions');
   // getIncentiveLink = () => this.api.get<IBaseIncentiveLink>('incentivelink');
@@ -24,12 +24,7 @@ export class PortalCandidateService {
 
   // getProfileStatus = () => this.api.get('profile');
 
-  put = (candidate: any) => {
-    console.log(candidate);
-    this.http.put('http://localhost:5000/api/candidates/' + candidate.id, candidate).subscribe();
-  }
-
-
+  // put = (candidate: BaseCandidate) => this.api.put(null, candidate);
   // patch = (candidate: BaseCandidate) => this.api.patch(null, candidate);
   // postCv = (cv: File) => this.api.post('cv', this.createFormData(cv));
 

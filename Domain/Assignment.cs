@@ -12,7 +12,7 @@ namespace Domain
         public string SourceId { get; set; }
         public string Customer { get; set; }
         public int? CategoryId { get; set; }
-        // public ICollection<ProposalModel> Proposals { get; set; }
+        public ICollection<Proposal> Proposals { get; set; } = new List<Proposal>();
         public int? Rate { get; set; }
         public int? Hours { get; set; }
         public string Role { get; set; }

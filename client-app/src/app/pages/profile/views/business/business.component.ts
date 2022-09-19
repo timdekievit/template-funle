@@ -19,7 +19,6 @@ export class ProfileBusinessComponent implements OnInit {
   skills: BaseSpecialty[] = [];
   candidate: any;
 
-
   form = new FormGroup({
     id: new FormControl(''),
     kvkNummer: new FormControl('', [Validators.required, KvKValidator(), Validators.pattern('^[0-9]{8}$')]),
@@ -81,7 +80,6 @@ export class ProfileBusinessComponent implements OnInit {
 
     this.candidateService.put(this.candidate);
     this.showNotification();
-    
   }
 
   showNotification(): void {  

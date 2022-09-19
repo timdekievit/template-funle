@@ -29,6 +29,7 @@ import { AssignmentsTableComponent } from './assignments-table/assignments-table
 import { MessageComponent } from './message/message.component';
 import { MessageContainerComponent } from './message-container/message-container.component';
 import { TranslateModule } from '@ngx-translate/core';
+import { AssignmentsFavoriteTableComponent } from './assignments-favorite-table/assignments-favorite-table.component';
 
 
 @NgModule({
@@ -43,7 +44,8 @@ import { TranslateModule } from '@ngx-translate/core';
     AssignmentGeneralItemComponent,
     AssignmentsTableComponent,
     MessageComponent,
-    MessageContainerComponent
+    MessageContainerComponent,
+    AssignmentsFavoriteTableComponent
     
   ],
   imports: [
@@ -79,7 +81,9 @@ import { TranslateModule } from '@ngx-translate/core';
     AssignmentsDetailComponent,
     AssignmentsTableComponent,
     MessageComponent,
-    MessageContainerComponent
+    MessageContainerComponent,
+    AssignmentsFavoriteTableComponent
+
   ],
 })
 export class ComponentsModule {}

@@ -1,0 +1,124 @@
+@import 'src/libs/ui/scss/constants/colors';
+@import 'src/libs/ui/scss/themes/material';
+
+.assignments-table {
+
+  &-container {
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background-color: #ffffff;
+  }
+
+  &--filter {
+    padding: 0px 16px;
+    
+    mat-form-field {
+      width: 100%;
+    }
+  }
+
+  &--row:hover  {
+      cursor: pointer;
+      background-color: rgba(64, 178, 181, 0.3);;
+  }
+
+  &--header {
+    font-size: 20px;
+    padding: 8px 0px;
+
+    &-sub {
+      font-size: 14px;
+      font-weight: normal;
+    }
+
+    &-filter {
+      display: flex;
+      justify-content: flex-end;
+      cursor: pointer;
+
+      .header-filter--active {
+        color: $color-secondary;
+      }
+    }
+  }
+
+  &--cell {
+    display: flex;
+    flex-direction: column;
+    padding-top: 8px;
+    padding-bottom: 8px;
+
+    &-title {
+      font-weight: 500;
+    }
+
+    &-info {
+      display: flex;
+      justify-content: space-between;
+
+      padding: 0px 8px;
+
+      .status {
+        padding: 8px;
+      }
+
+      .accepted {
+        background-color: #eee;
+      }
+
+      .rejected {
+        background-color: $color-warn;
+        color: #fff;
+      }
+
+      .interview {
+        background-color: $color-success;
+        color: #fff;
+      }
+
+      .submitted {
+        background-color: $color-secondary;
+        color: #fff;
+      }
+    }
+
+    &-forward {
+      display: flex;
+      justify-content: flex-end;
+
+      mat-icon {
+        color: #bfbfbf;
+        font-size: 16px;
+      }
+    }
+
+    &-icons {
+      display: flex;
+      justify-content: flex-end;
+
+      .favorite {
+        color: $color-error;
+      }
+    
+      .saved {
+        color: $color-secondary;
+      }
+    }
+  }
+
+  &--new {
+    background-color: $color-secondary;
+    padding: 0px 10px;
+    display: inline-block;
+    position: relative;
+    font-size: 12px;
+    color: #fff;
+  }
+
+  &--footer {
+    color: $color-secondary;
+  }
+}

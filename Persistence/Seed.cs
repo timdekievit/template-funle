@@ -40,6 +40,20 @@ namespace Persistence
                     Source = "Abn Amro",
                     SourceId = "Abn",
                     Customer = "Abn Amro",
+                    Proposals = new List<Proposal>
+                    {
+                        new Proposal
+                        {
+                            Candidate = candidates[0],
+                            Status = ProposalStatus.Created,
+                            Source = "test",
+                            Match = false,
+                            Done = false,
+                            RejectedReason = "",
+                            CreationDate = DateTime.Now,
+                            InterviewLocation = "Denhaag",
+                        }
+                    },
                     Role = "Scrum Master",
                     Description = "We zoeken iemand met 50 jaar ervaring als Scrum Master",
                     StartDate = DateTime.Now.AddMonths(2),
