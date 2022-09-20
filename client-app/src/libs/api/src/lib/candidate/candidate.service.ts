@@ -13,7 +13,7 @@ export class PortalCandidateService {
 
   constructor(private apiService: ApiService, private http: HttpClient) {}
 
-  get = () => this.http.get('http://localhost:5000/api/candidates/EE38480A-6DB4-41EE-B197-D33CC1CC02C9');
+  get = () => this.http.get('http://localhost:5000/api/candidates/0d9afa1e-fc1c-42ec-8c99-c94dff84ae51');
 
   // get = () => this.api.get();
   // getSkills = () => this.api.get('skills');

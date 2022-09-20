@@ -45,7 +45,7 @@ namespace Persistence
                         new Proposal
                         {
                             Candidate = candidates[0],
-                            Status = ProposalStatus.Created,
+                            ProposalStatus = "Created",
                             Source = "test",
                             Match = false,
                             Done = false,

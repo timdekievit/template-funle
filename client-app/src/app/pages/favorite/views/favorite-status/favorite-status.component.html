@@ -1,1 +1,13 @@
-<p>favorite-status works!</p>
+<!-- <ng-container *ngIf="loading; else content">
+    <funle-portal-loader></funle-portal-loader>
+  </ng-container> -->
+
+<div class="favorite-status-container container">
+    <funle-portal-assignments-table
+        [title]="title"
+        [showFilter]="true"
+        [assignments]="assignments"
+        (assignmentSelected)="onAssignmentSelected($event)"
+    ></funle-portal-assignments-table>
+</div>
+

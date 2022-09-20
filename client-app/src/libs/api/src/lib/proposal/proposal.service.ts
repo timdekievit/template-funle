@@ -8,7 +8,7 @@ import { ApiService } from '../api.service';
 @Injectable({
   providedIn: 'root',
 })
-export class PortalAssignmentService {
+export class PortalProposalService {
 //   api = this.apiService.for<BaseCandidate, IBaseCandidate>('candidates');
 
   constructor(private apiService: ApiService, private http: HttpClient) {}

@@ -2,29 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Domain;
 
-namespace Domain
+namespace Application.Proposals
 {
-
-        public enum ProposalStatus
-    {
-        Created,
-        Declined,
-        Accepted,
-        Submitted,
-        Interview,
-        Rejected,
-        Hired,
-        Expired,
-    }
-
-    public class Proposal
+    public class ProposalDto
     {
         public Guid Id { get; set; }
-
-        public Guid AssignmentId { get; set; }
-
-        public Assignment Assignment { get; set; }
 
         public Guid CandidateId { get; set; }
 

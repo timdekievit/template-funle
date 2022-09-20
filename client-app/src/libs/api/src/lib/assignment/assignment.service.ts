@@ -4,18 +4,22 @@ import { combineLatest } from 'rxjs';
 import { take, map, mergeMap } from 'rxjs/operators';
 import { IBaseCandidate, BaseCandidate, IBaseIncentiveLink, ILinkedCandidates } from '@funle/entities';
 import { ApiService } from '../api.service';
+import { PortalProposalService } from '../proposal/proposal.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PortalAssignmentService {
 //   api = this.apiService.for<BaseCandidate, IBaseCandidate>('candidates');
+    
+  assignments: any;
 
-  constructor(private apiService: ApiService, private http: HttpClient) {}
+  constructor(private apiService: ApiService, private http: HttpClient, private proposalService: PortalProposalService) {}
 
   getAll = () => this.http.get('http://localhost:5000/api/assignments/');
 
   get = (id: string) => this.http.get('http://localhost:5000/api/assignments/' + id);
+  
   // getSkills = () => this.api.get('skills');
   // getAgreement = () => this.api.get('termsandconditions');
   // getIncentiveLink = () => this.api.get<IBaseIncentiveLink>('incentivelink');

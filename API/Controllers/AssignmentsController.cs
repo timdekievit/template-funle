@@ -11,13 +11,13 @@ namespace API.Controllers
     public class AssignmentsController : BaseApiController
     {
         [HttpGet]
-        public async Task<ActionResult<List<Assignment>>> getAssignments() 
+        public async Task<ActionResult<List<AssignmentDto>>> getAssignments() 
         {
             return await Mediator.Send(new List.Query());
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Assignment>> getCandidate(Guid id) 
+        public async Task<ActionResult<AssignmentDto>> getCandidate(Guid id) 
         {
             return await Mediator.Send(new Details.Query{Id = id});
         }
