@@ -21,5 +21,11 @@ namespace API.Controllers
         {
             return await Mediator.Send(new Details.Query{Id = id});
         }
+
+        [HttpGet("proposals")]
+        public async Task<ActionResult<List<AssignmentDto>>> getAssignmentsWithProposals() 
+        {
+            return await Mediator.Send(new ListProposals.Query());
+        }
     }
 }

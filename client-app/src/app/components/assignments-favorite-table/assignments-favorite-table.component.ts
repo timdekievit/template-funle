@@ -43,6 +43,7 @@ export class AssignmentsFavoriteTableComponent implements OnInit, OnChanges {
   }
 
   onClick(id: string) {
+    console.log(id);
     this.assignmentSelected.emit(id);
   }
 
@@ -65,6 +66,8 @@ export class AssignmentsFavoriteTableComponent implements OnInit, OnChanges {
         return 'Intake';
       case 'Submitted':
         return 'Aangeboden';
+      case 'Created':
+        return 'Aangemaakt';  
       default:
         return inputStatus;
     }

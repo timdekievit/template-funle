@@ -20,7 +20,6 @@ export class AttentionComponent implements OnInit {
   constructor(private router: Router, private route: ActivatedRoute, private assignmentService: PortalAssignmentService) { }
 
   ngOnInit(): void {
-
     this.assignmentService.getAll().subscribe(res => {
       console.log(res);
       this.assignments = res;

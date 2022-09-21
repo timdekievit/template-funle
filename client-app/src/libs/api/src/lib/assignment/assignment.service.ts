@@ -19,6 +19,8 @@ export class PortalAssignmentService {
   getAll = () => this.http.get('http://localhost:5000/api/assignments/');
 
   get = (id: string) => this.http.get('http://localhost:5000/api/assignments/' + id);
+
+  getAssignmentsWithProposals = () => this.http.get('http://localhost:5000/api/assignments/proposals');
   
   // getSkills = () => this.api.get('skills');
   // getAgreement = () => this.api.get('termsandconditions');

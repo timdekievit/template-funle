@@ -19,13 +19,13 @@
 
     <ng-container matColumnDef="status">
       <td mat-cell *matCellDef="let assignment">
-        <div class="assignments-table--cell">
-          <div class="assignments-table--cell-info">
-            <div [ngClass]="assignment.proposalStatus.toLowerCase()" class="status">
-              {{ status(assignment.proposalStatus) }}
+          <div class="assignments-table--cell">
+            <div class="assignments-table--cell-info">
+              <div [ngClass]="assignment.proposals[0].proposalStatus.toLowerCase()" class="status">
+                {{ status(assignment.proposals[0].proposalStatus)}}
+              </div>
             </div>
           </div>
-        </div>
       </td>
       <td mat-footer-cell *matFooterCellDef></td>
     </ng-container>
@@ -43,7 +43,8 @@
       <td mat-footer-cell *matFooterCellDef></td>
     </ng-container>
 
-    <tr class="assignments-table--row" mat-row *matRowDef="let row; columns: columns" (click)="onClick(row.publicId)"></tr>
+    <tr class="assignments-table--row" mat-row *matRowDef="let row; columns: columns" (click)="onClick(row.id)">
+    </tr>
     <ng-container *ngIf="showMoreRow">
       <tr mat-footer-row *matFooterRowDef="columns" (click)="onShowMore()"></tr>
     </ng-container>

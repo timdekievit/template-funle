@@ -69,26 +69,26 @@ export class FavoriteDetailComponent implements OnDestroy {
   }
 
   openAcceptedDialog(): void {
-    const dialogRef = this.dialog.open(ProposalAcceptedDialogComponent, {
-      width: '100%',
-      data: this.assignment,
-    });
+    // const dialogRef = this.dialog.open(ProposalAcceptedDialogComponent, {
+    //   width: '100%',
+    //   data: this.assignment,
+    // });
 
-    dialogRef.afterClosed().subscribe(result => {
-      if (result !== undefined && result.motivation !== '') {
-        const model = {
-          id: this.assignment.id, 
-          motivation: result.motivation,
-          makeMotivationDefault: result.defaultMotivation,
-          notes: result.notes
-        };
-        this.assignment = { ...this.assignment, ...model};
-        // this.assignmentService.accept(model
-        //   ).subscribe(res => {
-        //     this.accepted = true;
-        //   });        
-      }
-    });
+    // dialogRef.afterClosed().subscribe(result => {
+    //   if (result !== undefined && result.motivation !== '') {
+    //     const model = {
+    //       id: this.assignment.id, 
+    //       motivation: result.motivation,
+    //       makeMotivationDefault: result.defaultMotivation,
+    //       notes: result.notes
+    //     };
+    //     this.assignment = { ...this.assignment, ...model};
+    //     // this.assignmentService.accept(model
+    //     //   ).subscribe(res => {
+    //     //     this.accepted = true;
+    //     //   });        
+    //   }
+    // });
   }
 }
 

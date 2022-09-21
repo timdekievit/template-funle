@@ -11,25 +11,20 @@ import { PortalAssignmentService, PortalProposalService } from '@funle/api';
 export class FavoriteComponent implements OnInit {
 
   assignments: any;
-  assignmentsProposals: any;
   message404Title = 'Hier zou het staan';
   messageErrorTitle = 'Er is iets fout gegaan';
   messageTitle = '';
   nothingFound = true;
   somethingWentWrong = false;
-  proposals: any;
-  loopDone = false;
 
   constructor(private router: Router, private route: ActivatedRoute, private assignmentService: PortalAssignmentService) { }
 
   ngOnInit(): void {
-    this.assignmentService.getAll().subscribe(res => {
+    this.assignmentService.getAssignmentsWithProposals().subscribe(res => {
       console.log(res);
 
       this.assignments = res;
     });
-
-
 
   }
 
@@ -38,6 +33,7 @@ export class FavoriteComponent implements OnInit {
   }
 
   onAssignmentSelected(id: string) {
+    console.log(id);
     this.router.navigate([id], { relativeTo: this.route });
   }
 

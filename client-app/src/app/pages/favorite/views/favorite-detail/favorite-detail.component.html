@@ -1,1 +1,8 @@
-<p>favorite-detail works!</p>
+<!-- <ng-container *ngIf="loading; else content">
+    <funle-portal-loader></funle-portal-loader>
+  </ng-container> -->
+
+<div class="favorite-detail-container container">
+    <funle-portal-assignments-detail (acceptedProposal)="acceptProposal()" [accepted]="accepted"
+        [assignment]="assignment"></funle-portal-assignments-detail>
+</div>
