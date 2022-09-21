@@ -16,6 +16,11 @@ import { MatButtonModule } from '@angular/material/button';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatNativeDateModule } from '@angular/material/core';
+import { MetaReducer, StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { EffectsModule } from '@ngrx/effects';
+
+export const metaReducers: MetaReducer<any>[] = [];
 
 @NgModule({
   declarations: [
@@ -43,6 +48,9 @@ import { MatNativeDateModule } from '@angular/material/core';
         useFactory: createTranslateLoader,
       },
     }),
+    StoreModule.forRoot({}, { metaReducers }),
+    StoreDevtoolsModule.instrument({}),
+    EffectsModule.forRoot(),
   ],
 
   providers: [],

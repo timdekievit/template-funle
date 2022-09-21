@@ -19,6 +19,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ProfileBusinessComponent } from './views/business/business.component';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { StoreModule } from '@ngrx/store';
+import { reducers } from 'src/app/ngrx';
 
 
 @NgModule({
@@ -37,6 +39,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
     MatDatepickerModule,
     MatTableModule,
     MatButtonModule,
+    StoreModule.forFeature('candidates', reducers),
     TranslateModule.forChild({ extend: true }),
     ProfileRoutingModule,
   ]

@@ -5,8 +5,10 @@ import { NotEmptyValidator } from 'src/app/validators/not-empty.validator';
 import { PortalCandidateService } from '@funle/api';
 import { HttpClient } from '@angular/common/http';
 import { debounceTime, takeUntil } from 'rxjs/operators';
-import { Subject } from 'rxjs';
+import { Subject, Observable } from 'rxjs';
 import { BaseCandidate } from '@funle/entities';
+import { Store } from '@ngrx/store';
+import * as fromStore from '../../../../ngrx';
 
 @Component({
   selector: 'funle-profile-person',
@@ -30,7 +32,7 @@ export class ProfilePersonComponent implements OnInit {
     whatsapp: new FormControl(''),
   });
 
-  constructor(private router: Router, private candidateService: PortalCandidateService, private http: HttpClient) { }
+  constructor(private router: Router, private store: Store<fromStore.CandidateState>) { }
 
   private destroy$ = new Subject<boolean>();
   ngOnDestroy(): void {
@@ -39,20 +41,28 @@ export class ProfilePersonComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.candidateService.get().subscribe(res => {
-      console.log(res);
-      this.candidate = res;
 
-      this.form.controls.firstName.setValue(this.candidate.firstName)
-      this.form.controls.prefix.setValue(this.candidate.prefix)
-      this.form.controls.lastname.setValue(this.candidate.lastname)
-      this.form.controls.email.setValue(this.candidate.email)
-      this.form.controls.phoneNumber.setValue(this.candidate.phoneNumber)
-      this.form.controls.city.setValue(this.candidate.city)
-      this.form.controls.whatsapp.setValue(this.candidate.whatsapp)
+    console.log(this.store)
 
-      console.log(this.form);
-    });
+    this.store.select<any>('candidates').subscribe(state => {
+      console.log(state)
+    })
+
+    
+    // this.candidateService.get().subscribe(res => {
+    //   console.log(res);
+    //   this.candidate = res;
+
+    //   this.form.controls.firstName.setValue(this.candidate.firstName)
+    //   this.form.controls.prefix.setValue(this.candidate.prefix)
+    //   this.form.controls.lastname.setValue(this.candidate.lastname)
+    //   this.form.controls.email.setValue(this.candidate.email)
+    //   this.form.controls.phoneNumber.setValue(this.candidate.phoneNumber)
+    //   this.form.controls.city.setValue(this.candidate.city)
+    //   this.form.controls.whatsapp.setValue(this.candidate.whatsapp)
+
+    //   console.log(this.form);
+    // });
 
     
     // console.log(this.res);
@@ -80,7 +90,7 @@ export class ProfilePersonComponent implements OnInit {
 
     console.log(this.candidate);
 
-    this.candidateService.put(this.candidate);
+    // this.candidateService.put(this.candidate);
     this.showNotification()
   }
 
