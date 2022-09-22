@@ -44,22 +44,28 @@ export class ProfilePersonComponent implements OnInit {
 
     console.log(this.store)
 
-    this.store.select<any>('candidates').subscribe(state => {
+    this.store.dispatch(new fromStore.LoadCandidate());
+
+    this.candidate = this.store.select<any>(fromStore.getAllCandidates).subscribe(state => {
       console.log(state)
+      this.candidate = state;
+
+      this.form.controls.firstName.setValue(this.candidate.firstName)
+      this.form.controls.prefix.setValue(this.candidate.prefix)
+      this.form.controls.lastname.setValue(this.candidate.lastname)
+      this.form.controls.email.setValue(this.candidate.email)
+      this.form.controls.phoneNumber.setValue(this.candidate.phoneNumber)
+      this.form.controls.city.setValue(this.candidate.city)
+      this.form.controls.whatsapp.setValue(this.candidate.whatsapp)
     })
 
-    
+
+  
     // this.candidateService.get().subscribe(res => {
     //   console.log(res);
     //   this.candidate = res;
 
-    //   this.form.controls.firstName.setValue(this.candidate.firstName)
-    //   this.form.controls.prefix.setValue(this.candidate.prefix)
-    //   this.form.controls.lastname.setValue(this.candidate.lastname)
-    //   this.form.controls.email.setValue(this.candidate.email)
-    //   this.form.controls.phoneNumber.setValue(this.candidate.phoneNumber)
-    //   this.form.controls.city.setValue(this.candidate.city)
-    //   this.form.controls.whatsapp.setValue(this.candidate.whatsapp)
+
 
     //   console.log(this.form);
     // });

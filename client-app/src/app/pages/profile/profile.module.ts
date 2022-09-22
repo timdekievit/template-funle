@@ -20,7 +20,8 @@ import { ProfileBusinessComponent } from './views/business/business.component';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { StoreModule } from '@ngrx/store';
-import { reducers } from 'src/app/ngrx';
+import { reducers, effects } from 'src/app/ngrx';
+import { EffectsModule } from '@ngrx/effects';
 
 
 @NgModule({
@@ -40,6 +41,7 @@ import { reducers } from 'src/app/ngrx';
     MatTableModule,
     MatButtonModule,
     StoreModule.forFeature('candidates', reducers),
+    EffectsModule.forFeature(effects),
     TranslateModule.forChild({ extend: true }),
     ProfileRoutingModule,
   ]

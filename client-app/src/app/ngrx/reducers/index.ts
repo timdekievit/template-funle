@@ -9,7 +9,7 @@ export const reducers: ActionReducerMap<CandidateState> = {
     candidate: fromCandidates.reducer
 };
 
-export const getCandidatesState = createFeatureSelector<CandidateState>('candidates')
+export const getCandidatesState = createFeatureSelector<CandidateState>('candidates');
 
 export const getCandidateState = createSelector(getCandidatesState, (state: CandidateState) => state.candidate);
 

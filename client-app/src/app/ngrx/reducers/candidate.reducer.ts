@@ -7,28 +7,7 @@ export interface CandidateState {
 }
 
 export const initialState: CandidateState = {
-    data: {
-        id: "0d9afa1e-fc1c-42ec-8c99-c94dff84ae51",
-        email: "timdekievit@hotmail.com",
-        firstName: "Tim",
-        prefix: "de",
-        lastname: "Kievit",
-        searching: null,
-        rate: null,
-        hours: null,
-        role: "Programmer",
-        availability: "2022-09-20T15:35:42.8412087",
-        phoneNumber: "0681568748",
-        city: "Wassenaar",
-        fileName: "tim_cv",
-        agreedTermsAndConditions: true,
-        agreedTermsAndConditionsDate: "2022-09-20T15:35:42.8494231",
-        kvkNummer: null,
-        assignmentSearchRadius: null,
-        discountGuid: "4a562d23-40ef-4fcf-b817-3efef7eeb207",
-        whatsapp: null,
-        defaultMotivation: "geld"
-    },
+    data: {},
     loaded: false,
     loading: false
 };
@@ -46,10 +25,13 @@ export function reducer(
             };
         }
         case fromCandidates.LOAD_CANDIDATE_SUCCESS: {
+            const data = action.payload;
+            console.log(data);
             return {
                 ...state,
                 loading: false,
-                loaded: true
+                loaded: true,
+                data
             };
         }
         case fromCandidates.LOAD_CANDIDATE_FAIL: {

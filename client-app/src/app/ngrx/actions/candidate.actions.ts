@@ -16,7 +16,6 @@ export class LoadCandidateFail implements Action {
 export class LoadCandidateSuccess implements Action {
     readonly type = LOAD_CANDIDATE_SUCCESS
     constructor(public payload: any) {}
-
 }
 
 export type CandidateAction = LoadCandidate | LoadCandidateFail | LoadCandidateSuccess;
