@@ -165,7 +165,8 @@
                 {{skill.value}}
                 <mat-icon matChipRemove>cancel</mat-icon>
               </mat-chip>
-              <input placeholder="Voeg skill toe" [formControl]="form.controls.specialty" [matChipInputFor]="chipList"
+              <input placeholder="Voeg skill toe" 
+              [matChipInputFor]="chipList"
                 [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="true"
                 (matChipInputTokenEnd)="addSpecialty($event)">
             </mat-chip-list>

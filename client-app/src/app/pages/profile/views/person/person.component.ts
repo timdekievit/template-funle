@@ -22,9 +22,9 @@ export class ProfilePersonComponent implements OnInit {
   show: boolean = false;
 
   candidate$: Observable<Candidate>;
+  newCandidate: Candidate;
 
   form = new FormGroup({
-    id: new FormControl(''),
     email: new FormControl(''),
     firstName: new FormControl('', [Validators.required, NotEmptyValidator(), Validators.pattern('^[A-zÀ-ú -]+$')]),
     prefix: new FormControl(''),
@@ -101,6 +101,17 @@ export class ProfilePersonComponent implements OnInit {
 
     // // this.candidateService.put(this.candidate);
     // this.showNotification()
+
+    this.candidate$.subscribe(candidate => {
+      this.newCandidate = {
+        ...candidate,
+        ...this.form.value
+      };
+    }).unsubscribe()
+
+    this.candidatesService.update(this.newCandidate);
+
+    this.showNotification();
   }
 
   showNotification(): void {  

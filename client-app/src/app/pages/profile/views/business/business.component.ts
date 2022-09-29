@@ -11,6 +11,7 @@ import { CandidateEntityService } from 'src/app/services/candidates/candidate-en
 import { Candidate } from 'src/app/models/candidate';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { ThrottlingUtils } from '@azure/msal-common';
 
 @Component({
   selector: 'funle-profile-business',
@@ -22,9 +23,9 @@ export class ProfileBusinessComponent implements OnInit {
   show: boolean = false;
   skills: BaseSpecialty[] = [];
   candidate$: Observable<Candidate>;
+  newCandidate: Candidate;
 
   form = new FormGroup({
-    id: new FormControl(''),
     kvkNummer: new FormControl('', [Validators.required, KvKValidator(), Validators.pattern('^[0-9]{8}$')]),
     rate: new FormControl('', [Validators.min(0), Validators.max(200)]),
     assignmentSearchRadius: new FormControl('', [Validators.min(0)]),
@@ -33,7 +34,6 @@ export class ProfileBusinessComponent implements OnInit {
     availability: new FormControl(''),
     searching: new FormControl(true),
     fileName: new FormControl('', [FileValidator.fileMaxSize(10500000), FileValidator.fileExtensions(['pdf'])]),
-    specialty: new FormControl(''),
     defaultMotivation: new FormControl('')
   });
 
@@ -72,24 +72,17 @@ export class ProfileBusinessComponent implements OnInit {
   }
 
   onSubmit(): void {
-    // this.candidate = {
-    //   ...this.candidate,
-    //   kvkNummer: this.form.value.kvkNummer,
-    //   rate: this.form.value.rate,
-    //   assignmentSearchRadius: this.form.value.assignmentSearchRadius,
-    //   hours: this.form.value.hours,
-    //   role: this.form.value.role,
-    //   availability: this.form.value.availability,
-    //   searching: this.form.value.searching,
-    //   fileName: this.form.value.fileName,
-    //   specialty: this.form.value.specialty,
-    //   defaultMotivation: this.form.value.defaultMotivation
-    // }
+    this.candidate$.subscribe(candidate => {
+      this.newCandidate = {
+        ...candidate,
+        ...this.form.value
+      };
+    }).unsubscribe()
 
-    // console.log(this.candidate);
+    this.candidatesService.update(this.newCandidate);
 
-    // this.candidateService.put(this.candidate);
-    // this.showNotification();
+    this.showNotification();
+
   }
 
   showNotification(): void {  
