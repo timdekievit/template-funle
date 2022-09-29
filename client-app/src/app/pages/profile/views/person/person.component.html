@@ -22,7 +22,7 @@
                         <mat-label>Email</mat-label>
 
                         <input matInput type="email" inputmode="email" autocomplete="off" [readonly]="true" 
-                            [formControl]="form.controls.email" [placeholder]="'Email'" />
+                            [formControl]="form.controls.email" [placeholder]="'Email'" [value]="this.candidate$ | async" />
                     </mat-form-field>
                 </div>
                 <div class="col-md-6">

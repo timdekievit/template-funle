@@ -22,6 +22,16 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { StoreModule } from '@ngrx/store';
 import { reducers, effects } from 'src/app/ngrx';
 import { EffectsModule } from '@ngrx/effects';
+import { EntityDefinitionService, EntityMetadataMap } from '@ngrx/data';
+import { CandidateEntityService } from 'src/app/services/candidates/candidate-entity.service';
+import { CandidatesResolver } from 'src/app/services/candidates/candidate.resolver';
+
+
+const EntityMetadata: EntityMetadataMap = {
+  Candidate: {
+  
+  }
+}
 
 
 @NgModule({
@@ -44,6 +54,12 @@ import { EffectsModule } from '@ngrx/effects';
     EffectsModule.forFeature(effects),
     TranslateModule.forChild({ extend: true }),
     ProfileRoutingModule,
-  ]
+  ],
+  providers: [CandidateEntityService, CandidatesResolver]
 })
-export class ProfileModule { }
+export class ProfileModule { 
+  constructor(private eds: EntityDefinitionService) {
+    eds.registerMetadataMap(EntityMetadata);
+
+  }
+}

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { CandidatesResolver } from 'src/app/services/candidates/candidate.resolver';
 
 import { ProfileComponent } from './profile.component';
 import { ProfileBusinessComponent } from './views/business/business.component';
@@ -11,7 +12,8 @@ import { ProfilePersonComponent } from './views/person/person.component';
 const routes: Routes = [
   {
     path: '',
-    component: ProfileComponent,
+    component: ProfileComponent
+
   },
 //   {
 //     path: 'incentive',
@@ -19,11 +21,17 @@ const routes: Routes = [
 //   },
   {
     path: 'person',
-    component: ProfilePersonComponent
+    component: ProfilePersonComponent,
+    resolve: {
+      candidates: CandidatesResolver
+    }
   },
   {
     path: 'business',
-    component: ProfileBusinessComponent
+    component: ProfileBusinessComponent,
+    resolve: {
+      candidates: CandidatesResolver
+    }
   },
   {
     path: 'missing/phonenumber',

@@ -19,6 +19,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MetaReducer, StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
+import { EntityDataModule } from '@ngrx/data';
 
 export const metaReducers: MetaReducer<any>[] = [];
 
@@ -48,9 +49,18 @@ export const metaReducers: MetaReducer<any>[] = [];
         useFactory: createTranslateLoader,
       },
     }),
-    StoreModule.forRoot({}, { metaReducers }),
-    StoreDevtoolsModule.instrument({}),
-    EffectsModule.forRoot(),
+    StoreModule.forRoot({}, {
+      metaReducers,
+      runtimeChecks : {
+          strictStateImmutability: true,
+          strictActionImmutability: true,
+          strictActionSerializability: true,
+          strictStateSerializability:true
+      }
+  }),
+    StoreDevtoolsModule.instrument({maxAge: 25}),
+    EffectsModule.forRoot([]),
+    EntityDataModule.forRoot({}),
   ],
 
   providers: [],

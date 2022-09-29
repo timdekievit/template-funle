@@ -4,11 +4,13 @@ import { Router } from '@angular/router';
 import { NotEmptyValidator } from 'src/app/validators/not-empty.validator';
 import { PortalCandidateService } from '@funle/api';
 import { HttpClient } from '@angular/common/http';
-import { debounceTime, takeUntil } from 'rxjs/operators';
+import { debounceTime, first, map, takeUntil } from 'rxjs/operators';
 import { Subject, Observable } from 'rxjs';
 import { BaseCandidate } from '@funle/entities';
 import { Store } from '@ngrx/store';
 import * as fromStore from '../../../../ngrx';
+import { CandidateEntityService } from 'src/app/services/candidates/candidate-entity.service';
+import { Candidate } from 'src/app/models/candidate';
 
 @Component({
   selector: 'funle-profile-person',
@@ -19,7 +21,7 @@ export class ProfilePersonComponent implements OnInit {
   
   show: boolean = false;
 
-  candidate: any;
+  candidate$: Observable<Candidate>;
 
   form = new FormGroup({
     id: new FormControl(''),
@@ -32,7 +34,7 @@ export class ProfilePersonComponent implements OnInit {
     whatsapp: new FormControl(''),
   });
 
-  constructor(private router: Router, private store: Store<fromStore.CandidateState>) { }
+  constructor(private router: Router, private candidatesService: CandidateEntityService) { }
 
   private destroy$ = new Subject<boolean>();
   ngOnDestroy(): void {
@@ -42,34 +44,21 @@ export class ProfilePersonComponent implements OnInit {
 
   ngOnInit(): void {
 
-    console.log(this.store)
+    // console.log(this.store)
 
-    this.store.dispatch(new fromStore.LoadCandidate());
+    // this.store.dispatch(new fromStore.LoadCandidate());
 
-    this.candidate = this.store.select<any>(fromStore.getAllCandidates).subscribe(state => {
-      console.log(state)
-      this.candidate = state;
+    // this.store.select<any>(fromStore.getAllCandidates).subscribe(state => {
+    //   console.log(state)
+    //   this.candidate = state;
+    // })
 
-      this.form.controls.firstName.setValue(this.candidate.firstName)
-      this.form.controls.prefix.setValue(this.candidate.prefix)
-      this.form.controls.lastname.setValue(this.candidate.lastname)
-      this.form.controls.email.setValue(this.candidate.email)
-      this.form.controls.phoneNumber.setValue(this.candidate.phoneNumber)
-      this.form.controls.city.setValue(this.candidate.city)
-      this.form.controls.whatsapp.setValue(this.candidate.whatsapp)
-    })
-
-
-  
-    // this.candidateService.get().subscribe(res => {
-    //   console.log(res);
-    //   this.candidate = res;
-
-
-
-    //   console.log(this.form);
-    // });
-
+    this.candidate$ = this.candidatesService.entities$
+      .pipe(
+        map(candidates => candidates[0])
+    );
+    
+    this.setValuesForm();  
     
     // console.log(this.res);
 
@@ -82,22 +71,36 @@ export class ProfilePersonComponent implements OnInit {
   
   }
 
+  setValuesForm(): void {
+    this.candidate$.subscribe(candidate => {
+      this.form.controls.firstName.setValue(candidate.firstName)
+      this.form.controls.prefix.setValue(candidate.prefix)
+      this.form.controls.lastname.setValue(candidate.lastname)
+      this.form.controls.email.setValue(candidate.email)
+      this.form.controls.phoneNumber.setValue(candidate.phoneNumber)
+      this.form.controls.city.setValue(candidate.city)
+      this.form.controls.whatsapp.setValue(candidate.whatsapp)
+    });
+
+  }
+
+
   onSubmit(): void {
-    this.candidate = {
-      ...this.candidate,
-      firstName: this.form.value.firstName,
-      prefix: this.form.value.prefix,
-      lastname: this.form.value.lastname,
-      email: this.form.value.email,
-      phoneNumber: this.form.value.phoneNumber,
-      city: this.form.value.city,
-      whatsapp: this.form.value.whatsapp
-    }
+    // this.candidate = {
+    //   ...this.candidate,
+    //   firstName: this.form.value.firstName,
+    //   prefix: this.form.value.prefix,
+    //   lastname: this.form.value.lastname,
+    //   email: this.form.value.email,
+    //   phoneNumber: this.form.value.phoneNumber,
+    //   city: this.form.value.city,
+    //   whatsapp: this.form.value.whatsapp
+    // }
 
-    console.log(this.candidate);
+    // console.log(this.candidate);
 
-    // this.candidateService.put(this.candidate);
-    this.showNotification()
+    // // this.candidateService.put(this.candidate);
+    // this.showNotification()
   }
 
   showNotification(): void {  

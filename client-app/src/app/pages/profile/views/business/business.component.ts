@@ -7,6 +7,10 @@ import { BaseSpecialty } from '@funle/entities';
 import { PortalCandidateService } from '@funle/api';
 import { KvKValidator } from 'src/app/validators/kvk.validator';
 import { FileValidator } from 'src/libs/forms/components/src/validators/file-validator';
+import { CandidateEntityService } from 'src/app/services/candidates/candidate-entity.service';
+import { Candidate } from 'src/app/models/candidate';
+import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'funle-profile-business',
@@ -17,7 +21,7 @@ export class ProfileBusinessComponent implements OnInit {
 
   show: boolean = false;
   skills: BaseSpecialty[] = [];
-  candidate: any;
+  candidate$: Observable<Candidate>;
 
   form = new FormGroup({
     id: new FormControl(''),
@@ -35,26 +39,32 @@ export class ProfileBusinessComponent implements OnInit {
 
   readonly separatorKeysCodes = [ENTER, COMMA] as const;
 
-  constructor(private router: Router, private candidateService: PortalCandidateService) { }
+  constructor(private router: Router, private candidatesService: CandidateEntityService) { }
 
   ngOnInit(): void {
 
-    this.candidateService.get().subscribe(res => {
-      console.log(res);
-      this.candidate = res;
+    this.candidate$ = this.candidatesService.entities$
+    .pipe(
+      map(candidates => candidates[0])
+    );
 
-      this.form.controls.kvkNummer.setValue(this.candidate.kvkNummer);
-      this.form.controls.rate.setValue(this.candidate.rate);
-      this.form.controls.assignmentSearchRadius.setValue(this.candidate.assignmentSearchRadius);
-      this.form.controls.hours.setValue(this.candidate.hours);
-      this.form.controls.role.setValue(this.candidate.role);
-      this.form.controls.availability.setValue(this.candidate.availability);
-      this.form.controls.searching.setValue(this.candidate.searching);
-      this.form.controls.fileName.setValue(this.candidate.fileName);
-      this.form.controls.specialty.setValue(this.candidate.specialty);
-      this.form.controls.defaultMotivation.setValue(this.candidate.defaultMotivation);
-      console.log(this.form);
+    this.setValuesForm()
+  }
+
+  setValuesForm(): void {
+    this.candidate$.subscribe(candidate => {
+      this.form.controls.kvkNummer.setValue(candidate.kvkNummer)
+      this.form.controls.rate.setValue(candidate.rate)
+      this.form.controls.assignmentSearchRadius.setValue(candidate.assignmentSearchRadius)
+      this.form.controls.hours.setValue(candidate.hours)
+      this.form.controls.role.setValue(candidate.role)
+      this.form.controls.availability.setValue(candidate.availability)
+      this.form.controls.searching.setValue(candidate.searching)
+      this.form.controls.fileName.setValue(candidate.fileName)
+      // this.form.controls.specialty.setValue(candidate.specialty)
+      this.form.controls.defaultMotivation.setValue(candidate.defaultMotivation)
     });
+
   }
 
   toPage(page: string): void {
@@ -62,24 +72,24 @@ export class ProfileBusinessComponent implements OnInit {
   }
 
   onSubmit(): void {
-    this.candidate = {
-      ...this.candidate,
-      kvkNummer: this.form.value.kvkNummer,
-      rate: this.form.value.rate,
-      assignmentSearchRadius: this.form.value.assignmentSearchRadius,
-      hours: this.form.value.hours,
-      role: this.form.value.role,
-      availability: this.form.value.availability,
-      searching: this.form.value.searching,
-      fileName: this.form.value.fileName,
-      specialty: this.form.value.specialty,
-      defaultMotivation: this.form.value.defaultMotivation
-    }
+    // this.candidate = {
+    //   ...this.candidate,
+    //   kvkNummer: this.form.value.kvkNummer,
+    //   rate: this.form.value.rate,
+    //   assignmentSearchRadius: this.form.value.assignmentSearchRadius,
+    //   hours: this.form.value.hours,
+    //   role: this.form.value.role,
+    //   availability: this.form.value.availability,
+    //   searching: this.form.value.searching,
+    //   fileName: this.form.value.fileName,
+    //   specialty: this.form.value.specialty,
+    //   defaultMotivation: this.form.value.defaultMotivation
+    // }
 
-    console.log(this.candidate);
+    // console.log(this.candidate);
 
-    this.candidateService.put(this.candidate);
-    this.showNotification();
+    // this.candidateService.put(this.candidate);
+    // this.showNotification();
   }
 
   showNotification(): void {  
