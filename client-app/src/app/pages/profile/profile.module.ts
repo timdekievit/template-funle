@@ -20,7 +20,6 @@ import { ProfileBusinessComponent } from './views/business/business.component';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { StoreModule } from '@ngrx/store';
-import { reducers, effects } from 'src/app/ngrx';
 import { EffectsModule } from '@ngrx/effects';
 import { EntityDataService, EntityDefinitionService, EntityMetadataMap } from '@ngrx/data';
 import { CandidateEntityService } from 'src/app/services/candidates/candidate-entity.service';
@@ -51,8 +50,6 @@ const EntityMetadata: EntityMetadataMap = {
     MatDatepickerModule,
     MatTableModule,
     MatButtonModule,
-    StoreModule.forFeature('candidates', reducers),
-    EffectsModule.forFeature(effects),
     TranslateModule.forChild({ extend: true }),
     ProfileRoutingModule,
   ],

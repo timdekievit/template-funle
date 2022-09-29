@@ -8,7 +8,6 @@ import { debounceTime, first, map, takeUntil } from 'rxjs/operators';
 import { Subject, Observable } from 'rxjs';
 import { BaseCandidate } from '@funle/entities';
 import { Store } from '@ngrx/store';
-import * as fromStore from '../../../../ngrx';
 import { CandidateEntityService } from 'src/app/services/candidates/candidate-entity.service';
 import { Candidate } from 'src/app/models/candidate';
 
