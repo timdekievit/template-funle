@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { IBasePortalAssignment } from '@funle/entities';
+import { Assignment } from 'src/app/models/assignment';
 
 @Component({
   selector: 'funle-portal-all-detail',
@@ -14,7 +15,7 @@ export class AllDetailComponent implements OnInit {
   nothingFoundMessage = 'Maak je profiel volledig zodat wij voor jou op zoek kunnen of kijk in het overzicht of er nog een andere interessante opdracht tussen staat.';
   nothingFoundButtonText = 'Terug naar overzicht';
 
-  assignment: IBasePortalAssignment;
+  assignment: Assignment;
 
   accepted: boolean;
 

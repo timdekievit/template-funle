@@ -30,7 +30,17 @@ import { MessageComponent } from './message/message.component';
 import { MessageContainerComponent } from './message-container/message-container.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { AssignmentsFavoriteTableComponent } from './assignments-favorite-table/assignments-favorite-table.component';
+import { EntityDataService, EntityDefinitionService, EntityMetadataMap } from '@ngrx/data';
+import { AssignmentDataService } from '../services/assignments/assignment-data.service';
+import { AssignmentEntityService } from '../services/assignments/assignment-enitity.service';
+import { AssignmentsResolver } from '../services/assignments/assignment.resolver';
 
+
+const EntityMetadata: EntityMetadataMap = {
+  Assignment: {
+  
+  }
+}
 
 @NgModule({
   declarations: [
@@ -85,5 +95,14 @@ import { AssignmentsFavoriteTableComponent } from './assignments-favorite-table/
     AssignmentsFavoriteTableComponent
 
   ],
+  providers: [AssignmentEntityService, AssignmentsResolver, AssignmentDataService]
 })
-export class ComponentsModule {}
+export class ComponentsModule {
+  constructor(private eds: EntityDefinitionService, private entityDataService: EntityDataService,
+    assignmentsDataService: AssignmentDataService) {
+   eds.registerMetadataMap(EntityMetadata);
+
+   entityDataService.registerService('Assignment', assignmentsDataService)
+
+ }
+}

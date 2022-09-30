@@ -10,7 +10,16 @@ import { AttentionRoutingModule } from './attention-routing.module';
 import { MatTableModule } from '@angular/material/table';
 import { AttentionDetailComponent } from './views/attention-detail/attention-detail.component';
 import { MatButtonModule } from '@angular/material/button';
+import { EntityDataService, EntityDefinitionService, EntityMetadataMap } from '@ngrx/data';
+import { AssignmentDataService } from 'src/app/services/assignments/assignment-data.service';
+import { AssignmentEntityService } from 'src/app/services/assignments/assignment-enitity.service';
+import { AssignmentsResolver } from 'src/app/services/assignments/assignment.resolver';
 
+const EntityMetadata: EntityMetadataMap = {
+  Assignment: {
+
+  }
+}
 
 @NgModule({
   declarations: [AttentionComponent, AttentionDetailComponent],
@@ -23,6 +32,15 @@ import { MatButtonModule } from '@angular/material/button';
     MatButtonModule,
     TranslateModule.forChild({ extend: true }),
     AttentionRoutingModule,
-  ]
+  ],
+  providers: [AssignmentEntityService, AssignmentsResolver, AssignmentDataService]
 })
-export class AttentionModule { }
+export class AttentionModule {
+  constructor(private eds: EntityDefinitionService, private entityDataService: EntityDataService,
+    assignmentsDataService: AssignmentDataService) {
+    eds.registerMetadataMap(EntityMetadata);
+
+    entityDataService.registerService('Assignment', assignmentsDataService)
+
+  }
+}

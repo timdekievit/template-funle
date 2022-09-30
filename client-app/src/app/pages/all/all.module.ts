@@ -10,7 +10,16 @@ import { AllRoutingModule } from './all-routing.module';
 import { MatTableModule } from '@angular/material/table';
 import { AllDetailComponent } from './views/all-detail/all-detail.component';
 import { MatButtonModule } from '@angular/material/button';
+import { EntityDataService, EntityDefinitionService, EntityMetadataMap } from '@ngrx/data';
+import { AssignmentEntityService } from 'src/app/services/assignments/assignment-enitity.service';
+import { AssignmentsResolver } from 'src/app/services/assignments/assignment.resolver';
+import { AssignmentDataService } from 'src/app/services/assignments/assignment-data.service';
 
+const EntityMetadata: EntityMetadataMap = {
+  Assignment: {
+  
+  }
+}
 
 @NgModule({
   declarations: [AllComponent, AllDetailComponent],
@@ -23,6 +32,15 @@ import { MatButtonModule } from '@angular/material/button';
     MatButtonModule,
     TranslateModule.forChild({ extend: true }),
     AllRoutingModule,
-  ]
+  ],
+  providers: [AssignmentEntityService, AssignmentsResolver, AssignmentDataService]
 })
-export class AllModule { }
+export class AllModule { 
+  constructor(private eds: EntityDefinitionService, private entityDataService: EntityDataService,
+     assignmentsDataService: AssignmentDataService) {
+    eds.registerMetadataMap(EntityMetadata);
+
+    entityDataService.registerService('Assignment', assignmentsDataService)
+
+  }
+}

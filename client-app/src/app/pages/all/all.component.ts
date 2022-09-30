@@ -2,6 +2,10 @@ import { HttpClient } from "@angular/common/http";
 import { Component } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { PortalAssignmentService } from "@funle/api";
+import { Observable } from "rxjs";
+import { map } from "rxjs/operators";
+import { Assignment } from "src/app/models/assignment";
+import { AssignmentEntityService } from "src/app/services/assignments/assignment-enitity.service";
 
 @Component({
     selector: 'funle-portal-dashboard',
@@ -9,19 +13,16 @@ import { PortalAssignmentService } from "@funle/api";
     styleUrls: ['./all.component.scss'],
   })
   export class AllComponent {
-    assignments: any;
+    assignments$: Observable<Assignment[]>;
     nothingFound = true;
     nothingFoundMessage =
     'Hmm vreemd we hebben op dit moment geen opdrachten die passen bij jou profiel... We doen ons best om zo veel mogelijk opdrachtgevers aan te sluiten op Funle zodat we voor iedereen mooie opdrachten hebben.';
     // somethingWentWrong = true;
 
-    constructor(private router: Router, private route: ActivatedRoute, private assignmentService: PortalAssignmentService) {}
+    constructor(private router: Router, private route: ActivatedRoute, private assignmentService: AssignmentEntityService) {}
 
     ngOnInit(): void {
-      this.assignmentService.getAll().subscribe(res => {
-        console.log(res);
-        this.assignments = res;
-      });
+      this.assignments$ = this.assignmentService.entities$
     }
 
     onAssignmentSelected(id: string) {

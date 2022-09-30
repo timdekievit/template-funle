@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
+    [Route("api/assignment")]
+    [Route("api/[controller]")]
     public class AssignmentsController : BaseApiController
     {
         [HttpGet]

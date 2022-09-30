@@ -20,6 +20,7 @@ import { MetaReducer, StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
 import { EntityDataModule } from '@ngrx/data';
+import { RouterState, StoreRouterConnectingModule } from '@ngrx/router-store';
 
 export const metaReducers: MetaReducer<any>[] = [];
 
@@ -51,16 +52,21 @@ export const metaReducers: MetaReducer<any>[] = [];
     }),
     StoreModule.forRoot({}, {
       metaReducers,
-      runtimeChecks : {
-          strictStateImmutability: true,
-          strictActionImmutability: true,
-          strictActionSerializability: true,
-          strictStateSerializability:true
+      runtimeChecks: {
+        strictStateImmutability: true,
+        strictActionImmutability: true,
+        strictActionSerializability: true,
+        strictStateSerializability: true
       }
-  }),
-    StoreDevtoolsModule.instrument({maxAge: 25}),
+    }),
+    StoreRouterConnectingModule.forRoot({
+      stateKey: 'router',
+      routerState: RouterState.Minimal
+    }),
+    StoreDevtoolsModule.instrument({ maxAge: 25 }),
     EffectsModule.forRoot([]),
     EntityDataModule.forRoot({}),
+
   ],
 
   providers: [],
