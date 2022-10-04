@@ -1,4 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { Assignment } from 'src/app/models/assignment';
+import { AssignmentEntityService } from 'src/app/services/assignments/assignment-enitity.service';
 
 @Component({
   selector: 'funle-portal-attention-detail',
@@ -10,16 +16,39 @@ export class AttentionDetailComponent implements OnInit {
   messageTitle = 'Deze opdracht is helaas niet meer beschikbaar';
   nothingFoundMessage = 'Maak je profiel volledig zodat wij voor jou op zoek kunnen of kijk in het overzicht of er nog een andere interessante opdracht tussen staat.';
   nothingFoundButtonText = 'Terug naar overzicht';
-
+  assignment$: Observable<Assignment>;
+  id: number;
   assignment: any;
   accepted: boolean;
 
   nothingFound = false;
 
-  constructor() { }
+  constructor(
+    public dialog: MatDialog, 
+    private assignmentService: AssignmentEntityService, 
+    private route: ActivatedRoute
+  ) { }
 
   ngOnInit(): void {
+    this.getAssignment();
   }
+
+  private getAssignment(): any {
+
+    this.route.params.subscribe(res => {
+      this.id = res.id;
+      this.assignment$ = this.assignmentService.entities$.pipe(
+        map(assignments => assignments.find(assignment => assignment.id == res.id))
+      )
+    });
+
+    this.assignment$.subscribe(assignment => this.assignment = assignment);
+
+    if(this.assignment == null) {
+      console.log("getById word uitgevoerd");
+      this.assignmentService.getByKey(this.id).subscribe(assignment => this.assignment = assignment);
+    }
+  } 
 
   declineProposal(): void {
     // this.assignmentService.decline(this.assignment.id).subscribe(res => {
