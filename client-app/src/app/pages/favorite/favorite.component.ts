@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AssignmentPortal } from '@funle/entities';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Assignment } from 'src/app/models/assignment';
 import { AssignmentEntityService } from 'src/app/services/assignments/assignment-enitity.service';
 
 @Component({
@@ -13,7 +13,7 @@ import { AssignmentEntityService } from 'src/app/services/assignments/assignment
 export class FavoriteComponent implements OnInit {
 
   assignments: any;
-  assignments$: Observable<Assignment[]> 
+  assignments$: Observable<AssignmentPortal[]> 
   message404Title = 'Hier zou het staan';
   messageErrorTitle = 'Er is iets fout gegaan';
   messageTitle = '';

@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
+import { AssignmentPortal } from '@funle/entities';
 import { Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
-import { Assignment } from 'src/app/models/assignment';
 import { AssignmentEntityService } from 'src/app/services/assignments/assignment-enitity.service';
 
 @Component({
@@ -16,8 +16,8 @@ export class AttentionDetailComponent implements OnInit {
   messageTitle = 'Deze opdracht is helaas niet meer beschikbaar';
   nothingFoundMessage = 'Maak je profiel volledig zodat wij voor jou op zoek kunnen of kijk in het overzicht of er nog een andere interessante opdracht tussen staat.';
   nothingFoundButtonText = 'Terug naar overzicht';
-  assignment$: Observable<Assignment>;
-  assignment: Assignment;
+  assignment$: Observable<AssignmentPortal>;
+  assignment: AssignmentPortal;
   accepted: boolean;
   id: string;
 

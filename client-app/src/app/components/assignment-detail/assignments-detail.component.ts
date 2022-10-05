@@ -1,12 +1,5 @@
-import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute } from '@angular/router';
-import { PortalAssignmentService } from '@funle/api';
-import { BaseAssignment, BasePortalAssignment, IBasePortalAssignment } from '@funle/entities';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { Assignment } from 'src/app/models/assignment';
-import { AssignmentEntityService } from 'src/app/services/assignments/assignment-enitity.service';
 // import { ProposalDeclinedDialogComponent } from '../proposal-declined-dialog/proposal-declined-dialog.component';
 
 @Component({

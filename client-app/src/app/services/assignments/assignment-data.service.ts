@@ -1,13 +1,13 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { AssignmentPortal } from "@funle/entities";
 import { DefaultDataService, HttpUrlGenerator } from "@ngrx/data";
 import { Update } from "@ngrx/entity";
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
-import { Assignment } from "src/app/models/assignment";
 
 @Injectable()
-export class AssignmentDataService extends DefaultDataService<Assignment> {
+export class AssignmentDataService extends DefaultDataService<AssignmentPortal> {
 
     constructor(http: HttpClient, httpUrlGenerator: HttpUrlGenerator) {
         super('Assignment', http, httpUrlGenerator);

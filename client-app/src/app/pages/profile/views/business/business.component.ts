@@ -2,12 +2,10 @@ import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { BaseSpecialty } from '@funle/entities';
-import { PortalCandidateService } from '@funle/api';
+import { BaseSpecialty, CandidatePortal } from '@funle/entities';
 import { KvKValidator } from 'src/app/validators/kvk.validator';
 import { FileValidator } from 'src/libs/forms/components/src/validators/file-validator';
 import { CandidateEntityService } from 'src/app/services/candidates/candidate-entity.service';
-import { Candidate } from 'src/app/models/candidate';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { ThrottlingUtils } from '@azure/msal-common';
@@ -21,8 +19,8 @@ export class ProfileBusinessComponent implements OnInit {
 
   show: boolean = false;
   skills: BaseSpecialty[] = [];
-  candidate$: Observable<Candidate>;
-  newCandidate: Candidate;
+  candidate$: Observable<CandidatePortal>;
+  newCandidate: CandidatePortal;
 
   form = new FormGroup({
     kvkNummer: new FormControl('', [Validators.required, KvKValidator(), Validators.pattern('^[0-9]{8}$')]),

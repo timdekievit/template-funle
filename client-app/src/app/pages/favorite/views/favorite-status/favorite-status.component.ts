@@ -1,6 +1,5 @@
 import { Component, OnDestroy } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
-import { PortalAssignmentService } from '@funle/api';
 import { Subject } from 'rxjs';
 import { filter, mergeMap, take, takeUntil, tap } from 'rxjs/operators';
 
@@ -22,8 +21,7 @@ export class FavoriteStatusComponent implements OnDestroy {
 
   constructor(
     private router: Router,
-    private route: ActivatedRoute,
-    private assignmentService: PortalAssignmentService
+    private route: ActivatedRoute
   ) {
     // this.params$
     //   .pipe(

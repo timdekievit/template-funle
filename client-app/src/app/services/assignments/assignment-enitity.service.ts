@@ -1,9 +1,9 @@
 import { Injectable } from "@angular/core";
+import { AssignmentPortal } from "@funle/entities";
 import { EntityCollectionServiceBase, EntityCollectionServiceElementsFactory } from "@ngrx/data";
-import { Assignment } from "src/app/models/assignment";
 
 @Injectable()
-export class AssignmentEntityService extends EntityCollectionServiceBase<Assignment> {
+export class AssignmentEntityService extends EntityCollectionServiceBase<AssignmentPortal> {
 
 
     constructor(serviceElementsFactory: EntityCollectionServiceElementsFactory) {

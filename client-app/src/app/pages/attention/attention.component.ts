@@ -1,9 +1,7 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { PortalAssignmentService } from '@funle/api';
+import { AssignmentPortal } from '@funle/entities';
 import { Observable } from 'rxjs';
-import { Assignment } from 'src/app/models/assignment';
 import { AssignmentEntityService } from 'src/app/services/assignments/assignment-enitity.service';
 
 @Component({
@@ -13,7 +11,7 @@ import { AssignmentEntityService } from 'src/app/services/assignments/assignment
 })
 export class AttentionComponent implements OnInit {
 
-  assignments$: Observable<Assignment[]>;
+  assignments$: Observable<AssignmentPortal[]>;
   message404Title = 'Hier zou het staan';
   messageErrorTitle = 'Er is iets fout gegaan';
   messageTitle = '';
