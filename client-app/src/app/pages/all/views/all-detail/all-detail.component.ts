@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IBasePortalAssignment } from '@funle/entities';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { Assignment } from 'src/app/models/assignment';
 import { AssignmentEntityService } from 'src/app/services/assignments/assignment-enitity.service';
 
@@ -18,7 +18,7 @@ export class AllDetailComponent implements OnInit {
   nothingFoundMessage = 'Maak je profiel volledig zodat wij voor jou op zoek kunnen of kijk in het overzicht of er nog een andere interessante opdracht tussen staat.';
   nothingFoundButtonText = 'Terug naar overzicht';
   assignment$: Observable<Assignment>;
-  id: number;
+  id: string;
 
   assignment: Assignment;
 
@@ -39,19 +39,17 @@ export class AllDetailComponent implements OnInit {
 
   private getAssignment(): any {
 
-    this.route.params.subscribe(res => {
-      this.id = res.id;
-      this.assignment$ = this.assignmentService.entities$.pipe(
-        map(assignments => assignments.find(assignment => assignment.id == res.id))
-      )
-    });
+    this.id = this.route.snapshot.paramMap.get("id");
 
-    this.assignment$.subscribe(assignment => this.assignment = assignment);
-
-    if(this.assignment == null) {
-      console.log("getById word uitgevoerd");
-      this.assignmentService.getByKey(this.id).subscribe(assignment => this.assignment = assignment);
-    }
+    this.assignment$ = this.assignmentService.entities$.pipe(
+      map(assignments => assignments.find(assignment => assignment.id == this.id)),
+      tap(assignment => {
+        if (assignment == undefined) {
+          console.log("getById word uitgevoerd");
+          this.assignmentService.getByKey(this.id).subscribe(assignment => assignment);
+        }
+      })
+    )
 
   } 
   acceptProposal(): void {

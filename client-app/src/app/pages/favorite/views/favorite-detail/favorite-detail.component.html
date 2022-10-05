@@ -4,5 +4,5 @@
 
 <div class="favorite-detail-container container">
     <funle-portal-assignments-detail (acceptedProposal)="acceptProposal()" [accepted]="accepted"
-        [assignment]="assignment"></funle-portal-assignments-detail>
+        [assignment]="assignment$ | async"></funle-portal-assignments-detail>
 </div>
