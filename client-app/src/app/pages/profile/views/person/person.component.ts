@@ -2,14 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NotEmptyValidator } from 'src/app/validators/not-empty.validator';
-import { PortalCandidateService } from '@funle/api';
-import { HttpClient } from '@angular/common/http';
-import { debounceTime, first, map, takeUntil } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { Subject, Observable } from 'rxjs';
-import { BaseCandidate } from '@funle/entities';
-import { Store } from '@ngrx/store';
 import { CandidateEntityService } from 'src/app/services/candidates/candidate-entity.service';
-import { Candidate } from 'src/app/models/candidate';
+import { CandidatePortal } from '@funle/entities';
 
 @Component({
   selector: 'funle-profile-person',
@@ -20,8 +16,8 @@ export class ProfilePersonComponent implements OnInit {
   
   show: boolean = false;
 
-  candidate$: Observable<Candidate>;
-  newCandidate: Candidate;
+  candidate$: Observable<CandidatePortal>;
+  newCandidate: CandidatePortal;
 
   form = new FormGroup({
     email: new FormControl(''),
@@ -43,31 +39,13 @@ export class ProfilePersonComponent implements OnInit {
 
   ngOnInit(): void {
 
-    // console.log(this.store)
-
-    // this.store.dispatch(new fromStore.LoadCandidate());
-
-    // this.store.select<any>(fromStore.getAllCandidates).subscribe(state => {
-    //   console.log(state)
-    //   this.candidate = state;
-    // })
-
     this.candidate$ = this.candidatesService.entities$
       .pipe(
         map(candidates => candidates[0])
     );
     
     this.setValuesForm();  
-    
-    // console.log(this.res);
 
-    // this.form.controls.firstName.valueChanges.pipe(takeUntil(this.destroy$), debounceTime(1000)).subscribe(() => this.onPropChange('firstName'));
-    // this.form.controls.prefix.valueChanges.pipe(takeUntil(this.destroy$), debounceTime(1000)).subscribe(() => this.onPropChange('prefix'));
-    // this.form.controls.lastname.valueChanges.pipe(takeUntil(this.destroy$), debounceTime(1000)).subscribe(() => this.onPropChange('lastname'));
-    // this.form.controls.phoneNumber.valueChanges.pipe(takeUntil(this.destroy$), debounceTime(1000)).subscribe(() => this.onPropChange('phoneNumber'));
-    // this.form.controls.city.valueChanges.pipe(takeUntil(this.destroy$), debounceTime(1000)).subscribe(() => this.onPropChange('city'));
-    // this.form.controls.whatsapp.valueChanges.pipe(takeUntil(this.destroy$), debounceTime(1000)).subscribe(() => this.onPropChange('whatsapp'));
-  
   }
 
   setValuesForm(): void {
@@ -85,21 +63,6 @@ export class ProfilePersonComponent implements OnInit {
 
 
   onSubmit(): void {
-    // this.candidate = {
-    //   ...this.candidate,
-    //   firstName: this.form.value.firstName,
-    //   prefix: this.form.value.prefix,
-    //   lastname: this.form.value.lastname,
-    //   email: this.form.value.email,
-    //   phoneNumber: this.form.value.phoneNumber,
-    //   city: this.form.value.city,
-    //   whatsapp: this.form.value.whatsapp
-    // }
-
-    // console.log(this.candidate);
-
-    // // this.candidateService.put(this.candidate);
-    // this.showNotification()
 
     this.candidate$.subscribe(candidate => {
       this.newCandidate = {
@@ -117,31 +80,6 @@ export class ProfilePersonComponent implements OnInit {
     this.show = true;
     setTimeout(() => this.show = false, 3000);
   }
-
-  // onPropChange(property: string): void {
-  //   if (this.form.controls[property].valid) {
-  //     this.propChange({ prop: property, candidate: this.form.value });
-  //   }
-  // }
-
-  // propChange(change: { prop: string; candidate: BaseCandidate }) {
-  //   let request = {};
-  //   request[change.prop] = change.candidate[change.prop];
-  //   this.candidateService
-  //     .patch(request as BaseCandidate)
-  //     .pipe(takeUntil(this.destroy$))
-  //     .subscribe(
-  //       () => {
-  //         this.show = true;
-  //         setTimeout(() => this.show = false, 3000);
-  //       },
-  //       error => {
-  //         if (error.status == 401) {
-  //           this.router.navigate(['account']);
-  //         }
-  //       }
-  //     );
-  // }
 
   toPage(page: string): void {
     this.router.navigate([page]);
