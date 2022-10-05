@@ -30,7 +30,6 @@ export class AssignmentsDetailComponent {
 
   constructor(public dialog: MatDialog) {}
 
-
   declineProposal(): void {
     this.declinedProposal.next(true);
     this.declined = true;

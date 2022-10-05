@@ -7,6 +7,26 @@ export enum AssignmentStatus {
   New,
 }
 
+export interface AssignmentPortal {
+  id: string;
+  source: string;
+  sourceId: string;
+  customer: string;
+  categoryId?: string;
+  proposals: any;
+  rate?: number;
+  hours?: number;
+  role: string;
+  description: string;
+  startDate?: Date;
+  endDate?: Date;
+  submitDate?: Date;
+  withProlongation?: boolean;
+  city: string;
+  notes: string;
+  title: string;
+}
+
 export interface IBaseAssignment {
   id?: number;
   publicId: string;
