@@ -1,5 +1,4 @@
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -39,9 +38,9 @@ export class ProfileBusinessComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.candidateService.get().subscribe(res => {
+    this.candidateService.getall().subscribe(res => {
       console.log(res);
-      this.candidate = res;
+      this.candidate = res[0];
 
       this.form.controls.kvkNummer.setValue(this.candidate.kvkNummer);
       this.form.controls.rate.setValue(this.candidate.rate);

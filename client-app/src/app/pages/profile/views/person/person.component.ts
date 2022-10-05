@@ -39,9 +39,9 @@ export class ProfilePersonComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.candidateService.get().subscribe(res => {
+    this.candidateService.getall().subscribe(res => {
       console.log(res);
-      this.candidate = res;
+      this.candidate = res[0];
 
       this.form.controls.firstName.setValue(this.candidate.firstName)
       this.form.controls.prefix.setValue(this.candidate.prefix)
@@ -54,16 +54,6 @@ export class ProfilePersonComponent implements OnInit {
       console.log(this.form);
     });
 
-    
-    // console.log(this.res);
-
-    // this.form.controls.firstName.valueChanges.pipe(takeUntil(this.destroy$), debounceTime(1000)).subscribe(() => this.onPropChange('firstName'));
-    // this.form.controls.prefix.valueChanges.pipe(takeUntil(this.destroy$), debounceTime(1000)).subscribe(() => this.onPropChange('prefix'));
-    // this.form.controls.lastname.valueChanges.pipe(takeUntil(this.destroy$), debounceTime(1000)).subscribe(() => this.onPropChange('lastname'));
-    // this.form.controls.phoneNumber.valueChanges.pipe(takeUntil(this.destroy$), debounceTime(1000)).subscribe(() => this.onPropChange('phoneNumber'));
-    // this.form.controls.city.valueChanges.pipe(takeUntil(this.destroy$), debounceTime(1000)).subscribe(() => this.onPropChange('city'));
-    // this.form.controls.whatsapp.valueChanges.pipe(takeUntil(this.destroy$), debounceTime(1000)).subscribe(() => this.onPropChange('whatsapp'));
-  
   }
 
   onSubmit(): void {
@@ -88,31 +78,6 @@ export class ProfilePersonComponent implements OnInit {
     this.show = true;
     setTimeout(() => this.show = false, 3000);
   }
-
-  // onPropChange(property: string): void {
-  //   if (this.form.controls[property].valid) {
-  //     this.propChange({ prop: property, candidate: this.form.value });
-  //   }
-  // }
-
-  // propChange(change: { prop: string; candidate: BaseCandidate }) {
-  //   let request = {};
-  //   request[change.prop] = change.candidate[change.prop];
-  //   this.candidateService
-  //     .patch(request as BaseCandidate)
-  //     .pipe(takeUntil(this.destroy$))
-  //     .subscribe(
-  //       () => {
-  //         this.show = true;
-  //         setTimeout(() => this.show = false, 3000);
-  //       },
-  //       error => {
-  //         if (error.status == 401) {
-  //           this.router.navigate(['account']);
-  //         }
-  //       }
-  //     );
-  // }
 
   toPage(page: string): void {
     this.router.navigate([page]);
