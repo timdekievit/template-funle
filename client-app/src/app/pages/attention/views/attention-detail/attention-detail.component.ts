@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { PortalAssignmentService } from '@funle/api';
+import { AssignmentPortal } from '@funle/entities';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'funle-portal-attention-detail',
@@ -11,16 +15,25 @@ export class AttentionDetailComponent implements OnInit {
   nothingFoundMessage = 'Maak je profiel volledig zodat wij voor jou op zoek kunnen of kijk in het overzicht of er nog een andere interessante opdracht tussen staat.';
   nothingFoundButtonText = 'Terug naar overzicht';
 
-  assignment: any;
+  id: string;
+  assignment$: Observable<AssignmentPortal>
+  
   accepted: boolean;
 
   nothingFound = false;
 
-  constructor() { }
+  constructor(
+    private assignmentService: PortalAssignmentService, 
+    private route: ActivatedRoute,) { }
 
   ngOnInit(): void {
+    this.getAssignment();
   }
 
+  private getAssignment(): any {
+    this.id = this.route.snapshot.paramMap.get('id');
+    this.assignment$ = this.assignmentService.get(this.id);
+  } 
   declineProposal(): void {
     // this.assignmentService.decline(this.assignment.id).subscribe(res => {
     //   this.openDeclinedDialog();

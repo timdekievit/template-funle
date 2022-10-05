@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Router } from '@angular/router';
-import { IBasePortalAssignment } from '@funle/entities';
+import { ActivatedRoute, Router } from '@angular/router';
+import { PortalAssignmentService } from '@funle/api';
+import { AssignmentPortal } from '@funle/entities';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'funle-portal-all-detail',
@@ -14,7 +16,8 @@ export class AllDetailComponent implements OnInit {
   nothingFoundMessage = 'Maak je profiel volledig zodat wij voor jou op zoek kunnen of kijk in het overzicht of er nog een andere interessante opdracht tussen staat.';
   nothingFoundButtonText = 'Terug naar overzicht';
 
-  assignment: IBasePortalAssignment;
+  id: string;
+  assignment$: Observable<AssignmentPortal>
 
   accepted: boolean;
 
@@ -23,11 +26,19 @@ export class AllDetailComponent implements OnInit {
 
   constructor(
     private router: Router,
+    private assignmentService: PortalAssignmentService, 
+    private route: ActivatedRoute,
     public dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
+    this.getAssignment();
   }
+
+  private getAssignment(): any {
+    this.id = this.route.snapshot.paramMap.get('id');
+    this.assignment$ = this.assignmentService.get(this.id);
+  } 
 
   acceptProposal(): void {
     this.openAcceptedDialog();

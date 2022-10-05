@@ -10,7 +10,7 @@ import { BaseAssignment, BasePortalAssignment, IBasePortalAssignment } from '@fu
   templateUrl: './assignments-detail.component.html',
   styleUrls: ['./assignments-detail.component.scss']
 })
-export class AssignmentsDetailComponent implements OnInit {
+export class AssignmentsDetailComponent {
   @Input() assignment: any;
   @Input() accepted: boolean;
 
@@ -24,17 +24,7 @@ export class AssignmentsDetailComponent implements OnInit {
   declined: boolean;
   
 
-  constructor(public dialog: MatDialog, private assignmentService: PortalAssignmentService, private route: ActivatedRoute) {}
-
-  ngOnInit(): void {
-    this.getAssignment();
-  }
-
-  private getAssignment(): any {
-    this.route.params.subscribe(res => {
-      this.assignmentService.get(res.id).subscribe(res => this.assignment = res)
-    });
-  } 
+  constructor(public dialog: MatDialog) {}
 
   declineProposal(): void {
     this.declinedProposal.next(true);

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { combineLatest } from 'rxjs';
 import { take, map, mergeMap } from 'rxjs/operators';
-import { IBaseCandidate, BaseCandidate, IBaseIncentiveLink, ILinkedCandidates } from '@funle/entities';
+import { IBaseCandidate, BaseCandidate, IBaseIncentiveLink, ILinkedCandidates, AssignmentPortal } from '@funle/entities';
 import { ApiService } from '../api.service';
 import { PortalProposalService } from '../proposal/proposal.service';
 
@@ -18,7 +18,7 @@ export class PortalAssignmentService {
 
   getAll = () => this.http.get('http://localhost:5000/api/assignments/');
 
-  get = (id: string) => this.http.get('http://localhost:5000/api/assignments/' + id);
+  get = (id: string) => this.http.get<AssignmentPortal>('http://localhost:5000/api/assignments/' + id);
 
   getAssignmentsWithProposals = () => this.http.get('http://localhost:5000/api/assignments/proposals');
   

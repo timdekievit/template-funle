@@ -1,10 +1,10 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { PortalAssignmentService } from '@funle/api';
-import { BasePortalAssignment, IBasePortalAssignment, ProposalStatus } from '@funle/entities';
+import { AssignmentPortal, BasePortalAssignment, IBasePortalAssignment, ProposalStatus } from '@funle/entities';
 // import { ProposalAcceptedDialogComponent } from 'apps/portal/src/app/components/proposal-accepted-dialog/proposal-accepted-dialog.component';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { filter, mergeMap, take, takeUntil, tap } from 'rxjs/operators';
 
 @Component({
@@ -12,14 +12,11 @@ import { filter, mergeMap, take, takeUntil, tap } from 'rxjs/operators';
   templateUrl: './favorite-detail.component.html',
   styleUrls: ['./favorite-detail.component.scss'],
 })
-export class FavoriteDetailComponent implements OnDestroy {
-  params$ = this.router.events.pipe(
-    filter(event => event instanceof NavigationEnd),
-    mergeMap(() => this.route.params),
-    filter(params => Boolean(params.id))
-  );
+export class FavoriteDetailComponent implements OnInit {
 
-  assignment: IBasePortalAssignment;
+  id: string;
+  assignment$: Observable<AssignmentPortal>;
+  assignment: AssignmentPortal;
   accepted: boolean;
   loading: boolean;
 
@@ -28,40 +25,15 @@ export class FavoriteDetailComponent implements OnDestroy {
     private route: ActivatedRoute,
     private assignmentService: PortalAssignmentService,
     public dialog: MatDialog
-  ) {
-    // this.params$
-    //   .pipe(
-    //     takeUntil(this.destroy$),
-    //     take(1),
-    //     tap(({ id }) => {
-    //       this.loading = true;
-    //       this.assignmentService
-    //         .get(id)
-    //         .pipe(takeUntil(this.destroy$))
-    //         .subscribe(
-    //           res => {
-    //             this.assignment = new BasePortalAssignment(res);
-    //             this.accepted = this.assignment.proposalStatus === 'Accepted';
-    //             this.loading = false;
-    //           },
-    //           error => {
-    //             if (error.status == 401) {
-    //               this.router.navigate(['account']);
-    //             }
-    //             if (error.status == 404) {
-    //               this.router.navigate(['favorite']);
-    //             }
-    //           }
-    //         );
-    //     })
-    //   )
-    //   .subscribe();
+  ) {}
+
+  ngOnInit(): void {
+    this.getAssignment();
   }
 
-  private destroy$ = new Subject<boolean>();
-  ngOnDestroy(): void {
-    this.destroy$.next(true);
-    this.destroy$.complete();
+  private getAssignment(): any {
+    this.id = this.route.snapshot.paramMap.get('id');
+    this.assignment$ = this.assignmentService.get(this.id);
   }
 
   acceptProposal(): void {
