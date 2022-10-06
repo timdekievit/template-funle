@@ -7,6 +7,7 @@ import { HttpClient } from '@angular/common/http';
 import { debounceTime, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { BaseCandidate } from '@funle/entities';
+import { CandidateStore } from 'src/app/services/candidateStore';
 
 @Component({
   selector: 'funle-profile-person',
@@ -30,7 +31,7 @@ export class ProfilePersonComponent implements OnInit {
     whatsapp: new FormControl(''),
   });
 
-  constructor(private router: Router, private candidateService: PortalCandidateService, private http: HttpClient) { }
+  constructor(private router: Router, private candidateStore: CandidateStore) { }
 
   private destroy$ = new Subject<boolean>();
   ngOnDestroy(): void {
@@ -39,7 +40,7 @@ export class ProfilePersonComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.candidateService.getall().subscribe(res => {
+    this.candidateStore.getCandidates().subscribe(res => {
       console.log(res);
       this.candidate = res[0];
 
@@ -70,7 +71,7 @@ export class ProfilePersonComponent implements OnInit {
 
     console.log(this.candidate);
 
-    this.candidateService.put(this.candidate);
+    // this.candidateService.put(this.candidate);
     this.showNotification()
   }
 

@@ -6,7 +6,6 @@ import {AssignmentPortal } from '@funle/entities';
   providedIn: 'root',
 })
 export class PortalAssignmentService { 
-  assignments: any;
 
   constructor(private http: HttpClient) {}
 
