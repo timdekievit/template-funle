@@ -31,8 +31,6 @@ import { MessageComponent } from './message/message.component';
 import { MessageContainerComponent } from './message-container/message-container.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { AssignmentsFavoriteTableComponent } from './assignments-favorite-table/assignments-favorite-table.component';
-import { LoaderComponent } from './loader/loader.component';
-
 
 @NgModule({
   declarations: [
@@ -47,8 +45,7 @@ import { LoaderComponent } from './loader/loader.component';
     AssignmentsTableComponent,
     MessageComponent,
     MessageContainerComponent,
-    AssignmentsFavoriteTableComponent,
-    LoaderComponent
+    AssignmentsFavoriteTableComponent
     
   ],
   imports: [
@@ -86,8 +83,7 @@ import { LoaderComponent } from './loader/loader.component';
     AssignmentsTableComponent,
     MessageComponent,
     MessageContainerComponent,
-    AssignmentsFavoriteTableComponent,
-    LoaderComponent
+    AssignmentsFavoriteTableComponent
 
   ],
 })

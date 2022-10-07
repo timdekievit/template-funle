@@ -1,9 +1,8 @@
 import { Injectable } from "@angular/core";
 import { PortalCandidateService } from "@funle/api";
 import { CandidatePortal } from "@funle/entities";
-import { BehaviorSubject, from, Observable } from "rxjs";
-import { shareReplay, tap } from "rxjs/operators";
-import { LoadingService } from "../loadingService";
+import { BehaviorSubject, Observable } from "rxjs";
+import { tap } from "rxjs/operators";
 
 
 @Injectable({
@@ -19,7 +18,7 @@ export class CandidateStore {
 
     loaded$: Observable<boolean> = this.loadedSubject.asObservable();
 
-    constructor(private portalCandidateService: PortalCandidateService, private loadingService: LoadingService) {
+    constructor(private portalCandidateService: PortalCandidateService) {
         console.log('constructeur called')
      }
 

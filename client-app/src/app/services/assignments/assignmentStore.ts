@@ -1,9 +1,8 @@
 import { Injectable } from "@angular/core";
-import { PortalAssignmentService, PortalCandidateService } from "@funle/api";
-import { AssignmentPortal, CandidatePortal } from "@funle/entities";
-import { BehaviorSubject, from, Observable } from "rxjs";
-import { map, shareReplay, tap } from "rxjs/operators";
-import { LoadingService } from "../loadingService";
+import { PortalAssignmentService } from "@funle/api";
+import { AssignmentPortal } from "@funle/entities";
+import { BehaviorSubject, Observable } from "rxjs";
+import { map, tap } from "rxjs/operators";
 
 
 @Injectable({
