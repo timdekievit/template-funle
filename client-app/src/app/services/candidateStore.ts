@@ -24,7 +24,6 @@ export class CandidateStore {
      }
 
 
-
     loadAllCandidates() {
 
         this.portalCandidateService.getall().pipe( 
@@ -34,8 +33,26 @@ export class CandidateStore {
                 this.loadedSubject.next(true)}),  
         ).subscribe()
 
-        // this.loadingService.showLoaderUntilCompleted(loadCandidates$).subscribe()
+    }
 
+    saveCandidate(candidateId:string, changes: Partial<CandidatePortal>) {
+
+        const candidates = this.subject.getValue();
+
+        const index = candidates.findIndex(candidate => candidate.id == candidateId);
+
+        const newCandidate: CandidatePortal = {
+          ...candidates[index],
+          ...changes
+        };
+
+        const newCandidates: CandidatePortal[] = candidates.slice(0);
+
+        newCandidates[index] = newCandidate;
+
+        this.subject.next(newCandidates);
+
+        this.portalCandidateService.put(changes)
     }
 
     getCandidatesObservable() {

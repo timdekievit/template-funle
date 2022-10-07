@@ -13,7 +13,7 @@ export class PortalCandidateService {
   getall = () => this.http.get<CandidatePortal[]>('/api/candidates/').pipe(
     shareReplay()
   );
-  put = (candidate: any) => {
+  put = (candidate: Partial<CandidatePortal>) => {
     console.log(candidate);
     this.http.put('/api/candidates/' + candidate.id, candidate).subscribe();
   }

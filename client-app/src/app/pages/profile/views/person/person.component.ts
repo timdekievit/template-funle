@@ -21,6 +21,7 @@ export class ProfilePersonComponent implements OnInit {
   loading: boolean;
 
   candidate$: Observable<CandidatePortal>;
+  candidate: CandidatePortal;
 
   form = new FormGroup({
     id: new FormControl(''),
@@ -69,7 +70,8 @@ export class ProfilePersonComponent implements OnInit {
 
     this.candidate$ = this.candidateStore.candidates$
       .pipe(
-        map(candidates => candidates[0])
+        map(candidates => candidates[0]),
+        tap(candidate => this.candidate = candidate)
       );
 
     this.setValuesForm();
@@ -90,20 +92,20 @@ export class ProfilePersonComponent implements OnInit {
 
 
     onSubmit(): void {
-      // this.candidate = {
-      //   ...this.candidate,
-      //   firstName: this.form.value.firstName,
-      //   prefix: this.form.value.prefix,
-      //   lastname: this.form.value.lastname,
-      //   email: this.form.value.email,
-      //   phoneNumber: this.form.value.phoneNumber,
-      //   city: this.form.value.city,
-      //   whatsapp: this.form.value.whatsapp
-      // }
+      this.candidate = {
+        ...this.candidate,
+        firstName: this.form.value.firstName,
+        prefix: this.form.value.prefix,
+        lastname: this.form.value.lastname,
+        email: this.form.value.email,
+        phoneNumber: this.form.value.phoneNumber,
+        city: this.form.value.city,
+        whatsapp: this.form.value.whatsapp
+      }
 
-      // console.log(this.candidate);
+      console.log(this.candidate);
 
-      // this.candidateService.put(this.candidate);
+      this.candidateStore.saveCandidate(this.candidate.id, this.candidate)
       this.showNotification()
     }
 

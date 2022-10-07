@@ -8,7 +8,7 @@ import { KvKValidator } from 'src/app/validators/kvk.validator';
 import { FileValidator } from 'src/libs/forms/components/src/validators/file-validator';
 import { CandidateStore } from 'src/app/services/candidateStore';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'funle-profile-business',
@@ -19,7 +19,7 @@ export class ProfileBusinessComponent implements OnInit {
 
   show: boolean = false;
   skills: BaseSpecialty[] = [];
-  candidate: any;
+  candidate: CandidatePortal;
   candidate$: Observable<CandidatePortal>;
 
   form = new FormGroup({
@@ -67,31 +67,32 @@ export class ProfileBusinessComponent implements OnInit {
   }
 
   onSubmit(): void {
-    // this.candidate = {
-    //   ...this.candidate,
-    //   kvkNummer: this.form.value.kvkNummer,
-    //   rate: this.form.value.rate,
-    //   assignmentSearchRadius: this.form.value.assignmentSearchRadius,
-    //   hours: this.form.value.hours,
-    //   role: this.form.value.role,
-    //   availability: this.form.value.availability,
-    //   searching: this.form.value.searching,
-    //   fileName: this.form.value.fileName,
-    //   specialty: this.form.value.specialty,
-    //   defaultMotivation: this.form.value.defaultMotivation
-    // }
+    this.candidate = {
+      ...this.candidate,
+      kvkNummer: this.form.value.kvkNummer,
+      rate: this.form.value.rate,
+      assignmentSearchRadius: this.form.value.assignmentSearchRadius,
+      hours: this.form.value.hours,
+      role: this.form.value.role,
+      availability: this.form.value.availability,
+      searching: this.form.value.searching,
+      fileName: this.form.value.fileName,
+      // specialty: this.form.value.specialty,
+      defaultMotivation: this.form.value.defaultMotivation
+    }
 
-    // console.log(this.candidate);
+    console.log(this.candidate);
 
-    // this.candidateService.put(this.candidate);
-    // this.showNotification();
+    this.candidateStore.saveCandidate(this.candidate.id, this.candidate)
+    this.showNotification();
   }
 
   loadCandidates() {
 
     this.candidate$ = this.candidateStore.candidates$
       .pipe(
-        map(candidates => candidates[0])
+        map(candidates => candidates[0]),
+        tap(candidate => this.candidate = candidate)
       );
 
     this.setValuesForm();
