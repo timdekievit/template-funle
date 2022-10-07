@@ -3,6 +3,7 @@ import { MatSidenav } from '@angular/material/sidenav';
 import { ActivationEnd, NavigationEnd, Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { filter, map, takeUntil } from 'rxjs/operators';
+import { CandidateStore } from './services/candidateStore';
 
 @Component({
   selector: 'funle-portal-root',

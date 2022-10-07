@@ -2,10 +2,13 @@ import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { BaseSpecialty } from '@funle/entities';
+import { BaseSpecialty, CandidatePortal } from '@funle/entities';
 import { PortalCandidateService } from '@funle/api';
 import { KvKValidator } from 'src/app/validators/kvk.validator';
 import { FileValidator } from 'src/libs/forms/components/src/validators/file-validator';
+import { CandidateStore } from 'src/app/services/candidateStore';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'funle-profile-business',
@@ -17,6 +20,7 @@ export class ProfileBusinessComponent implements OnInit {
   show: boolean = false;
   skills: BaseSpecialty[] = [];
   candidate: any;
+  candidate$: Observable<CandidatePortal>;
 
   form = new FormGroup({
     id: new FormControl(''),
@@ -34,26 +38,28 @@ export class ProfileBusinessComponent implements OnInit {
 
   readonly separatorKeysCodes = [ENTER, COMMA] as const;
 
-  constructor(private router: Router, private candidateService: PortalCandidateService) { }
+  constructor(private router: Router, private candidateStore: CandidateStore) { }
 
   ngOnInit(): void {
 
-    this.candidateService.getall().subscribe(res => {
-      console.log(res);
-      this.candidate = res[0];
+    this.loadCandidates();
 
-      this.form.controls.kvkNummer.setValue(this.candidate.kvkNummer);
-      this.form.controls.rate.setValue(this.candidate.rate);
-      this.form.controls.assignmentSearchRadius.setValue(this.candidate.assignmentSearchRadius);
-      this.form.controls.hours.setValue(this.candidate.hours);
-      this.form.controls.role.setValue(this.candidate.role);
-      this.form.controls.availability.setValue(this.candidate.availability);
-      this.form.controls.searching.setValue(this.candidate.searching);
-      this.form.controls.fileName.setValue(this.candidate.fileName);
-      this.form.controls.specialty.setValue(this.candidate.specialty);
-      this.form.controls.defaultMotivation.setValue(this.candidate.defaultMotivation);
-      console.log(this.form);
-    });
+    // this.candidateService.getall().subscribe(res => {
+    //   console.log(res);
+    //   this.candidate = res[0];
+
+    //   this.form.controls.kvkNummer.setValue(this.candidate.kvkNummer);
+    //   this.form.controls.rate.setValue(this.candidate.rate);
+    //   this.form.controls.assignmentSearchRadius.setValue(this.candidate.assignmentSearchRadius);
+    //   this.form.controls.hours.setValue(this.candidate.hours);
+    //   this.form.controls.role.setValue(this.candidate.role);
+    //   this.form.controls.availability.setValue(this.candidate.availability);
+    //   this.form.controls.searching.setValue(this.candidate.searching);
+    //   this.form.controls.fileName.setValue(this.candidate.fileName);
+    //   this.form.controls.specialty.setValue(this.candidate.specialty);
+    //   this.form.controls.defaultMotivation.setValue(this.candidate.defaultMotivation);
+    //   console.log(this.form);
+    // });
   }
 
   toPage(page: string): void {
@@ -61,24 +67,49 @@ export class ProfileBusinessComponent implements OnInit {
   }
 
   onSubmit(): void {
-    this.candidate = {
-      ...this.candidate,
-      kvkNummer: this.form.value.kvkNummer,
-      rate: this.form.value.rate,
-      assignmentSearchRadius: this.form.value.assignmentSearchRadius,
-      hours: this.form.value.hours,
-      role: this.form.value.role,
-      availability: this.form.value.availability,
-      searching: this.form.value.searching,
-      fileName: this.form.value.fileName,
-      specialty: this.form.value.specialty,
-      defaultMotivation: this.form.value.defaultMotivation
-    }
+    // this.candidate = {
+    //   ...this.candidate,
+    //   kvkNummer: this.form.value.kvkNummer,
+    //   rate: this.form.value.rate,
+    //   assignmentSearchRadius: this.form.value.assignmentSearchRadius,
+    //   hours: this.form.value.hours,
+    //   role: this.form.value.role,
+    //   availability: this.form.value.availability,
+    //   searching: this.form.value.searching,
+    //   fileName: this.form.value.fileName,
+    //   specialty: this.form.value.specialty,
+    //   defaultMotivation: this.form.value.defaultMotivation
+    // }
 
-    console.log(this.candidate);
+    // console.log(this.candidate);
 
-    this.candidateService.put(this.candidate);
-    this.showNotification();
+    // this.candidateService.put(this.candidate);
+    // this.showNotification();
+  }
+
+  loadCandidates() {
+
+    this.candidate$ = this.candidateStore.candidates$
+      .pipe(
+        map(candidates => candidates[0])
+      );
+
+    this.setValuesForm();
+  }
+
+  setValuesForm(): void {
+    this.candidate$.subscribe(candidate => {
+      this.form.controls.kvkNummer.setValue(candidate.kvkNummer);
+      this.form.controls.rate.setValue(candidate.rate);
+      this.form.controls.assignmentSearchRadius.setValue(candidate.assignmentSearchRadius);
+      this.form.controls.hours.setValue(candidate.hours);
+      this.form.controls.role.setValue(candidate.role);
+      this.form.controls.availability.setValue(candidate.availability);
+      this.form.controls.searching.setValue(candidate.searching);
+      this.form.controls.fileName.setValue(candidate.fileName);
+      // this.form.controls.specialty.setValue(candidate.specialty);
+      this.form.controls.defaultMotivation.setValue(candidate.defaultMotivation);
+    });
   }
 
   showNotification(): void {  

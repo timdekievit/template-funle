@@ -13,6 +13,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatBadgeModule } from '@angular/material/badge';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
@@ -30,6 +31,7 @@ import { MessageComponent } from './message/message.component';
 import { MessageContainerComponent } from './message-container/message-container.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { AssignmentsFavoriteTableComponent } from './assignments-favorite-table/assignments-favorite-table.component';
+import { LoaderComponent } from './loader/loader.component';
 
 
 @NgModule({
@@ -45,7 +47,8 @@ import { AssignmentsFavoriteTableComponent } from './assignments-favorite-table/
     AssignmentsTableComponent,
     MessageComponent,
     MessageContainerComponent,
-    AssignmentsFavoriteTableComponent
+    AssignmentsFavoriteTableComponent,
+    LoaderComponent
     
   ],
   imports: [
@@ -64,6 +67,7 @@ import { AssignmentsFavoriteTableComponent } from './assignments-favorite-table/
     MatDialogModule,
     MatBadgeModule,
     MatTooltipModule,
+    MatProgressSpinnerModule,
     CommonModule,
     FormsModule,
     RouterModule,
@@ -82,7 +86,8 @@ import { AssignmentsFavoriteTableComponent } from './assignments-favorite-table/
     AssignmentsTableComponent,
     MessageComponent,
     MessageContainerComponent,
-    AssignmentsFavoriteTableComponent
+    AssignmentsFavoriteTableComponent,
+    LoaderComponent
 
   ],
 })

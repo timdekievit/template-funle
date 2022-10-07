@@ -1,8 +1,9 @@
 import { Injectable } from "@angular/core";
 import { PortalCandidateService } from "@funle/api";
 import { CandidatePortal } from "@funle/entities";
-import { BehaviorSubject, Observable } from "rxjs";
-import { first, tap } from "rxjs/operators";
+import { BehaviorSubject, from, Observable } from "rxjs";
+import { shareReplay, tap } from "rxjs/operators";
+import { LoadingService } from "./loadingService";
 
 
 @Injectable({
@@ -12,24 +13,32 @@ export class CandidateStore {
 
     private subject = new BehaviorSubject<CandidatePortal[]>([]);
 
+    private loadedSubject = new BehaviorSubject<boolean>(false);
+
     candidates$: Observable<CandidatePortal[]> = this.subject.asObservable();
 
-    constructor(private portalCandidateService: PortalCandidateService) {}
+    loaded$: Observable<boolean> = this.loadedSubject.asObservable();
+
+    constructor(private portalCandidateService: PortalCandidateService, private loadingService: LoadingService) {
+        console.log('constructeur called')
+     }
 
 
 
-    getCandidates(): Observable<CandidatePortal[]> {
-        if (this.subject.value.length == 0) {
-            return this.candidates$.pipe(
-                tap(() => this.portalCandidateService.getall()),
-                tap(candidates => this.subject.next(candidates)),
-                first()
-            )
-            
-        }
-        else {
-            return this.candidates$
-        }
+    loadAllCandidates() {
 
+        this.portalCandidateService.getall().pipe( 
+            tap(candidates => {
+                console.log(candidates)
+                this.subject.next(candidates)
+                this.loadedSubject.next(true)}),  
+        ).subscribe()
+
+        // this.loadingService.showLoaderUntilCompleted(loadCandidates$).subscribe()
+
+    }
+
+    getCandidatesObservable() {
+        return this.candidates$
     }
 }
