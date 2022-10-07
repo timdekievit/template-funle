@@ -6,7 +6,7 @@ import { BaseSpecialty, CandidatePortal } from '@funle/entities';
 import { PortalCandidateService } from '@funle/api';
 import { KvKValidator } from 'src/app/validators/kvk.validator';
 import { FileValidator } from 'src/libs/forms/components/src/validators/file-validator';
-import { CandidateStore } from 'src/app/services/candidateStore';
+import { CandidateStore } from 'src/app/services/candidates/candidateStore';
 import { Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 
@@ -41,25 +41,7 @@ export class ProfileBusinessComponent implements OnInit {
   constructor(private router: Router, private candidateStore: CandidateStore) { }
 
   ngOnInit(): void {
-
     this.loadCandidates();
-
-    // this.candidateService.getall().subscribe(res => {
-    //   console.log(res);
-    //   this.candidate = res[0];
-
-    //   this.form.controls.kvkNummer.setValue(this.candidate.kvkNummer);
-    //   this.form.controls.rate.setValue(this.candidate.rate);
-    //   this.form.controls.assignmentSearchRadius.setValue(this.candidate.assignmentSearchRadius);
-    //   this.form.controls.hours.setValue(this.candidate.hours);
-    //   this.form.controls.role.setValue(this.candidate.role);
-    //   this.form.controls.availability.setValue(this.candidate.availability);
-    //   this.form.controls.searching.setValue(this.candidate.searching);
-    //   this.form.controls.fileName.setValue(this.candidate.fileName);
-    //   this.form.controls.specialty.setValue(this.candidate.specialty);
-    //   this.form.controls.defaultMotivation.setValue(this.candidate.defaultMotivation);
-    //   console.log(this.form);
-    // });
   }
 
   toPage(page: string): void {

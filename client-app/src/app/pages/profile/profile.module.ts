@@ -19,7 +19,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ProfileBusinessComponent } from './views/business/business.component';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { CandidatesResolver } from 'src/app/services/candidate.resolver';
+import { CandidatesResolver } from 'src/app/services/candidates/candidate.resolver';
 
 
 @NgModule({

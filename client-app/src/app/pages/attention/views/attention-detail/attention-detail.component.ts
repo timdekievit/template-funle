@@ -3,6 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { PortalAssignmentService } from '@funle/api';
 import { AssignmentPortal } from '@funle/entities';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { AssignmentStore } from 'src/app/services/assignments/assignmentStore';
 
 @Component({
   selector: 'funle-portal-attention-detail',
@@ -23,17 +25,27 @@ export class AttentionDetailComponent implements OnInit {
   nothingFound = false;
 
   constructor(
-    private assignmentService: PortalAssignmentService, 
+    private assignmentService: PortalAssignmentService,
+    private assignmentStore: AssignmentStore, 
     private route: ActivatedRoute,) { }
 
-  ngOnInit(): void {
-    this.getAssignment();
-  }
+    ngOnInit(): void {
+      this.getAssignment();
+    }
+  
+    private getAssignment(): any {
+  
+      this.id = this.route.snapshot.paramMap.get("id");
+  
+      if(this.assignmentStore.isLoaded()) {
+        this.assignment$ = this.assignmentStore.assignments$
+          .pipe(map(assignments => assignments.find(assignment => assignment.id == this.id)));
+      } 
+      else {
+        this.assignment$ = this.assignmentService.get(this.id);
+      }
+    }
 
-  private getAssignment(): any {
-    this.id = this.route.snapshot.paramMap.get('id');
-    this.assignment$ = this.assignmentService.get(this.id);
-  } 
   declineProposal(): void {
     // this.assignmentService.decline(this.assignment.id).subscribe(res => {
     //   this.openDeclinedDialog();

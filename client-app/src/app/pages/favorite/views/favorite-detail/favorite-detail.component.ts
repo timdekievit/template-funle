@@ -5,7 +5,8 @@ import { PortalAssignmentService } from '@funle/api';
 import { AssignmentPortal, BasePortalAssignment, IBasePortalAssignment, ProposalStatus } from '@funle/entities';
 // import { ProposalAcceptedDialogComponent } from 'apps/portal/src/app/components/proposal-accepted-dialog/proposal-accepted-dialog.component';
 import { Observable, Subject } from 'rxjs';
-import { filter, mergeMap, take, takeUntil, tap } from 'rxjs/operators';
+import { filter, map, mergeMap, take, takeUntil, tap } from 'rxjs/operators';
+import { AssignmentStore } from 'src/app/services/assignments/assignmentStore';
 
 @Component({
   selector: 'funle-portal-favorite-detail',
@@ -23,6 +24,7 @@ export class FavoriteDetailComponent implements OnInit {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
+    private assignmentStore: AssignmentStore,
     private assignmentService: PortalAssignmentService,
     public dialog: MatDialog
   ) {}
@@ -32,9 +34,17 @@ export class FavoriteDetailComponent implements OnInit {
   }
 
   private getAssignment(): any {
-    this.id = this.route.snapshot.paramMap.get('id');
-    this.assignment$ = this.assignmentService.get(this.id);
-  }
+
+    this.id = this.route.snapshot.paramMap.get("id");
+
+    if(this.assignmentStore.isLoaded()) {
+      this.assignment$ = this.assignmentStore.assignments$
+        .pipe(map(assignments => assignments.find(assignment => assignment.id == this.id)));
+    } 
+    else {
+      this.assignment$ = this.assignmentService.get(this.id);
+    }
+  } 
 
   acceptProposal(): void {
     this.openAcceptedDialog();  

@@ -7,7 +7,7 @@ import { HttpClient } from '@angular/common/http';
 import { debounceTime, finalize, first, last, map, takeUntil, tap } from 'rxjs/operators';
 import { Observable, Subject } from 'rxjs';
 import { BaseCandidate, CandidatePortal } from '@funle/entities';
-import { CandidateStore } from 'src/app/services/candidateStore';
+import { CandidateStore } from 'src/app/services/candidates/candidateStore';
 import { LoadingService } from 'src/app/services/loadingService';
 
 @Component({

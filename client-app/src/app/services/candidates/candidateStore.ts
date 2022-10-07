@@ -3,7 +3,7 @@ import { PortalCandidateService } from "@funle/api";
 import { CandidatePortal } from "@funle/entities";
 import { BehaviorSubject, from, Observable } from "rxjs";
 import { shareReplay, tap } from "rxjs/operators";
-import { LoadingService } from "./loadingService";
+import { LoadingService } from "../loadingService";
 
 
 @Injectable({
