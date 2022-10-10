@@ -16,6 +16,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatNativeDateModule } from '@angular/material/core';
+import { NgxsModule } from '@ngxs/store';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { MatNativeDateModule } from '@angular/material/core';
         useFactory: createTranslateLoader,
       },
     }),
+    NgxsModule.forRoot([])
   ],
 
   providers: [],
