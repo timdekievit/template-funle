@@ -4,9 +4,9 @@ import { Router } from '@angular/router';
 import { NotEmptyValidator } from 'src/app/validators/not-empty.validator';
 import { PortalCandidateService } from '@funle/api';
 import { HttpClient } from '@angular/common/http';
-import { debounceTime, takeUntil } from 'rxjs/operators';
-import { Subject } from 'rxjs';
-import { BaseCandidate } from '@funle/entities';
+import { debounceTime, map, takeUntil, tap } from 'rxjs/operators';
+import { Observable, Subject } from 'rxjs';
+import { BaseCandidate, CandidatePortal } from '@funle/entities';
 
 @Component({
   selector: 'funle-profile-person',
@@ -17,7 +17,8 @@ export class ProfilePersonComponent implements OnInit {
   
   show: boolean = false;
 
-  candidate: any;
+  candidate: CandidatePortal;
+  candidate$: Observable<CandidatePortal>;
 
   form = new FormGroup({
     id: new FormControl(''),
@@ -39,21 +40,31 @@ export class ProfilePersonComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.candidateService.getall().subscribe(res => {
-      console.log(res);
-      this.candidate = res[0];
+    this.loadCandidates();
+  }
 
-      this.form.controls.firstName.setValue(this.candidate.firstName)
-      this.form.controls.prefix.setValue(this.candidate.prefix)
-      this.form.controls.lastname.setValue(this.candidate.lastname)
-      this.form.controls.email.setValue(this.candidate.email)
-      this.form.controls.phoneNumber.setValue(this.candidate.phoneNumber)
-      this.form.controls.city.setValue(this.candidate.city)
-      this.form.controls.whatsapp.setValue(this.candidate.whatsapp)
+  loadCandidates() {
 
-      console.log(this.form);
+    this.candidate$ = this.candidateService.getall()
+      .pipe(
+        map(candidates => candidates[0]),
+        tap(candidate => this.candidate = candidate)
+      );
+
+    this.setValuesForm();
+
+  }
+
+  private setValuesForm(): void {
+    this.candidate$.subscribe(candidate => {
+      this.form.controls.firstName.setValue(candidate.firstName)
+      this.form.controls.prefix.setValue(candidate.prefix)
+      this.form.controls.lastname.setValue(candidate.lastname)
+      this.form.controls.email.setValue(candidate.email)
+      this.form.controls.phoneNumber.setValue(candidate.phoneNumber)
+      this.form.controls.city.setValue(candidate.city)
+      this.form.controls.whatsapp.setValue(candidate.whatsapp)
     });
-
   }
 
   onSubmit(): void {
