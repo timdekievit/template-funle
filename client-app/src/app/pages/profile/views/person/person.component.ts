@@ -2,13 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NotEmptyValidator } from 'src/app/validators/not-empty.validator';
-import { PortalCandidateService } from '@funle/api';
-import { HttpClient } from '@angular/common/http';
-import { debounceTime, finalize, first, last, map, takeUntil, tap } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { Observable, Subject } from 'rxjs';
-import { BaseCandidate, CandidatePortal } from '@funle/entities';
+import { CandidatePortal } from '@funle/entities';
 import { CandidateStore } from 'src/app/services/candidates/candidateStore';
-import { LoadingService } from 'src/app/services/loadingService';
 
 @Component({
   selector: 'funle-profile-person',
@@ -45,24 +42,6 @@ export class ProfilePersonComponent implements OnInit {
   ngOnInit(): void {
 
     this.loadCandidates();
-
-    // this.loading = true;
-    //   this.candidateStore.getCandidatesObservable().subscribe(res => {
-    //     console.log(res);
-    //     this.candidate = res[0];
-
-    //     this.form.controls.firstName.setValue(this.candidate.firstName)
-    //     this.form.controls.prefix.setValue(this.candidate.prefix)
-    //     this.form.controls.lastname.setValue(this.candidate.lastname)
-    //     this.form.controls.email.setValue(this.candidate.email)
-    //     this.form.controls.phoneNumber.setValue(this.candidate.phoneNumber)
-    //     this.form.controls.city.setValue(this.candidate.city)
-    //     this.form.controls.whatsapp.setValue(this.candidate.whatsapp)
-
-    //     console.log(this.form);
-    //     this.loading = false;
-    //   });
-
 
   }
 
