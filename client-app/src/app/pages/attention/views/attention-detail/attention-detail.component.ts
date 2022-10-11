@@ -2,7 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PortalAssignmentService } from '@funle/api';
 import { AssignmentPortal } from '@funle/entities';
+import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { loadAssignmentAction } from 'src/app/services/assignments/assignment.actions';
+import { AssignmentState } from 'src/app/services/assignments/assignment.state';
 
 @Component({
   selector: 'funle-portal-attention-detail',
@@ -16,14 +20,16 @@ export class AttentionDetailComponent implements OnInit {
   nothingFoundButtonText = 'Terug naar overzicht';
 
   id: string;
-  assignment$: Observable<AssignmentPortal>
+  assignment$: Observable<AssignmentPortal>;
+  @Select(AssignmentState.getAssignments) assignments$: Observable<AssignmentPortal[]>;
   
   accepted: boolean;
 
   nothingFound = false;
 
   constructor(
-    private assignmentService: PortalAssignmentService, 
+    private assignmentState: AssignmentState,
+    private store: Store,
     private route: ActivatedRoute,) { }
 
   ngOnInit(): void {
@@ -31,9 +37,21 @@ export class AttentionDetailComponent implements OnInit {
   }
 
   private getAssignment(): any {
-    this.id = this.route.snapshot.paramMap.get('id');
-    this.assignment$ = this.assignmentService.get(this.id);
+
+    this.id = this.route.snapshot.paramMap.get("id");
+
+    if(this.assignmentState.isLoaded()) {
+      this.assignment$ = this.assignments$
+        .pipe(map(assignments => assignments.find(assignment => assignment.id == this.id)));
+    } 
+    else {
+      this.assignment$ = this.store.dispatch(new loadAssignmentAction(this.id))
+        .pipe(
+          map(state => state.Assignments.assignments.find(assignment => assignment.id == this.id))
+        )
+    }
   } 
+
   declineProposal(): void {
     // this.assignmentService.decline(this.assignment.id).subscribe(res => {
     //   this.openDeclinedDialog();

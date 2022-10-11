@@ -16,7 +16,9 @@ export class CandidateStateModel {
     },
 })
 
-@Injectable()
+@Injectable({
+    providedIn: 'root'
+})
 export class CandidateState {
 
     constructor(private candidateService: PortalCandidateService) {}

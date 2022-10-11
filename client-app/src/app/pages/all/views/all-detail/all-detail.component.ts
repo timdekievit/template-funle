@@ -3,7 +3,11 @@ import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PortalAssignmentService } from '@funle/api';
 import { AssignmentPortal } from '@funle/entities';
+import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { loadAssignmentAction } from 'src/app/services/assignments/assignment.actions';
+import { AssignmentState } from 'src/app/services/assignments/assignment.state';
 
 @Component({
   selector: 'funle-portal-all-detail',
@@ -17,7 +21,8 @@ export class AllDetailComponent implements OnInit {
   nothingFoundButtonText = 'Terug naar overzicht';
 
   id: string;
-  assignment$: Observable<AssignmentPortal>
+  assignment$: Observable<AssignmentPortal>;
+  @Select(AssignmentState.getAssignments) assignments$: Observable<AssignmentPortal[]>;
 
   accepted: boolean;
 
@@ -25,9 +30,9 @@ export class AllDetailComponent implements OnInit {
 
 
   constructor(
-    private router: Router,
-    private assignmentService: PortalAssignmentService, 
     private route: ActivatedRoute,
+    private assignmentState: AssignmentState,
+    private store: Store,
     public dialog: MatDialog
   ) { }
 
@@ -36,8 +41,19 @@ export class AllDetailComponent implements OnInit {
   }
 
   private getAssignment(): any {
-    this.id = this.route.snapshot.paramMap.get('id');
-    this.assignment$ = this.assignmentService.get(this.id);
+
+    this.id = this.route.snapshot.paramMap.get("id");
+
+    if(this.assignmentState.isLoaded()) {
+      this.assignment$ = this.assignments$
+        .pipe(map(assignments => assignments.find(assignment => assignment.id == this.id)));
+    } 
+    else {
+      this.assignment$ = this.store.dispatch(new loadAssignmentAction(this.id))
+        .pipe(
+          map(state => state.Assignments.assignments.find(assignment => assignment.id == this.id))
+        )
+    }
   } 
 
   acceptProposal(): void {

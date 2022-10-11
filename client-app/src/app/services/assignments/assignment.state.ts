@@ -3,7 +3,7 @@ import { PortalAssignmentService } from "@funle/api";
 import { AssignmentPortal } from "@funle/entities";
 import { Action, Selector, State, StateContext } from "@ngxs/store";
 import { tap } from "rxjs/operators";
-import { loadAssignmentsAction } from "./assignment.actions";
+import { loadAssignmentAction, loadAssignmentsAction } from "./assignment.actions";
 
 export class AssignmentStateModel {
     assignments: AssignmentPortal[]
@@ -16,8 +16,13 @@ export class AssignmentStateModel {
     },
 })
 
-@Injectable()
+@Injectable({
+    providedIn: 'root'
+})
+
 export class AssignmentState {
+
+    private loaded = false;
 
     constructor(private assignmentsService: PortalAssignmentService) { }
 
@@ -36,6 +41,42 @@ export class AssignmentState {
                 })
             )
     }
+
+
+    @Action(loadAssignmentAction)
+    loadAssignment(context: StateContext<AssignmentStateModel>, action: loadAssignmentAction) {
+
+        // console.log('action in assignmentState')
+        // de return zorgt ervoor dat erop de obervable wordt gewacht tot het klaar is.
+        return this.assignmentsService.get(action.id)
+            .pipe(
+                tap(assignment => {
+                    console.log(assignment)
+
+                    let state = context.getState();
+
+                    state = {
+                        ...state,
+                        assignments: [...state.assignments, assignment]
+                    }
+
+                    context.setState(state);
+                })
+            )
+    }
+
+    isLoaded() {
+        return this.loaded;
+    }
+
+    setLoaded(loaded: boolean) {
+        this.loaded = loaded;
+    }
+
+    // @Selector()
+    // static getAssignment(state: AssignmentStateModel) {
+    //     return state.assignments.find(assignments => assignments.id == )
+    // }
 
 
     @Selector()

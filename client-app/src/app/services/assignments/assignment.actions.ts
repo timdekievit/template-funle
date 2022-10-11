@@ -8,6 +8,12 @@ import { CandidatePortal } from "@funle/entities";
 //     }
 // }
 
+export class loadAssignmentAction {
+    static readonly type = '[Assignments API] load assignment';
+
+    constructor(public id: string) {}
+}
+
 export class loadAssignmentsAction {
     static readonly type = '[Assignments API] load assignments';
 
