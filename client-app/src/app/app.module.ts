@@ -19,6 +19,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { NgxsModule } from '@ngxs/store';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import { CandidateState } from './services/candidate/CandidateState';
+import { AssignmentState } from './services/assignments/assignment.state';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { CandidateState } from './services/candidate/CandidateState';
       },
     }),
     NgxsModule.forRoot([
-      CandidateState
+      CandidateState,
+      AssignmentState
     ]),
     NgxsReduxDevtoolsPluginModule.forRoot(),
   ],

@@ -2,6 +2,10 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PortalAssignmentService } from '@funle/api';
+import { AssignmentPortal } from '@funle/entities';
+import { Select } from '@ngxs/store';
+import { Observable } from 'rxjs';
+import { AssignmentState } from 'src/app/services/assignments/assignment.state';
 
 @Component({
   selector: 'funle-portal-attention',
@@ -10,7 +14,7 @@ import { PortalAssignmentService } from '@funle/api';
 })
 export class AttentionComponent implements OnInit {
 
-  assignments: any;
+  @Select(AssignmentState.getAssignments) assignments$: Observable<AssignmentPortal[]>;
   message404Title = 'Hier zou het staan';
   messageErrorTitle = 'Er is iets fout gegaan';
   messageTitle = '';
@@ -19,12 +23,7 @@ export class AttentionComponent implements OnInit {
 
   constructor(private router: Router, private route: ActivatedRoute, private assignmentService: PortalAssignmentService) { }
 
-  ngOnInit(): void {
-    this.assignmentService.getAll().subscribe(res => {
-      console.log(res);
-      this.assignments = res;
-    });
-  }
+  ngOnInit(): void {}
 
   onAssignmentSelected(id: string) {
     this.router.navigate([id], { relativeTo: this.route });

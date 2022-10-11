@@ -10,6 +10,7 @@ import { AttentionRoutingModule } from './attention-routing.module';
 import { MatTableModule } from '@angular/material/table';
 import { AttentionDetailComponent } from './views/attention-detail/attention-detail.component';
 import { MatButtonModule } from '@angular/material/button';
+import { AssignmentsResolver } from 'src/app/services/assignments/assignment.resolver';
 
 
 @NgModule({
@@ -23,6 +24,7 @@ import { MatButtonModule } from '@angular/material/button';
     MatButtonModule,
     TranslateModule.forChild({ extend: true }),
     AttentionRoutingModule,
-  ]
+  ],
+  // providers: [AssignmentsResolver]
 })
 export class AttentionModule { }

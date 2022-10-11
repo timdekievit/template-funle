@@ -39,7 +39,6 @@ export class CandidateState {
 
         context.patchState({
             candidates: candidates
-        
         })
 
         console.log(context.getState())

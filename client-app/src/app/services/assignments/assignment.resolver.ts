@@ -3,12 +3,13 @@ import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from "@angular/r
 import { Store } from "@ngxs/store";
 import { Observable } from "rxjs";
 import { filter, finalize, first, map, tap } from "rxjs/operators";
-import { loadCandidatesAction } from "./candidate.actions";
+import { loadAssignmentsAction } from "./assignment.actions";
 
+// een singleton is hier nodig om te zorgen dat het niet 3 keer wordt geladen.
 @Injectable({
     providedIn: 'root'
 })
-export class CandidatesResolver implements Resolve<boolean> {
+export class AssignmentsResolver implements Resolve<boolean> {
 
     loading = false;
     loaded = false;
@@ -20,13 +21,13 @@ export class CandidatesResolver implements Resolve<boolean> {
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean>{
 
         if (!this.loaded) {
-            return this.store.dispatch(new loadCandidatesAction())
+            return this.store.dispatch(new loadAssignmentsAction())
             .pipe(
-                tap((candidates) => {
+                tap((assignments) => {
                     if (!this.loading) {
                         this.loading = true;
                         console.log('loading')
-                        console.log(candidates)
+                        console.log(assignments)
                         this.loaded = true;
                     }
                 }),

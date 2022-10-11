@@ -2,8 +2,8 @@
     <h1>Opdrachten</h1>
     <div class="row">
         <div class="col-md-12">
-            <funle-portal-assignments-table *ngIf="assignments?.length > 0; else noContent" [showFilter]="false"
-                [assignments]="assignments" (assignmentSelected)="onAssignmentSelected($event)">
+            <funle-portal-assignments-table [showFilter]="false"
+                [assignments]="assignments$ | async" (assignmentSelected)="onAssignmentSelected($event)">
             </funle-portal-assignments-table>
             <ng-template #noContent>
                 <funle-portal-message-container [title]="messageTitle">

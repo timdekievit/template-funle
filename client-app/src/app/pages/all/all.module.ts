@@ -10,6 +10,7 @@ import { AllRoutingModule } from './all-routing.module';
 import { MatTableModule } from '@angular/material/table';
 import { AllDetailComponent } from './views/all-detail/all-detail.component';
 import { MatButtonModule } from '@angular/material/button';
+import { AssignmentsResolver } from 'src/app/services/assignments/assignment.resolver';
 
 
 @NgModule({
@@ -23,6 +24,7 @@ import { MatButtonModule } from '@angular/material/button';
     MatButtonModule,
     TranslateModule.forChild({ extend: true }),
     AllRoutingModule,
-  ]
+  ],
+  // providers: [AssignmentsResolver]
 })
 export class AllModule { }
