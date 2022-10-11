@@ -46,20 +46,16 @@ export class ProfilePersonComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadCandidates();
+    this.setValuesForm();
   }
 
   loadCandidates() {
-
 
     this.candidate$ = this.candidates$
       .pipe(
         map(candidates => candidates = candidates[0]),
         tap(candidate => this.candidate = candidate)
       )
-
-
-    this.setValuesForm();
-
   }
 
   private setValuesForm(): void {

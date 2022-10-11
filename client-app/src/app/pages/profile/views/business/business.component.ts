@@ -8,6 +8,9 @@ import { KvKValidator } from 'src/app/validators/kvk.validator';
 import { FileValidator } from 'src/libs/forms/components/src/validators/file-validator';
 import { Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
+import { Select, Store } from '@ngxs/store';
+import { CandidateState } from 'src/app/services/candidate/CandidateState';
+import { updateCandidateAction } from 'src/app/services/candidate/candidate.actions';
 
 @Component({
   selector: 'funle-profile-business',
@@ -20,6 +23,7 @@ export class ProfileBusinessComponent implements OnInit {
   skills: BaseSpecialty[] = [];
   candidate: CandidatePortal;
   candidate$: Observable<CandidatePortal>;
+  @Select(CandidateState.getCandidates) candidates$: Observable<CandidatePortal>;
 
   form = new FormGroup({
     id: new FormControl(''),
@@ -37,21 +41,20 @@ export class ProfileBusinessComponent implements OnInit {
 
   readonly separatorKeysCodes = [ENTER, COMMA] as const;
 
-  constructor(private router: Router, private candidateService: PortalCandidateService) { }
+  constructor(private router: Router, private candidateService: PortalCandidateService, private store: Store) { }
 
   ngOnInit(): void {
     this.loadCandidates();
+    this.setValuesForm();
   }
 
   loadCandidates() {
 
-    this.candidate$ = this.candidateService.getall()
+    this.candidate$ = this.candidates$
       .pipe(
-        map(candidates => candidates[0]),
+        map(candidates => candidates = candidates[0]),
         tap(candidate => this.candidate = candidate)
-      );
-
-    this.setValuesForm();
+      )
   }
 
   setValuesForm(): void {
@@ -64,7 +67,6 @@ export class ProfileBusinessComponent implements OnInit {
       this.form.controls.availability.setValue(candidate.availability);
       this.form.controls.searching.setValue(candidate.searching);
       this.form.controls.fileName.setValue(candidate.fileName);
-      // this.form.controls.specialty.setValue(candidate.specialty);
       this.form.controls.defaultMotivation.setValue(candidate.defaultMotivation);
     });
   }
@@ -84,13 +86,11 @@ export class ProfileBusinessComponent implements OnInit {
       availability: this.form.value.availability,
       searching: this.form.value.searching,
       fileName: this.form.value.fileName,
-      // specialty: this.form.value.specialty,
       defaultMotivation: this.form.value.defaultMotivation
     }
 
     console.log(this.candidate);
-
-    this.candidateService.put(this.candidate);
+    this.store.dispatch(new updateCandidateAction(this.candidate))
     this.showNotification();
   }
 

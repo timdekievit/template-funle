@@ -27,7 +27,10 @@ const routes: Routes = [
   },
   {
     path: 'business',
-    component: ProfileBusinessComponent
+    component: ProfileBusinessComponent,
+    resolve: {
+      candidates: CandidatesResolver
+    }
   },
   {
     path: 'missing/phonenumber',
