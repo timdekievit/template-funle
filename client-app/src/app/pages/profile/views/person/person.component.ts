@@ -6,7 +6,10 @@ import { PortalCandidateService } from '@funle/api';
 import { HttpClient } from '@angular/common/http';
 import { debounceTime, map, takeUntil, tap } from 'rxjs/operators';
 import { Observable, Subject } from 'rxjs';
-import { BaseCandidate, CandidatePortal } from '@funle/entities';
+import { CandidatePortal } from '@funle/entities';
+import { Select, Store } from '@ngxs/store';
+import { updateCandidateAction } from 'src/app/services/candidate/candidate.actions';
+import { CandidateState } from 'src/app/services/candidate/CandidateState';
 
 @Component({
   selector: 'funle-profile-person',
@@ -17,6 +20,7 @@ export class ProfilePersonComponent implements OnInit {
   
   show: boolean = false;
 
+  @Select(CandidateState.getCandidates) candidates$: Observable<CandidatePortal>;
   candidate: CandidatePortal;
   candidate$: Observable<CandidatePortal>;
 
@@ -31,7 +35,8 @@ export class ProfilePersonComponent implements OnInit {
     whatsapp: new FormControl(''),
   });
 
-  constructor(private router: Router, private candidateService: PortalCandidateService, private http: HttpClient) { }
+  constructor(private router: Router, private candidateService: PortalCandidateService, private store: Store) { }
+
 
   private destroy$ = new Subject<boolean>();
   ngOnDestroy(): void {
@@ -45,11 +50,13 @@ export class ProfilePersonComponent implements OnInit {
 
   loadCandidates() {
 
-    this.candidate$ = this.candidateService.getall()
+
+    this.candidate$ = this.candidates$
       .pipe(
-        map(candidates => candidates[0]),
+        map(candidates => candidates = candidates[0]),
         tap(candidate => this.candidate = candidate)
-      );
+      )
+
 
     this.setValuesForm();
 
@@ -57,6 +64,7 @@ export class ProfilePersonComponent implements OnInit {
 
   private setValuesForm(): void {
     this.candidate$.subscribe(candidate => {
+      console.log(candidate)
       this.form.controls.firstName.setValue(candidate.firstName)
       this.form.controls.prefix.setValue(candidate.prefix)
       this.form.controls.lastname.setValue(candidate.lastname)
@@ -81,7 +89,8 @@ export class ProfilePersonComponent implements OnInit {
 
     console.log(this.candidate);
 
-    this.candidateService.put(this.candidate);
+    // this.candidateService.put(this.candidate);
+    this.store.dispatch(new updateCandidateAction(this.candidate))
     this.showNotification()
   }
 

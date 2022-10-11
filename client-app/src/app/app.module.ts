@@ -17,6 +17,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatNativeDateModule } from '@angular/material/core';
 import { NgxsModule } from '@ngxs/store';
+import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
+import { CandidateState } from './services/candidate/CandidateState';
 
 @NgModule({
   declarations: [
@@ -44,7 +46,10 @@ import { NgxsModule } from '@ngxs/store';
         useFactory: createTranslateLoader,
       },
     }),
-    NgxsModule.forRoot([])
+    NgxsModule.forRoot([
+      CandidateState
+    ]),
+    NgxsReduxDevtoolsPluginModule.forRoot(),
   ],
 
   providers: [],

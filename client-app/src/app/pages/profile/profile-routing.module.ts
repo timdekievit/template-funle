@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { CandidatesResolver } from 'src/app/services/candidate/candidate.resolver';
 
 import { ProfileComponent } from './profile.component';
 import { ProfileBusinessComponent } from './views/business/business.component';
@@ -19,7 +20,10 @@ const routes: Routes = [
 //   },
   {
     path: 'person',
-    component: ProfilePersonComponent
+    component: ProfilePersonComponent,
+    resolve: {
+      candidates: CandidatesResolver
+    }
   },
   {
     path: 'business',
