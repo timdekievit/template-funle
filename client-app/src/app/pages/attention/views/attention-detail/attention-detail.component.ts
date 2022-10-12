@@ -3,6 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { PortalAssignmentService } from '@funle/api';
 import { AssignmentPortal } from '@funle/entities';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { assignments$, isLoaded } from 'src/app/services/assignments/assignments.repository';
 
 @Component({
   selector: 'funle-portal-attention-detail',
@@ -30,9 +32,18 @@ export class AttentionDetailComponent implements OnInit {
     this.getAssignment();
   }
 
+
   private getAssignment(): any {
-    this.id = this.route.snapshot.paramMap.get('id');
-    this.assignment$ = this.assignmentService.get(this.id);
+
+    this.id = this.route.snapshot.paramMap.get("id");
+
+    if(isLoaded()) {
+      this.assignment$ = assignments$
+        .pipe(map(assignments => assignments.find(assignment => assignment.id == this.id)));
+    } 
+    else {
+      this.assignment$ = this.assignmentService.get(this.id);
+    }
   } 
   declineProposal(): void {
     // this.assignmentService.decline(this.assignment.id).subscribe(res => {

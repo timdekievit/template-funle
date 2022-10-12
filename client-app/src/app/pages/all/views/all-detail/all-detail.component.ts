@@ -4,6 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { PortalAssignmentService } from '@funle/api';
 import { AssignmentPortal } from '@funle/entities';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { assignments$, isLoaded } from 'src/app/services/assignments/assignments.repository';
 
 @Component({
   selector: 'funle-portal-all-detail',
@@ -36,10 +38,17 @@ export class AllDetailComponent implements OnInit {
   }
 
   private getAssignment(): any {
-    this.id = this.route.snapshot.paramMap.get('id');
-    this.assignment$ = this.assignmentService.get(this.id);
-  } 
 
+    this.id = this.route.snapshot.paramMap.get("id");
+
+    if(isLoaded()) {
+      this.assignment$ = assignments$
+        .pipe(map(assignments => assignments.find(assignment => assignment.id == this.id)));
+    } 
+    else {
+      this.assignment$ = this.assignmentService.get(this.id);
+    }
+  } 
   acceptProposal(): void {
     this.openAcceptedDialog();
   }
