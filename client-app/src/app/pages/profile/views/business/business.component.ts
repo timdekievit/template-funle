@@ -8,6 +8,7 @@ import { KvKValidator } from 'src/app/validators/kvk.validator';
 import { FileValidator } from 'src/libs/forms/components/src/validators/file-validator';
 import { Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
+import { candidates$, updateCandidate } from 'src/app/services/candidates.repository';
 
 @Component({
   selector: 'funle-profile-business',
@@ -41,17 +42,16 @@ export class ProfileBusinessComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadCandidates();
+    this.setValuesForm()
   }
 
   loadCandidates() {
 
-    this.candidate$ = this.candidateService.getall()
+    this.candidate$ = candidates$
       .pipe(
         map(candidates => candidates[0]),
         tap(candidate => this.candidate = candidate)
-      );
-
-    this.setValuesForm();
+      )
   }
 
   setValuesForm(): void {
@@ -90,6 +90,7 @@ export class ProfileBusinessComponent implements OnInit {
 
     console.log(this.candidate);
 
+    updateCandidate(this.candidate.id, this.candidate);
     this.candidateService.put(this.candidate);
     this.showNotification();
   }

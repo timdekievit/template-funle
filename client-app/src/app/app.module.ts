@@ -16,6 +16,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatNativeDateModule } from '@angular/material/core';
+import { devTools } from '@ngneat/elf-devtools';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,12 @@ import { MatNativeDateModule } from '@angular/material/core';
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+
+  constructor() {
+    devTools();
+  }
+}
 
 export function createTranslateLoader(): TranslateLoader {
   return {
