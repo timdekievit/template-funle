@@ -8,7 +8,7 @@ import { KvKValidator } from 'src/app/validators/kvk.validator';
 import { FileValidator } from 'src/libs/forms/components/src/validators/file-validator';
 import { Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
-import { candidates$, updateCandidate } from 'src/app/services/candidates.repository';
+import { candidates$, updateCandidate } from 'src/app/services/candidates/candidates.repository';
 
 @Component({
   selector: 'funle-profile-business',

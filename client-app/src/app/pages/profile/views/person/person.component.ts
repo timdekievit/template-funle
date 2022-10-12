@@ -7,7 +7,7 @@ import { HttpClient } from '@angular/common/http';
 import { debounceTime, map, takeUntil, tap } from 'rxjs/operators';
 import { Observable, Subject } from 'rxjs';
 import { BaseCandidate, CandidatePortal } from '@funle/entities';
-import { candidates$, updateCandidate } from 'src/app/services/candidates.repository';
+import { candidates$, updateCandidate } from 'src/app/services/candidates/candidates.repository';
 
 @Component({
   selector: 'funle-profile-person',

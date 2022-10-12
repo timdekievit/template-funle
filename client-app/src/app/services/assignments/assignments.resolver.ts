@@ -1,15 +1,15 @@
 
 import { Injectable } from "@angular/core";
 import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from "@angular/router";
-import { PortalCandidateService } from "@funle/api";
+import { PortalAssignmentService } from "@funle/api";
 import { Observable } from "rxjs";
-import { filter, first, map, shareReplay, tap } from "rxjs/operators";
-import { isLoaded, setCandidates, setLoaded} from "./candidates.repository"
+import { tap } from "rxjs/operators";
+import { isLoaded, setAssignments, setLoaded} from "./assignments.repository"
 
 @Injectable()
-export class CandidatesResolver implements Resolve<any> {
+export class AssignmentsResolver implements Resolve<any> {
 
-    constructor(private candidateService: PortalCandidateService) {
+    constructor(private assignmentsService: PortalAssignmentService) {
 
     }
 
@@ -18,9 +18,9 @@ export class CandidatesResolver implements Resolve<any> {
         console.log('resolver called')
 
         if(!isLoaded()) {
-            return this.candidateService.getall()
+            return this.assignmentsService.getAll()
             .pipe(
-                tap(setCandidates),
+                tap(setAssignments),
                 tap(() => setLoaded(true))
             )
         }

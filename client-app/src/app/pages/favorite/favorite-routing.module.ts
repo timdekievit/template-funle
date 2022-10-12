@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { AssignmentsResolver } from 'src/app/services/assignments/assignments.resolver';
 
 import { FavoriteComponent } from './favorite.component';
 import { FavoriteDetailComponent } from './views/favorite-detail/favorite-detail.component';
@@ -10,6 +11,9 @@ const routes: Routes = [
   {
     path: '',
     component: FavoriteComponent,
+    resolve: {
+      assignments: AssignmentsResolver
+    }
   },
   {
     path: 'status/:status',

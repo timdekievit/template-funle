@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { CandidatesResolver } from 'src/app/services/candidates.resolver';
+import { CandidatesResolver } from 'src/app/services/candidates/candidates.resolver';
 
 import { ProfileComponent } from './profile.component';
 import { ProfileBusinessComponent } from './views/business/business.component';
