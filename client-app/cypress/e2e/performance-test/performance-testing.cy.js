@@ -14,18 +14,6 @@ describe('testing Assignments', () => {
   allTestAllComponent()
   allTestFavoriteComponent()
   allTestAttentionComponent()
-
-  allTestAllComponent()
-  allTestAttentionComponent()
-  allTestFavoriteComponent()
-
-  allTestFavoriteComponent()
-  allTestAttentionComponent()
-  allTestAllComponent()
-
-  allTestAllComponent()
-  allTestFavoriteComponent()
-  allTestAttentionComponent()
 })
 
 function visitWebsite() {
