@@ -90,7 +90,7 @@ function moveToBusinessComponent() {
 
 function checkInputsBusinessComponent() {
   it('check date in business.component', () => {
-    cy.get('input').eq(0).should('not.be.empty')
+    cy.get('input').eq(0).should('not.be.null')
   })
 
   it('check kvk in business.component', () => {
