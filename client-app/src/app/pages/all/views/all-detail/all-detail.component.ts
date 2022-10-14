@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AssignmentPortal } from '@funle/entities';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { AssignmentEntityService } from 'src/app/services/assignments/assignment-enitity.service';
 
@@ -11,13 +11,15 @@ import { AssignmentEntityService } from 'src/app/services/assignments/assignment
   templateUrl: './all-detail.component.html',
   styleUrls: ['./all-detail.component.scss']
 })
-export class AllDetailComponent implements OnInit {
+export class AllDetailComponent implements OnInit, OnDestroy {
 
   messageTitle = 'Deze opdracht is helaas niet meer beschikbaar';
   nothingFoundMessage = 'Maak je profiel volledig zodat wij voor jou op zoek kunnen of kijk in het overzicht of er nog een andere interessante opdracht tussen staat.';
   nothingFoundButtonText = 'Terug naar overzicht';
   assignment$: Observable<AssignmentPortal>;
   id: string;
+  subscription: Subscription;
+  subscriptionUsed = false;
 
   assignment: AssignmentPortal;
 
@@ -31,6 +33,10 @@ export class AllDetailComponent implements OnInit {
     private assignmentService: AssignmentEntityService, 
     private route: ActivatedRoute
   ) { }
+  
+  ngOnDestroy(): void {
+    if (this.subscriptionUsed) this.subscription.unsubscribe()
+  }
 
   ngOnInit(): void {
     this.getAssignment();
@@ -45,7 +51,8 @@ export class AllDetailComponent implements OnInit {
       tap(assignment => {
         if (assignment == undefined) {
           console.log("getById word uitgevoerd");
-          this.assignmentService.getByKey(this.id).subscribe(assignment => assignment);
+          this.subscription = this.assignmentService.getByKey(this.id).subscribe(assignment => assignment);
+          this.subscriptionUsed = true;
         }
       })
     )

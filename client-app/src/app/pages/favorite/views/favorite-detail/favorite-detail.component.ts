@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { AssignmentPortal} from '@funle/entities';
 // import { ProposalAcceptedDialogComponent } from 'apps/portal/src/app/components/proposal-accepted-dialog/proposal-accepted-dialog.component';
-import { Observable, Subject } from 'rxjs';
+import { Observable, Subject, Subscription } from 'rxjs';
 import { filter, finalize, map, mergeMap, take, takeUntil, tap } from 'rxjs/operators';
 import { AssignmentEntityService } from 'src/app/services/assignments/assignment-enitity.service';
 
@@ -12,25 +12,25 @@ import { AssignmentEntityService } from 'src/app/services/assignments/assignment
   templateUrl: './favorite-detail.component.html',
   styleUrls: ['./favorite-detail.component.scss'],
 })
-export class FavoriteDetailComponent implements OnInit {
-  params$ = this.router.events.pipe(
-    filter(event => event instanceof NavigationEnd),
-    mergeMap(() => this.route.params),
-    filter(params => Boolean(params.id))
-  );
+export class FavoriteDetailComponent implements OnInit, OnDestroy {
 
   assignment$: Observable<AssignmentPortal>;
   assignment: AssignmentPortal;
   accepted: boolean;
   loading: boolean;
   id: string;
+  subscription: Subscription;
+  subscriptionUsed = false;
 
   constructor(
-    private router: Router,
     private route: ActivatedRoute,
     private assignmentService: AssignmentEntityService, 
     public dialog: MatDialog
   ) {}
+
+  ngOnDestroy(): void {
+    if (this.subscriptionUsed) this.subscription.unsubscribe()
+  }
 
   ngOnInit(): void {
     this.getAssignment();
@@ -45,7 +45,8 @@ export class FavoriteDetailComponent implements OnInit {
       tap(assignment => {
         if (assignment == undefined) {
           console.log("getById word uitgevoerd");
-          this.assignmentService.getByKey(this.id).subscribe(assignment => assignment);
+          this.subscription = this.assignmentService.getByKey(this.id).subscribe(assignment => assignment);
+          this.subscriptionUsed = true;
         }
       })
     )

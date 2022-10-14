@@ -1,5 +1,5 @@
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BaseSpecialty, CandidatePortal } from '@funle/entities';
@@ -7,7 +7,7 @@ import { KvKValidator } from 'src/app/validators/kvk.validator';
 import { FileValidator } from 'src/libs/forms/components/src/validators/file-validator';
 import { CandidateEntityService } from 'src/app/services/candidates/candidate-entity.service';
 import { map } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { ThrottlingUtils } from '@azure/msal-common';
 
 @Component({
@@ -15,12 +15,13 @@ import { ThrottlingUtils } from '@azure/msal-common';
   templateUrl: './business.component.html',
   styleUrls: ['./business.component.scss']
 })
-export class ProfileBusinessComponent implements OnInit {
+export class ProfileBusinessComponent implements OnInit, OnDestroy {
 
   show: boolean = false;
   skills: BaseSpecialty[] = [];
   candidate$: Observable<CandidatePortal>;
   newCandidate: CandidatePortal;
+  subcription: Subscription;
 
   form = new FormGroup({
     kvkNummer: new FormControl('', [Validators.required, KvKValidator(), Validators.pattern('^[0-9]{8}$')]),
@@ -37,19 +38,24 @@ export class ProfileBusinessComponent implements OnInit {
   readonly separatorKeysCodes = [ENTER, COMMA] as const;
 
   constructor(private router: Router, private candidatesService: CandidateEntityService) { }
+  ngOnDestroy(): void {
+    this.subcription.unsubscribe();
+  }
 
   ngOnInit(): void {
+    this.loadCandidates()
+    this.setValuesForm()
+  }
 
+  private loadCandidates(): void {
     this.candidate$ = this.candidatesService.entities$
     .pipe(
       map(candidates => candidates[0])
     );
-
-    this.setValuesForm()
   }
 
   setValuesForm(): void {
-    this.candidate$.subscribe(candidate => {
+    this.subcription = this.candidate$.subscribe(candidate => {
       this.form.controls.kvkNummer.setValue(candidate.kvkNummer)
       this.form.controls.rate.setValue(candidate.rate)
       this.form.controls.assignmentSearchRadius.setValue(candidate.assignmentSearchRadius)

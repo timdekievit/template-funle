@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { AssignmentPortal } from '@funle/entities';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { AssignmentEntityService } from 'src/app/services/assignments/assignment-enitity.service';
 
@@ -11,7 +11,7 @@ import { AssignmentEntityService } from 'src/app/services/assignments/assignment
   templateUrl: './attention-detail.component.html',
   styleUrls: ['./attention-detail.component.scss']
 })
-export class AttentionDetailComponent implements OnInit {
+export class AttentionDetailComponent implements OnInit, OnDestroy {
 
   messageTitle = 'Deze opdracht is helaas niet meer beschikbaar';
   nothingFoundMessage = 'Maak je profiel volledig zodat wij voor jou op zoek kunnen of kijk in het overzicht of er nog een andere interessante opdracht tussen staat.';
@@ -20,6 +20,8 @@ export class AttentionDetailComponent implements OnInit {
   assignment: AssignmentPortal;
   accepted: boolean;
   id: string;
+  subscription: Subscription;
+  subscriptionUsed = false;
 
   nothingFound = false;
 
@@ -28,6 +30,10 @@ export class AttentionDetailComponent implements OnInit {
     private assignmentService: AssignmentEntityService, 
     private route: ActivatedRoute
   ) { }
+
+  ngOnDestroy(): void {
+    if (this.subscriptionUsed) this.subscription.unsubscribe()
+  }
 
   ngOnInit(): void {
     this.getAssignment();
@@ -42,7 +48,8 @@ export class AttentionDetailComponent implements OnInit {
       tap(assignment => {
         if (assignment == undefined) {
           console.log("getById word uitgevoerd");
-          this.assignmentService.getByKey(this.id).subscribe(assignment => assignment);
+          this.subscription = this.assignmentService.getByKey(this.id).subscribe(assignment => assignment);
+          this.subscriptionUsed = true;
         }
       })
     )
