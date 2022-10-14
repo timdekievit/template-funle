@@ -5,7 +5,7 @@ import { NotEmptyValidator } from 'src/app/validators/not-empty.validator';
 import { PortalCandidateService } from '@funle/api';
 import { HttpClient } from '@angular/common/http';
 import { debounceTime, map, takeUntil, tap } from 'rxjs/operators';
-import { Observable, Subject } from 'rxjs';
+import { Observable, Subject, Subscription } from 'rxjs';
 import { BaseCandidate, CandidatePortal } from '@funle/entities';
 
 @Component({
@@ -19,6 +19,7 @@ export class ProfilePersonComponent implements OnInit {
 
   candidate: CandidatePortal;
   candidate$: Observable<CandidatePortal>;
+  subscription: Subscription;
 
   form = new FormGroup({
     id: new FormControl(''),
@@ -31,32 +32,28 @@ export class ProfilePersonComponent implements OnInit {
     whatsapp: new FormControl(''),
   });
 
-  constructor(private router: Router, private candidateService: PortalCandidateService, private http: HttpClient) { }
+  constructor(private router: Router, private candidateService: PortalCandidateService) { }
 
-  private destroy$ = new Subject<boolean>();
   ngOnDestroy(): void {
-    this.destroy$.next(true);
-    this.destroy$.complete();
+    this.subscription.unsubscribe()
   }
 
   ngOnInit(): void {
     this.loadCandidates();
+    this.setValuesForm()
   }
 
   loadCandidates() {
-
+    
     this.candidate$ = this.candidateService.getall()
       .pipe(
         map(candidates => candidates[0]),
         tap(candidate => this.candidate = candidate)
       );
-
-    this.setValuesForm();
-
   }
 
   private setValuesForm(): void {
-    this.candidate$.subscribe(candidate => {
+    this.subscription = this.candidate$.subscribe(candidate => {
       this.form.controls.firstName.setValue(candidate.firstName)
       this.form.controls.prefix.setValue(candidate.prefix)
       this.form.controls.lastname.setValue(candidate.lastname)
@@ -64,7 +61,7 @@ export class ProfilePersonComponent implements OnInit {
       this.form.controls.phoneNumber.setValue(candidate.phoneNumber)
       this.form.controls.city.setValue(candidate.city)
       this.form.controls.whatsapp.setValue(candidate.whatsapp)
-    });
+    })
   }
 
   onSubmit(): void {

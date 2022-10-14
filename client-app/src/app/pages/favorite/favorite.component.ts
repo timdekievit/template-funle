@@ -2,6 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PortalAssignmentService, PortalProposalService } from '@funle/api';
+import { AssignmentPortal } from '@funle/entities';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'funle-portal-favorite',
@@ -10,7 +12,7 @@ import { PortalAssignmentService, PortalProposalService } from '@funle/api';
 })
 export class FavoriteComponent implements OnInit {
 
-  assignments: any;
+  assignments$: Observable<AssignmentPortal[]>;
   message404Title = 'Hier zou het staan';
   messageErrorTitle = 'Er is iets fout gegaan';
   messageTitle = '';
@@ -20,11 +22,7 @@ export class FavoriteComponent implements OnInit {
   constructor(private router: Router, private route: ActivatedRoute, private assignmentService: PortalAssignmentService) { }
 
   ngOnInit(): void {
-    this.assignmentService.getAssignmentsWithProposals().subscribe(res => {
-      console.log(res);
-
-      this.assignments = res;
-    });
+    this.assignments$ = this.assignmentService.getAssignmentsWithProposals()
 
   }
 
