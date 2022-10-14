@@ -1,7 +1,5 @@
-import { HttpClient } from "@angular/common/http";
 import { Component } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
-import { PortalAssignmentService } from "@funle/api";
 import { AssignmentPortal } from "@funle/entities";
 import { Observable } from "rxjs";
 import { assignments$ } from "src/app/services/assignments/assignments.repository";
@@ -16,9 +14,8 @@ import { assignments$ } from "src/app/services/assignments/assignments.repositor
     nothingFound = true;
     nothingFoundMessage =
     'Hmm vreemd we hebben op dit moment geen opdrachten die passen bij jou profiel... We doen ons best om zo veel mogelijk opdrachtgevers aan te sluiten op Funle zodat we voor iedereen mooie opdrachten hebben.';
-    // somethingWentWrong = true;
 
-    constructor(private router: Router, private route: ActivatedRoute, private assignmentService: PortalAssignmentService) {}
+    constructor(private router: Router, private route: ActivatedRoute) {}
 
     ngOnInit(): void {
       this.assignments$ = assignments$;

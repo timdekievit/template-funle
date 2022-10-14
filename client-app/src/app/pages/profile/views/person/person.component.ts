@@ -3,10 +3,9 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NotEmptyValidator } from 'src/app/validators/not-empty.validator';
 import { PortalCandidateService } from '@funle/api';
-import { HttpClient } from '@angular/common/http';
-import { debounceTime, map, takeUntil, tap } from 'rxjs/operators';
-import { Observable, Subject } from 'rxjs';
-import { BaseCandidate, CandidatePortal } from '@funle/entities';
+import { map, tap } from 'rxjs/operators';
+import { Observable, Subscription } from 'rxjs';
+import { CandidatePortal } from '@funle/entities';
 import { candidates$, updateCandidate } from 'src/app/services/candidates/candidates.repository';
 
 @Component({
@@ -20,6 +19,7 @@ export class ProfilePersonComponent implements OnInit {
 
   candidate: CandidatePortal;
   candidate$: Observable<CandidatePortal>;
+  subscription: Subscription;
 
   form = new FormGroup({
     id: new FormControl(''),
@@ -34,10 +34,8 @@ export class ProfilePersonComponent implements OnInit {
 
   constructor(private router: Router, private candidateService: PortalCandidateService) { }
 
-  private destroy$ = new Subject<boolean>();
   ngOnDestroy(): void {
-    this.destroy$.next(true);
-    this.destroy$.complete();
+    this.subscription.unsubscribe()
   }
 
   ngOnInit(): void {
@@ -56,7 +54,7 @@ export class ProfilePersonComponent implements OnInit {
   }
 
   private setValuesForm(): void {
-    this.candidate$.subscribe(candidate => {
+    this.subscription = this.candidate$.subscribe(candidate => {
       this.form.controls.firstName.setValue(candidate.firstName)
       this.form.controls.prefix.setValue(candidate.prefix)
       this.form.controls.lastname.setValue(candidate.lastname)
@@ -64,7 +62,7 @@ export class ProfilePersonComponent implements OnInit {
       this.form.controls.phoneNumber.setValue(candidate.phoneNumber)
       this.form.controls.city.setValue(candidate.city)
       this.form.controls.whatsapp.setValue(candidate.whatsapp)
-    });
+    })
   }
 
   onSubmit(): void {

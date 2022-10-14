@@ -1,7 +1,5 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { PortalAssignmentService } from '@funle/api';
 import { AssignmentPortal } from '@funle/entities';
 import { Observable } from 'rxjs';
 import { assignments$ } from 'src/app/services/assignments/assignments.repository';
@@ -20,7 +18,7 @@ export class AttentionComponent implements OnInit {
   nothingFound = true;
   somethingWentWrong = false;
 
-  constructor(private router: Router, private route: ActivatedRoute, private assignmentService: PortalAssignmentService) { }
+  constructor(private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.assignments$ = assignments$;

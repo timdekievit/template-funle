@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { PortalAssignmentService } from '@funle/api';
 import { AssignmentPortal } from '@funle/entities';
 import { Observable } from 'rxjs';
@@ -27,7 +27,6 @@ export class AllDetailComponent implements OnInit {
 
 
   constructor(
-    private router: Router,
     private assignmentService: PortalAssignmentService, 
     private route: ActivatedRoute,
     public dialog: MatDialog

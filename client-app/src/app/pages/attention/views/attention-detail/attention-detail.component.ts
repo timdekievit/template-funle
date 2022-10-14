@@ -26,7 +26,7 @@ export class AttentionDetailComponent implements OnInit {
 
   constructor(
     private assignmentService: PortalAssignmentService, 
-    private route: ActivatedRoute,) { }
+    private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.getAssignment();
