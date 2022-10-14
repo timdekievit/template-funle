@@ -12,7 +12,6 @@ import { AssignmentEntityService } from 'src/app/services/assignments/assignment
 })
 export class FavoriteComponent implements OnInit {
 
-  assignments: any;
   assignments$: Observable<AssignmentPortal[]> 
   message404Title = 'Hier zou het staan';
   messageErrorTitle = 'Er is iets fout gegaan';
@@ -24,12 +23,8 @@ export class FavoriteComponent implements OnInit {
 
   ngOnInit(): void {
     this.assignments$ = this.assignmentService.entities$.pipe(
-      map(assignments => assignments.filter(assignment => assignment.proposals.length != 0))
+      map(assignments => assignments.filter(assignment => assignment.proposals.length != 0)),
     )
-
-    this.assignments$.subscribe(assignments => this.assignments = assignments);
-
-    console.log(this.assignments);
   }
 
   toPage(page: string) {

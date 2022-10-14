@@ -48,7 +48,7 @@ export class ProfilePersonComponent implements OnInit, OnDestroy {
     );
   }
 
-  setValuesForm(): void {
+  private setValuesForm(): void {
     this.subscription = this.candidate$.subscribe(candidate => {
       this.form.controls.firstName.setValue(candidate.firstName)
       this.form.controls.prefix.setValue(candidate.prefix)
@@ -57,8 +57,7 @@ export class ProfilePersonComponent implements OnInit, OnDestroy {
       this.form.controls.phoneNumber.setValue(candidate.phoneNumber)
       this.form.controls.city.setValue(candidate.city)
       this.form.controls.whatsapp.setValue(candidate.whatsapp)
-    });
-
+    })
   }
 
 
@@ -71,7 +70,6 @@ export class ProfilePersonComponent implements OnInit, OnDestroy {
     }).unsubscribe()
 
     this.candidatesService.update(this.newCandidate);
-
     this.showNotification();
   }
 

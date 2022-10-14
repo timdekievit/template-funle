@@ -33,6 +33,7 @@
     "@types/gapi.auth2": "^0.0.54",
     "@types/jest": "26.0.8",
     "bootstrap": "^4.5.2",
+    "cypress": "^10.10.0",
     "font-awesome": "^4.7.0",
     "jest": "26.2.2",
     "jest-preset-angular": "8.3.1",

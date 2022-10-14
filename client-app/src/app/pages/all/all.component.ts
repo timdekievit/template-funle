@@ -1,9 +1,7 @@
-import { HttpClient } from "@angular/common/http";
 import { Component } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { AssignmentPortal } from "@funle/entities";
 import { Observable } from "rxjs";
-import { map } from "rxjs/operators";
 import { AssignmentEntityService } from "src/app/services/assignments/assignment-enitity.service";
 
 @Component({
@@ -16,7 +14,6 @@ import { AssignmentEntityService } from "src/app/services/assignments/assignment
     nothingFound = true;
     nothingFoundMessage =
     'Hmm vreemd we hebben op dit moment geen opdrachten die passen bij jou profiel... We doen ons best om zo veel mogelijk opdrachtgevers aan te sluiten op Funle zodat we voor iedereen mooie opdrachten hebben.';
-    // somethingWentWrong = true;
 
     constructor(private router: Router, private route: ActivatedRoute, private assignmentService: AssignmentEntityService) {}
 

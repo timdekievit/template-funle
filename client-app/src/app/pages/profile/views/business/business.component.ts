@@ -8,7 +8,6 @@ import { FileValidator } from 'src/libs/forms/components/src/validators/file-val
 import { CandidateEntityService } from 'src/app/services/candidates/candidate-entity.service';
 import { map } from 'rxjs/operators';
 import { Observable, Subscription } from 'rxjs';
-import { ThrottlingUtils } from '@azure/msal-common';
 
 @Component({
   selector: 'funle-profile-business',
@@ -83,9 +82,7 @@ export class ProfileBusinessComponent implements OnInit, OnDestroy {
     }).unsubscribe()
 
     this.candidatesService.update(this.newCandidate);
-
     this.showNotification();
-
   }
 
   showNotification(): void {  
