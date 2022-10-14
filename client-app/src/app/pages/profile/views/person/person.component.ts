@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NotEmptyValidator } from 'src/app/validators/not-empty.validator';
 import { map, tap } from 'rxjs/operators';
-import { Observable, Subject } from 'rxjs';
+import { Observable, Subject, Subscription } from 'rxjs';
 import { CandidatePortal } from '@funle/entities';
 import { CandidateStore } from 'src/app/services/candidates/candidateStore';
 
@@ -12,13 +12,14 @@ import { CandidateStore } from 'src/app/services/candidates/candidateStore';
   templateUrl: './person.component.html',
   styleUrls: ['./person.component.scss']
 })
-export class ProfilePersonComponent implements OnInit {
+export class ProfilePersonComponent implements OnInit, OnDestroy {
 
   show: boolean = false;
   loading: boolean;
 
   candidate$: Observable<CandidatePortal>;
   candidate: CandidatePortal;
+  subscription: Subscription;
 
   form = new FormGroup({
     id: new FormControl(''),
@@ -33,16 +34,13 @@ export class ProfilePersonComponent implements OnInit {
 
   constructor(private router: Router, private candidateStore: CandidateStore) { }
 
-  private destroy$ = new Subject<boolean>();
   ngOnDestroy(): void {
-    this.destroy$.next(true);
-    this.destroy$.complete();
+    this.subscription.unsubscribe()
   }
 
   ngOnInit(): void {
-
     this.loadCandidates();
-
+    this.setValuesForm();
   }
 
   loadCandidates() {
@@ -52,13 +50,10 @@ export class ProfilePersonComponent implements OnInit {
         map(candidates => candidates[0]),
         tap(candidate => this.candidate = candidate)
       );
-
-    this.setValuesForm();
-
   }
 
   setValuesForm(): void {
-    this.candidate$.subscribe(candidate => {
+    this.subscription = this.candidate$.subscribe(candidate => {
       this.form.controls.firstName.setValue(candidate.firstName)
       this.form.controls.prefix.setValue(candidate.prefix)
       this.form.controls.lastname.setValue(candidate.lastname)
