@@ -2,14 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NotEmptyValidator } from 'src/app/validators/not-empty.validator';
-import { PortalCandidateService } from '@funle/api';
-import { HttpClient } from '@angular/common/http';
-import { debounceTime, map, takeUntil, tap } from 'rxjs/operators';
-import { Observable, Subject } from 'rxjs';
+import { map, tap } from 'rxjs/operators';
 import { CandidatePortal } from '@funle/entities';
 import { Select, Store } from '@ngxs/store';
 import { updateCandidateAction } from 'src/app/services/candidate/candidate.actions';
 import { CandidateState } from 'src/app/services/candidate/CandidateState';
+import { Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'funle-profile-person',
@@ -23,6 +21,7 @@ export class ProfilePersonComponent implements OnInit {
   @Select(CandidateState.getCandidates) candidates$: Observable<CandidatePortal>;
   candidate: CandidatePortal;
   candidate$: Observable<CandidatePortal>;
+  subscription: Subscription;
 
   form = new FormGroup({
     id: new FormControl(''),
@@ -35,13 +34,11 @@ export class ProfilePersonComponent implements OnInit {
     whatsapp: new FormControl(''),
   });
 
-  constructor(private router: Router, private candidateService: PortalCandidateService, private store: Store) { }
+  constructor(private router: Router, private store: Store) { }
 
 
-  private destroy$ = new Subject<boolean>();
   ngOnDestroy(): void {
-    this.destroy$.next(true);
-    this.destroy$.complete();
+    this.subscription.unsubscribe()
   }
 
   ngOnInit(): void {
@@ -59,8 +56,7 @@ export class ProfilePersonComponent implements OnInit {
   }
 
   private setValuesForm(): void {
-    this.candidate$.subscribe(candidate => {
-      console.log(candidate)
+    this.subscription = this.candidate$.subscribe(candidate => {
       this.form.controls.firstName.setValue(candidate.firstName)
       this.form.controls.prefix.setValue(candidate.prefix)
       this.form.controls.lastname.setValue(candidate.lastname)
@@ -68,7 +64,7 @@ export class ProfilePersonComponent implements OnInit {
       this.form.controls.phoneNumber.setValue(candidate.phoneNumber)
       this.form.controls.city.setValue(candidate.city)
       this.form.controls.whatsapp.setValue(candidate.whatsapp)
-    });
+    })
   }
 
   onSubmit(): void {
@@ -85,7 +81,6 @@ export class ProfilePersonComponent implements OnInit {
 
     console.log(this.candidate);
 
-    // this.candidateService.put(this.candidate);
     this.store.dispatch(new updateCandidateAction(this.candidate))
     this.showNotification()
   }

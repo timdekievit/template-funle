@@ -1,11 +1,9 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { PortalAssignmentService, PortalProposalService } from '@funle/api';
 import { AssignmentPortal } from '@funle/entities';
 import { Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { AssignmentState } from 'src/app/services/assignments/assignment.state';
 
 @Component({
@@ -23,7 +21,7 @@ export class FavoriteComponent implements OnInit {
   nothingFound = true;
   somethingWentWrong = false;
 
-  constructor(private router: Router, private route: ActivatedRoute, private assignmentService: PortalAssignmentService) { }
+  constructor(private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.obs$ = this.assignments$

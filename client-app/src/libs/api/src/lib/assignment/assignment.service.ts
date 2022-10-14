@@ -14,5 +14,5 @@ export class PortalAssignmentService {
 
   get = (id: string) => this.http.get<AssignmentPortal>('/api/assignments/' + id);
 
-  getAssignmentsWithProposals = () => this.http.get('/api/assignments/proposals/');
+  getAssignmentsWithProposals = () => this.http.get<AssignmentPortal[]>('/api/assignments/proposals/');
 }
