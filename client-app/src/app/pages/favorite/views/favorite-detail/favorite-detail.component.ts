@@ -1,12 +1,10 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
-import { PortalAssignmentService } from '@funle/api';
-import { AssignmentPortal, BasePortalAssignment, IBasePortalAssignment, ProposalStatus } from '@funle/entities';
+import { ActivatedRoute } from '@angular/router';
+import { AssignmentPortal } from '@funle/entities';
 import { Select, Store } from '@ngxs/store';
-// import { ProposalAcceptedDialogComponent } from 'apps/portal/src/app/components/proposal-accepted-dialog/proposal-accepted-dialog.component';
-import { Observable, Subject } from 'rxjs';
-import { filter, map, mergeMap, take, takeUntil, tap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { loadAssignmentAction } from 'src/app/services/assignments/assignment.actions';
 import { AssignmentState } from 'src/app/services/assignments/assignment.state';
 

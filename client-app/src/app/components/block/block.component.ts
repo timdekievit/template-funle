@@ -1,6 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, Input, ElementRef, ViewChild, OnChanges, SimpleChanges } from '@angular/core';
-import { MatTableDataSource } from '@angular/material/table';
-import { BaseAssignment, BasePortalAssignment } from '@funle/entities';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'funle-portal-block',

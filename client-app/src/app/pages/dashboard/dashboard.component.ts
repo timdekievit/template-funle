@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { IBaseDashboard } from '@funle/entities';
 
 @Component({
   selector: 'funle-portal-dashboard',
@@ -10,7 +9,7 @@ import { IBaseDashboard } from '@funle/entities';
 
 export class DashboardComponent implements OnInit {
 
-  dashboard: IBaseDashboard
+  dashboard: any
 
   get isSearching(): boolean {
     return this.dashboard?.mainScenario === 1 || this.dashboard?.mainScenario === 2;
