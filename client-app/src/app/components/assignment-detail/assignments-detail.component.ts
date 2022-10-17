@@ -1,9 +1,5 @@
-import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute } from '@angular/router';
-import { PortalAssignmentService } from '@funle/api';
-import { BaseAssignment, BasePortalAssignment, IBasePortalAssignment } from '@funle/entities';
-// import { ProposalDeclinedDialogComponent } from '../proposal-declined-dialog/proposal-declined-dialog.component';
 
 @Component({
   selector: 'funle-portal-assignments-detail',
@@ -33,7 +29,6 @@ export class AssignmentsDetailComponent {
 
   acceptProposal(): void {
     this.acceptedProposal.next(true);
-    // this.accepted = true;
   }
 
 }

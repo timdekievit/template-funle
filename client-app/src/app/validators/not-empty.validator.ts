@@ -1,5 +1,4 @@
 import { AbstractControl, ValidationErrors, ValidatorFn } from "@angular/forms";
-import { replace } from "ramda";
 
 export function NotEmptyValidator(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {

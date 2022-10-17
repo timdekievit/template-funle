@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { NotEmptyValidator } from 'src/app/validators/not-empty.validator';
 import { PortalCandidateService } from '@funle/api';
 import { map, tap } from 'rxjs/operators';
 import { Observable, Subscription } from 'rxjs';
@@ -24,9 +23,9 @@ export class ProfilePersonComponent implements OnInit {
   form = new FormGroup({
     id: new FormControl(''),
     email: new FormControl(''),
-    firstName: new FormControl('', [Validators.required, NotEmptyValidator(), Validators.pattern('^[A-zÀ-ú -]+$')]),
+    firstName: new FormControl('', [Validators.required, Validators.pattern('^[A-zÀ-ú -]+$')]),
     prefix: new FormControl(''),
-    lastname: new FormControl('', [Validators.required, NotEmptyValidator(), Validators.pattern('^[A-zÀ-ú -]+$')]),
+    lastname: new FormControl('', [Validators.required, Validators.pattern('^[A-zÀ-ú -]+$')]),
     city: new FormControl(''),
     phoneNumber: new FormControl('', [Validators.required, Validators.pattern('^06[0-9]{8}$')]),
     whatsapp: new FormControl(''),
