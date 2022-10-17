@@ -7,8 +7,6 @@ export const assignmentStore = createStore(
   { name: 'assignments' },
   withEntities<AssignmentPortal>());
 
-// export const trackCandidatesRequestsStatus =  createRequestsStatusOperator(candidateStore);
-
 let loaded = false;
 
 export const assignments$ = assignmentStore.pipe(selectAllEntities());
