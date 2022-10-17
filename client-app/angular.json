@@ -202,45 +202,6 @@
           }
         }
       }
-    },
-    "forms": {
-      "projectType": "library",
-      "root": "libs/forms",
-      "sourceRoot": "libs/forms/src",
-      "prefix": "funle",
-      "architect": {
-        "build": {
-          "builder": "@nrwl/angular:package",
-          "options": {
-            "tsConfig": "libs/forms/tsconfig.lib.json",
-            "project": "libs/forms/ng-package.json"
-          },
-          "configurations": {
-            "production": {
-              "tsConfig": "libs/forms/tsconfig.lib.prod.json"
-            }
-          }
-        },
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "libs/forms/src/**/*.ts",
-              "libs/forms/src/**/*.html"
-            ]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/forms"
-          ],
-          "options": {
-            "jestConfig": "libs/forms/jest.config.js",
-            "passWithNoTests": true
-          }
-        }
-      }
     }
   },
   "defaultProject": "ngrx-funle-test"
