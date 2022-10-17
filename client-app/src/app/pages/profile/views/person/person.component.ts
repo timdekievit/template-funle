@@ -1,11 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { NotEmptyValidator } from 'src/app/validators/not-empty.validator';
-import { map, tap } from 'rxjs/operators';
-import { Observable, Subject, Subscription } from 'rxjs';
 import { CandidatePortal } from '@funle/entities';
+import { Observable, Subscription } from 'rxjs';
+import { map, tap } from 'rxjs/operators';
 import { CandidateStore } from 'src/app/services/candidates/candidateStore';
+import { NotEmptyValidator } from 'src/app/validators/not-empty.validator';
 
 @Component({
   selector: 'funle-profile-person',
@@ -61,7 +61,7 @@ export class ProfilePersonComponent implements OnInit, OnDestroy {
       this.form.controls.phoneNumber.setValue(candidate.phoneNumber)
       this.form.controls.city.setValue(candidate.city)
       this.form.controls.whatsapp.setValue(candidate.whatsapp)
-    });
+    })
   }
 
 

@@ -1,11 +1,10 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { PortalAssignmentService } from '@funle/api';
-import { AssignmentPortal, BasePortalAssignment, IBasePortalAssignment, ProposalStatus } from '@funle/entities';
-// import { ProposalAcceptedDialogComponent } from 'apps/portal/src/app/components/proposal-accepted-dialog/proposal-accepted-dialog.component';
-import { Observable, Subject } from 'rxjs';
-import { filter, map, mergeMap, take, takeUntil, tap } from 'rxjs/operators';
+import { AssignmentPortal } from '@funle/entities';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { AssignmentStore } from 'src/app/services/assignments/assignmentStore';
 
 @Component({
@@ -22,7 +21,6 @@ export class FavoriteDetailComponent implements OnInit {
   loading: boolean;
 
   constructor(
-    private router: Router,
     private route: ActivatedRoute,
     private assignmentStore: AssignmentStore,
     private assignmentService: PortalAssignmentService,
