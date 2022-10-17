@@ -1,4 +1,3 @@
-import { HttpClient } from "@angular/common/http";
 import { Component } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { PortalAssignmentService } from "@funle/api";

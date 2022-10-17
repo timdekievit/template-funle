@@ -2,10 +2,9 @@ import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { BaseSpecialty, CandidatePortal } from '@funle/entities';
+import { CandidatePortal } from '@funle/entities';
 import { PortalCandidateService } from '@funle/api';
 import { KvKValidator } from 'src/app/validators/kvk.validator';
-import { FileValidator } from 'src/libs/forms/components/src/validators/file-validator';
 import { Observable, Subscription } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 
@@ -16,8 +15,8 @@ import { map, tap } from 'rxjs/operators';
 })
 export class ProfileBusinessComponent implements OnInit, OnDestroy {
 
+  skills: any;
   show: boolean = false;
-  skills: BaseSpecialty[] = [];
   candidate: CandidatePortal;
   candidate$: Observable<CandidatePortal>;
   subscription: Subscription;
@@ -31,7 +30,7 @@ export class ProfileBusinessComponent implements OnInit, OnDestroy {
     role: new FormControl(''),
     availability: new FormControl(''),
     searching: new FormControl(true),
-    fileName: new FormControl('', [FileValidator.fileMaxSize(10500000), FileValidator.fileExtensions(['pdf'])]),
+    fileName: new FormControl(''),
     specialty: new FormControl(''),
     defaultMotivation: new FormControl('')
   });
@@ -87,7 +86,6 @@ export class ProfileBusinessComponent implements OnInit, OnDestroy {
       availability: this.form.value.availability,
       searching: this.form.value.searching,
       fileName: this.form.value.fileName,
-      // specialty: this.form.value.specialty,
       defaultMotivation: this.form.value.defaultMotivation
     }
 
@@ -102,7 +100,7 @@ export class ProfileBusinessComponent implements OnInit, OnDestroy {
     setTimeout(() => this.show = false, 3000);
   }
 
-  addSpecialty(skill: BaseSpecialty) {
+  addSpecialty(skill: any) {
     // const oldSkills = this.skills;
     // if (skill?.value !== undefined && skill?.value !== null && skill?.value.trim() !== '') {
     //   this.candidateService

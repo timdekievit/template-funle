@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { NotEmptyValidator } from 'src/app/validators/not-empty.validator';
 import { PortalCandidateService } from '@funle/api';
-import { HttpClient } from '@angular/common/http';
-import { debounceTime, map, takeUntil, tap } from 'rxjs/operators';
-import { Observable, Subject, Subscription } from 'rxjs';
-import { BaseCandidate, CandidatePortal } from '@funle/entities';
+import { CandidatePortal } from '@funle/entities';
+import { Observable, Subscription } from 'rxjs';
+import { map, tap } from 'rxjs/operators';
+import { NotEmptyValidator } from 'src/app/validators/not-empty.validator';
 
 @Component({
   selector: 'funle-profile-person',

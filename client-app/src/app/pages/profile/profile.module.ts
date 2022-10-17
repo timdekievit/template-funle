@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 import { MatIconModule } from '@angular/material/icon';
-import { FormComponentsModule } from '@funle/forms/components';
 
 import { ComponentsModule } from '../../components/components.module';
 import { MatTableModule } from '@angular/material/table';
@@ -28,7 +27,6 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
     ComponentsModule,
     FormsModule,
     ReactiveFormsModule,
-    FormComponentsModule,
     MatIconModule,
     MatDialogModule,
     MatChipsModule,

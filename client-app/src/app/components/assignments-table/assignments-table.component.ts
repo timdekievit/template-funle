@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter, Input, ElementRef, ViewChild, OnChanges, SimpleChanges } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { BaseAssignment, BasePortalAssignment } from '@funle/entities';
+import { AssignmentPortal } from '@funle/entities';
 
 @Component({
   selector: 'funle-portal-assignments-table',
@@ -11,7 +11,7 @@ export class AssignmentsTableComponent implements OnInit, OnChanges {
   @Output() assignmentSelected = new EventEmitter<string>();
   @Output() showMoreClick = new EventEmitter<string>();
 
-  @Input() assignments: BasePortalAssignment[];
+  @Input() assignments: AssignmentPortal[];
   @Input() title: string = 'Opdrachten';
   @Input() subtitle: string;
   @Input() showMoreRow: boolean;
@@ -20,7 +20,7 @@ export class AssignmentsTableComponent implements OnInit, OnChanges {
   columns = ['title', 'detail'];
   toggleFilter: boolean;
 
-  data: MatTableDataSource<BasePortalAssignment>;
+  data: MatTableDataSource<AssignmentPortal>;
 
   @ViewChild('filterInput', { static: true }) filter: ElementRef;
 

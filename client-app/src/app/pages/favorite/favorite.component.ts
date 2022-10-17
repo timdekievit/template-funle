@@ -1,7 +1,6 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { PortalAssignmentService, PortalProposalService } from '@funle/api';
+import { PortalAssignmentService } from '@funle/api';
 import { AssignmentPortal } from '@funle/entities';
 import { Observable } from 'rxjs';
 

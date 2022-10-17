@@ -1,6 +1,5 @@
-import { Component, OnInit, Output, EventEmitter, Input, ElementRef, ViewChild, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { BaseAssignment, BasePortalAssignment } from '@funle/entities';
 
 @Component({
   selector: 'funle-portal-assignments-favorite-table',
