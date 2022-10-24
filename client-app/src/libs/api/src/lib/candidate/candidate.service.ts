@@ -10,8 +10,6 @@ export class PortalCandidateService {
   constructor( private http: HttpClient) {}
 
   getall = () => this.http.get<CandidatePortal[]>('/api/candidates/')
-  put = (candidate: any) => {
-    console.log(candidate);
-    this.http.put('/api/candidates/' + candidate.id, candidate).subscribe();
-  }
+  put = (candidate: any) => this.http.put('/api/candidates/' + candidate.id, candidate);
+  
 }

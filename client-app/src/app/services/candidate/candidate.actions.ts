@@ -1,5 +1,13 @@
 import { CandidatePortal } from "@funle/entities";
 
+export class undoCandidateAction{
+    static readonly type = '[Candidate Page] undo update candidate';
+
+    constructor(public candidates: CandidatePortal[]) {
+        console.log("undo action ran")
+    }
+}
+
 export class updateCandidateAction{
     static readonly type = '[Candidate Page] update candidate';
 

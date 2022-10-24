@@ -1,9 +1,9 @@
 import { Injectable } from "@angular/core";
 import { PortalCandidateService } from "@funle/api";
 import { CandidatePortal } from "@funle/entities";
-import { Action, Selector, State, StateContext } from "@ngxs/store";
+import { Action, Selector, State, StateContext, Store } from "@ngxs/store";
 import { tap } from "rxjs/operators";
-import { loadCandidatesAction, updateCandidateAction } from "./candidate.actions";
+import { loadCandidatesAction, undoCandidateAction, updateCandidateAction } from "./candidate.actions";
 
 export class CandidateStateModel {
     candidates: CandidatePortal[]
@@ -21,13 +21,11 @@ export class CandidateStateModel {
 })
 export class CandidateState {
 
-    constructor(private candidateService: PortalCandidateService) {}
+    constructor(private candidateService: PortalCandidateService, private store: Store) {}
 
     @Action(updateCandidateAction)
     updateCandidate(context: StateContext<CandidateStateModel>, action: updateCandidateAction) {
 
-
-        this.candidateService.put(action.candidate);
 
         const state = context.getState();
 
@@ -37,13 +35,30 @@ export class CandidateState {
 
         let candidates = state.candidates;
 
+        const copyCandidates = candidates.slice(0);
+
         candidates[index] = action.candidate;
 
         context.patchState({
             candidates: candidates
         })
 
+        this.candidateService.put(action.candidate).subscribe(
+            () => {},
+            (err) => {
+                console.log(err);
+                this.store.dispatch(new undoCandidateAction(copyCandidates))
+            }
+        )
+
         console.log(context.getState())
+    }
+
+    @Action(undoCandidateAction)
+    undoUpdateCandidate(context: StateContext<CandidateStateModel>, action: undoCandidateAction) {
+        context.patchState({
+            candidates: action.candidates
+        })
     }
 
     @Action(loadCandidatesAction)
